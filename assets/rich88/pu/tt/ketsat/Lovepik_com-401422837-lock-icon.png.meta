@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "530bf0ec-5ef1-4e28-a231-ede5d93b01e1",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 41,
+  "height": 47,
+  "platformSettings": {},
+  "subMetas": {
+    "Lovepik_com-401422837-lock-icon": {
+      "ver": "1.0.4",
+      "uuid": "7ca13176-51a5-44f2-824c-b7d47af1312b",
+      "rawTextureUuid": "530bf0ec-5ef1-4e28-a231-ede5d93b01e1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 41,
+      "height": 47,
+      "rawWidth": 41,
+      "rawHeight": 47,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

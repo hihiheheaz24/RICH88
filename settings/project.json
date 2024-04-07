@@ -1,0 +1,53 @@
+{
+  "migrate-history": [
+    "cloud-function"
+  ],
+  "last-module-event-record-time": 1711364703925,
+  "group-list": [
+    "default",
+    "bullet",
+    "fish"
+  ],
+  "collision-matrix": [
+    [
+      false
+    ],
+    [
+      false,
+      false,
+      true
+    ],
+    [
+      false,
+      true,
+      false
+    ]
+  ],
+  "excluded-modules": [
+    "3D Physics/Builtin"
+  ],
+  "start-scene": "28be5ba7-b801-41aa-8630-8758c14a1650",
+  "preview-port": 7456,
+  "design-resolution-width": 1280,
+  "design-resolution-height": 720,
+  "fit-width": true,
+  "fit-height": false,
+  "use-project-simulator-setting": false,
+  "simulator-orientation": false,
+  "use-customize-simulator": true,
+  "simulator-resolution": {
+    "height": 640,
+    "width": 960
+  },
+  "clear-simulator-cache": true,
+  "facebook": {
+    "appID": "",
+    "audience": {
+      "enable": false
+    },
+    "enable": false,
+    "live": {
+      "enable": false
+    }
+  }
+}

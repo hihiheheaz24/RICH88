@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "910034804589",
+    "project_id": "vsop-poker",
+    "storage_bucket": "vsop-poker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910034804589:android:0c8479bd5e16d2a171c464",
+        "android_client_info": {
+          "package_name": "com.vsop.pokeronline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910034804589-4r5e843ej7kpam75eoqln2d4o6k37mt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vsop.pokeronline",
+            "certificate_hash": "0b97a334ea66c78c8c5a11a72042f1605d14f27d"
+          }
+        },
+        {
+          "client_id": "910034804589-l51mfcjp3pqeg0o62urs46og3ovmqbnj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1bL_QSNmDNDnKhlKkKjTn40arg0uNqv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910034804589-l51mfcjp3pqeg0o62urs46og3ovmqbnj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "910034804589-51hlj0dl163ug76adot4fh21crpf72km.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vsop.pokeronline"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

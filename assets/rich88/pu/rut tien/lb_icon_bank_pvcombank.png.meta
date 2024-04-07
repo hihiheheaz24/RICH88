@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "6524869c-3230-41b8-8b09-76028febf4dd",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 311,
+  "height": 77,
+  "platformSettings": {},
+  "subMetas": {
+    "lb_icon_bank_pvcombank": {
+      "ver": "1.0.4",
+      "uuid": "ab346d2f-a878-401c-83b8-cf1495ec6312",
+      "rawTextureUuid": "6524869c-3230-41b8-8b09-76028febf4dd",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 311,
+      "height": 77,
+      "rawWidth": 311,
+      "rawHeight": 77,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

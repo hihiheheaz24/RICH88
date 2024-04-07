@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "931760e3-157d-4cf0-9a9d-fd0859b1f897",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 317,
+  "height": 167,
+  "platformSettings": {},
+  "subMetas": {
+    "ig_xocdia_chan_noxingau": {
+      "ver": "1.0.4",
+      "uuid": "6d339ce8-d565-496c-9024-b27f581b4eaa",
+      "rawTextureUuid": "931760e3-157d-4cf0-9a9d-fd0859b1f897",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 317,
+      "height": 167,
+      "rawWidth": 317,
+      "rawHeight": 167,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

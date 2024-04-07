@@ -1,0 +1,13 @@
+var SCREEN_CODE = {
+    NONE : 0,
+    LOGIN : 1,
+    LOBBY : 2,
+    LOBBY_NORMAL : 3,
+    INGAME_KILL_BOSS : 4,
+    INGAME_ARENA : 5,
+    LOAD_INGAME_KILL_BOSS : 6,
+    LOAD_WAIT_ARENA : 7,
+    WAIT_INGAME_ARENA : 8,
+    INGAME_SLOT : 9,
+    INGAME_CARD : 10,
+}

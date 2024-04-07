@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "26c96d52-bd2f-481d-8726-7e84ec5d45f9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 973,
+  "height": 161,
+  "platformSettings": {},
+  "subMetas": {
+    "ig_countdown_bg_1_tulinh": {
+      "ver": "1.0.4",
+      "uuid": "976d755c-0cdc-46a9-9c81-72b71e873e54",
+      "rawTextureUuid": "26c96d52-bd2f-481d-8726-7e84ec5d45f9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 973,
+      "height": 161,
+      "rawWidth": 973,
+      "rawHeight": 161,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

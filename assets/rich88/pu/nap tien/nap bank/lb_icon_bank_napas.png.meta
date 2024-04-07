@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "6d64267a-a07f-4fc6-b1b0-83dacb40ff3c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 311,
+  "height": 77,
+  "platformSettings": {},
+  "subMetas": {
+    "lb_icon_bank_napas": {
+      "ver": "1.0.4",
+      "uuid": "a3b8cf7d-23c8-46b2-b1a1-4681adc40fee",
+      "rawTextureUuid": "6d64267a-a07f-4fc6-b1b0-83dacb40ff3c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 311,
+      "height": 77,
+      "rawWidth": 311,
+      "rawHeight": 77,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

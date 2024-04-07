@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "b3021123-fca9-4f21-bc30-bf62f9f05c17",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 452,
+  "height": 202,
+  "platformSettings": {},
+  "subMetas": {
+    "banner_pay_momo_co_tien": {
+      "ver": "1.0.4",
+      "uuid": "c897c66a-631a-4ad9-81dc-0c28f7801e02",
+      "rawTextureUuid": "b3021123-fca9-4f21-bc30-bf62f9f05c17",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 452,
+      "height": 202,
+      "rawWidth": 452,
+      "rawHeight": 202,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

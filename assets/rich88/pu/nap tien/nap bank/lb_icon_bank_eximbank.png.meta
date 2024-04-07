@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "60323672-3e44-4ccf-8b49-6f2cd1427b9f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 311,
+  "height": 77,
+  "platformSettings": {},
+  "subMetas": {
+    "lb_icon_bank_eximbank": {
+      "ver": "1.0.4",
+      "uuid": "005e6e49-74d8-451d-b374-8ba086aec371",
+      "rawTextureUuid": "60323672-3e44-4ccf-8b49-6f2cd1427b9f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 311,
+      "height": 77,
+      "rawWidth": 311,
+      "rawHeight": 77,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
