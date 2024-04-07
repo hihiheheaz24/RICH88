@@ -148,18 +148,18 @@ cc.Class({
 	},
 
 	preLoadPopupInRes(funNext) {
-		this.autoLogin();
+		// this.autoLogin();
 		funNext();
-		// cc.resources.loadDir(
-		// 	"Popup",
-		// 	(count, total) => {
-		// 		this.progressLoading(count / total);
-		// 	},
-		// 	(err, listAset) => {
-		// 		this.autoLogin();
-		// 		funNext();
-		// 	}
-		// );
+		cc.resources.loadDir(
+			"Popup",
+			(count, total) => {
+				this.progressLoading(count / total);
+			},
+			(err, listAset) => {
+				this.hideLoading();
+				funNext();
+			}
+		);
 	},
 
 	showButtonMiniGame(isActive) {
@@ -261,6 +261,7 @@ cc.Class({
 
 	showCommandPopup(message, event) {
 		console.log("check message : ", message);
+		this.showNoti(message);
 		return;
 		if(Global.CommandPopup === null){
 			cc.resources.load("Popup/CommandPopup", cc.Prefab, (err, prefab) => {
@@ -445,11 +446,13 @@ cc.Class({
 	},
 
 	showLoginTabView() {
-		if (Global.LobbyView) {
-			cc.log("chay vao show login view");
-			Global.LobbyView.onHideLobby();
-			Global.LobbyView.nodeLoginTabView.active = true;
-
+		if (Global.LoginTabView == null) {
+			cc.resources.load("Popup/LoginTabView", cc.Prefab, (err, prefab) => {
+				let item = cc.instantiate(prefab);
+				this.parentPopup.addChild(item);
+			})
+		} else {
+			Global.LoginTabView.show();
 		}
 	},
 
@@ -1193,7 +1196,7 @@ cc.Class({
 		let component = "";
 		switch (gameType) {
 			case GAME_TYPE.TAI_XIU:
-				str = "Popup/TaiXiu";
+				str = "TaiXiu";
 				strGame = "TaiXiu";
 				component = "TaiXiu";
 				break;
@@ -1218,6 +1221,18 @@ cc.Class({
 				str = "XocDiaView"; // ten cua no trong thu muc
 				strGame = "XocDia"; // ten cua global
 				component = "XocDiaView";
+				break;
+
+			case GAME_TYPE.MINI_POKER:
+				str = "MiniPoker"; // ten cua no trong thu muc
+				strGame = "MiniPoker"; // ten cua global
+				component = "MiniPokerView";
+				break;
+
+			case GAME_TYPE.MINI_SLOT:
+				str = "MiniSlot";
+				strGame = "MiniSlot";
+				component = "MiniSlotView";
 				break;
 		}
 
@@ -1273,6 +1288,7 @@ cc.Class({
 				component.node.parent = this.parentMiniGame;
 				if (!component.isMinimizeGame) component.startGame();
 				component.isMinimizeGame = false;
+				this.hideMiniLoading();
 			}
 		};
 		

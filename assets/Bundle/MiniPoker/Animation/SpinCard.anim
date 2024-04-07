@@ -1,0 +1,363 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "SpinCard",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "Card1/ImgSpin": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card1/Blur": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card2/ImgSpin": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.4,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card2/Blur": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card3/ImgSpin": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.6,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card3/Blur": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card4/ImgSpin": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.8,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card4/Blur": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card5/ImgSpin": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 1,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card5/Blur": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      },
+      "Card1/ImgCard": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.1,
+              "value": [
+                0,
+                15,
+                0
+              ]
+            },
+            {
+              "frame": 0.2,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 0.2,
+              "value": false
+            }
+          ]
+        }
+      },
+      "Card2/ImgCard": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.2,
+              "value": [
+                0,
+                -0.778,
+                0
+              ]
+            },
+            {
+              "frame": 0.3,
+              "value": [
+                0,
+                15,
+                0
+              ]
+            },
+            {
+              "frame": 0.4,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 0.4,
+              "value": false
+            }
+          ]
+        }
+      },
+      "Card3/ImgCard": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                -0.778,
+                0
+              ]
+            },
+            {
+              "frame": 0.4,
+              "value": [
+                0,
+                -0.778,
+                0
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                0,
+                15,
+                0
+              ]
+            },
+            {
+              "frame": 0.6,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 0.6,
+              "value": false
+            }
+          ]
+        }
+      },
+      "Card4/ImgCard": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.6,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.7,
+              "value": [
+                0,
+                15,
+                0
+              ]
+            },
+            {
+              "frame": 0.8,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 0.8,
+              "value": false
+            }
+          ]
+        }
+      },
+      "Card5/ImgCard": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.8,
+              "value": [
+                0,
+                -0.778,
+                0
+              ]
+            },
+            {
+              "frame": 0.9,
+              "value": [
+                0,
+                15,
+                0
+              ]
+            },
+            {
+              "frame": 1,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 1,
+              "value": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

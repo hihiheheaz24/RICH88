@@ -85,6 +85,7 @@ window.Global = {
     InGameManager: null,
     GameLogic: null,
     //popup
+    LoginTabView : null,
     EventRanking: null,
     CommandPopup: null,
     NotifyPopup: null,

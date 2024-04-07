@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "eb33acf0-12e2-41c6-8215-e700e0f708f4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 512,
+  "height": 256,
+  "platformSettings": {},
+  "subMetas": {
+    "thantai_text_game": {
+      "ver": "1.0.4",
+      "uuid": "4c9386a4-35c8-4b19-9716-734270c66db3",
+      "rawTextureUuid": "eb33acf0-12e2-41c6-8215-e700e0f708f4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -23,
+      "offsetY": 1,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 466,
+      "height": 254,
+      "rawWidth": 512,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

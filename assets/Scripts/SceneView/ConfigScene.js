@@ -34,7 +34,7 @@ cc.Class({
 			type: cc.JsonAsset,
 		},
 
-		btnQuit: cc.Node,
+		// btnQuit: cc.Node,
 
 		nodeSupport: cc.Node,
 	},
@@ -81,17 +81,17 @@ cc.Class({
 		// this.labelTip.string = MyLocalization.GetText(textEdit);
 		this.labelTip.string = "";
 
-		if (cc.sys.isBrowser) {
-			var url = new URL(window.location.href);
-			var AccessToken = url.searchParams.get("accesstoken");
-			if (AccessToken) {
-				this.btnQuit.active = true;
-			} else {
-				this.btnQuit.active = false;
-			}
-		} else {
-			this.btnQuit.active = false;
-		}
+		// if (cc.sys.isBrowser) {
+		// 	var url = new URL(window.location.href);
+		// 	var AccessToken = url.searchParams.get("accesstoken");
+		// 	if (AccessToken) {
+		// 		this.btnQuit.active = true;
+		// 	} else {
+		// 		this.btnQuit.active = false;
+		// 	}
+		// } else {
+		// 	this.btnQuit.active = false;
+		// }
 	},
 
 	getConfigLink() {

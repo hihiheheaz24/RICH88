@@ -1,0 +1,104 @@
+{
+"skeleton": {
+	"hash": "N+ES3d+ZaEbKyokCQeCxxyg7Wm0",
+	"spine": "3.8.99",
+	"x": -57,
+	"y": -117.5,
+	"width": 156.94,
+	"height": 288.6,
+	"images": "../export/minipoker/can_gat/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "lo_can", "parent": "root", "x": 17.81, "y": 51.54 },
+	{ "name": "can", "parent": "root", "length": 101.16, "rotation": 65.02, "x": 12.07, "y": 38.52 }
+],
+"slots": [
+	{ "name": "bg_can", "bone": "root", "attachment": "bg_can" },
+	{ "name": "lo_can", "bone": "lo_can", "attachment": "lo_can" },
+	{ "name": "ar", "bone": "root", "attachment": "ar" },
+	{ "name": "ar2", "bone": "root", "attachment": "ar" },
+	{ "name": "can", "bone": "can", "attachment": "can" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"ar": {
+				"ar": { "x": 16.76, "y": -13.06, "width": 70, "height": 53 }
+			},
+			"ar2": {
+				"ar": { "x": 16.76, "y": -63.08, "scaleX": 0.8, "scaleY": 0.8, "width": 70, "height": 53 }
+			},
+			"bg_can": {
+				"bg_can": { "width": 114, "height": 235 }
+			},
+			"can": {
+				"can": { "x": 72.39, "y": -3.63, "rotation": -65.02, "width": 108, "height": 137 }
+			},
+			"lo_can": {
+				"lo_can": { "x": -1.56, "y": -2.61, "width": 45, "height": 40 }
+			}
+		}
+	}
+],
+"animations": {
+	"dung_yen": {
+		"slots": {
+			"ar": {
+				"color": [
+					{ "color": "ffffffff" },
+					{ "time": 0.5, "color": "ffffff00" },
+					{ "time": 1, "color": "ffffffff" }
+				]
+			},
+			"ar2": {
+				"color": [
+					{ "color": "ffffff00" },
+					{ "time": 0.5, "color": "ffffffff" },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			}
+		}
+	},
+	"quay": {
+		"slots": {
+			"ar": {
+				"color": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"ar2": {
+				"color": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"lo_can": {
+				"translate": [
+					{},
+					{ "time": 0.6667, "x": -8.62, "y": -93.1 },
+					{ "time": 1.3333 }
+				]
+			},
+			"can": {
+				"rotate": [
+					{},
+					{ "time": 0.6667, "angle": -124.42 },
+					{ "time": 1.3333 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.3333, "x": -13.36, "y": -36.64 },
+					{ "time": 0.6667, "x": -12.93, "y": -73.27 },
+					{ "time": 1, "x": -11.64, "y": -36.64 },
+					{ "time": 1.3333, "curve": "stepped" },
+					{ "time": 2 }
+				]
+			}
+		}
+	}
+}
+}

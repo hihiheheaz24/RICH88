@@ -1,0 +1,34 @@
+
+ICON.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1R
+  rotate: true
+  xy: 2, 66
+  size: 51, 135
+  orig: 51, 135
+  offset: 0, 0
+  index: -1
+F1
+  rotate: false
+  xy: 2, 2
+  size: 57, 28
+  orig: 57, 28
+  offset: 0, 0
+  index: -1
+TAYQUAY
+  rotate: false
+  xy: 139, 55
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+TRUCQUAY
+  rotate: true
+  xy: 2, 32
+  size: 32, 96
+  orig: 32, 96
+  offset: 0, 0
+  index: -1

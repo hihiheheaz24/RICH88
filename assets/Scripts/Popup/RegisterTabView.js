@@ -53,10 +53,10 @@ cc.Class({
         Global.CapchaController.requestCapcha();
     },
     onClickClose() {
-        // Global.onPopOff(this.node);
+        Global.onPopOff(this.node);
     },
     show() {
-        // Global.onPopOn(this.node);
+        Global.onPopOn(this.node);
     },
    
     // start () {

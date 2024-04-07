@@ -6,12 +6,8 @@ cc.Class({
     inputPassWordLogin: cc.EditBox,
     edbCapcha: cc.EditBox,
     nodeCapCha: cc.Node,
-    nodeLogin: cc.Node,
-    nodeRegister: cc.Node,
-    nodeInput: cc.Node,
     edbPassWord: cc.EditBox,
     toggleSave: cc.Toggle,
-    listSupport: cc.Node,
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -51,8 +47,6 @@ cc.Class({
         this.onClickBtnLogin();
       })
     );
-    this.nodeLogin.active = false;
-    this.nodeRegister.active = false;
   },
 
   onToggleSaveInfo(event, date) {
@@ -70,12 +64,13 @@ cc.Class({
   },
   onClickClose() {
     cc.log("chay vao offf tab");
-    this.node.active = false;
-    // Global.onPopOff(this.node);
+    // this.node.active = false;
+    Global.onPopOff(this.node);
   },
   show() {
     cc.log("chay vao showw tab");
-    this.node.active = true;
+    // this.node.active = true;
+    Global.onPopOn(this.node);
   },
   showCapcha() {
     this.nodeCapCha.active = true;
@@ -104,30 +99,6 @@ cc.Class({
   clickForgotPass() {
     cc.sys.openURL(Global.ConfigLogin.HotSmsFanpage);
   },
-
-  onClickShowRegister() {
-    Global.UIManager.showMask();
-    Global.nodeInOutToRight(this.nodeRegister, null, true);
-    Global.nodeInOutToLeft(null, this.nodeLogin, true);
-  },
-
-  onClickShowLogin() {
-    Global.UIManager.showMask();
-    Global.nodeInOutToRight(this.nodeLogin, null, true);
-    Global.nodeInOutToLeft(null, this.nodeRegister, true);
-  },
-
-  onClickCloseLogin() {
-    Global.UIManager.hideMask();
-    Global.nodeInOutToLeft(null, this.nodeLogin, true);
-  },
-
-  onClickCloseRegister() {
-    Global.UIManager.hideMask();
-    Global.nodeInOutToLeft(null, this.nodeRegister, true);
-  },
-
-  onClickShowListSupport(event, data) {},
 
   ClickBtnMessage() {
     //Global.AudioManager.ClickButton();

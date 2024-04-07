@@ -1,0 +1,119 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "ShowJackpot",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 3,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "frame": 0.2,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.3,
+            "y": 1.3
+          }
+        },
+        {
+          "frame": 0.4,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.9,
+            "y": 0.9
+          }
+        },
+        {
+          "frame": 0.6,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.2,
+            "y": 1.2
+          }
+        },
+        {
+          "frame": 0.8,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.9,
+            "y": 0.9
+          }
+        },
+        {
+          "frame": 1,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.1,
+            "y": 1.1
+          }
+        },
+        {
+          "frame": 1.2,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 1.4,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.1,
+            "y": 1.1
+          }
+        },
+        {
+          "frame": 1.6,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 1.8,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.1,
+            "y": 1.1
+          }
+        },
+        {
+          "frame": 2,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 3,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "frame": 3,
+      "func": "Hide",
+      "params": []
+    }
+  ]
+}

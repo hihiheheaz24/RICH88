@@ -1,0 +1,121 @@
+{
+"skeleton": { "hash": "EDLeoNjBcjVQz+qgtzxpgwUQCBQ", "spine": "3.6.53", "width": 86.05, "height": 158.2, "images": "../Images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "1R", "parent": "root", "length": 25.02, "rotation": -91.08, "x": 0.52, "y": -39.5 },
+	{ "name": "F1", "parent": "1R", "length": 22.42, "rotation": 1.08, "x": 31.39, "y": 0.36 },
+	{ "name": "TRUCQUAY", "parent": "root", "length": 32.15, "rotation": 89.66, "x": -0.6, "y": -40.07 },
+	{ "name": "bone2", "parent": "root", "length": 89.7, "rotation": 91.23, "x": -1.71, "y": 14.45 }
+],
+"slots": [
+	{ "name": "TRUCQUAY", "bone": "TRUCQUAY", "attachment": "TRUCQUAY" },
+	{ "name": "TAYQUAY", "bone": "bone2", "attachment": "TAYQUAY" },
+	{ "name": "F1", "bone": "F1" },
+	{ "name": "1R", "bone": "1R" }
+],
+"skins": {
+	"default": {
+		"1R": {
+			"1R": { "x": -38.6, "y": -3.12, "rotation": 91.08, "width": 51, "height": 135 }
+		},
+		"F1": {
+			"F1": { "x": 8.21, "y": -0.27, "rotation": 90, "width": 57, "height": 28 }
+		},
+		"TAYQUAY": {
+			"TAYQUAY": { "x": 57.46, "y": -2.09, "rotation": -57.29, "width": 62, "height": 62 }
+		},
+		"TRUCQUAY": {
+			"TRUCQUAY": { "x": 44.82, "y": 1.24, "rotation": -89.66, "width": 32, "height": 96 }
+		}
+	}
+},
+"animations": {
+	"DEFAULT": {
+		"slots": {
+			"1R": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.2667, "color": "ffffffff" },
+					{ "time": 0.5, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "1R" }
+				]
+			},
+			"F1": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.2667, "color": "ffffffff" },
+					{ "time": 0.5, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "F1" }
+				]
+			},
+			"TAYQUAY": {
+				"attachment": [
+					{ "time": 0, "name": "TAYQUAY" }
+				]
+			},
+			"TRUCQUAY": {
+				"attachment": [
+					{ "time": 0, "name": "TRUCQUAY" }
+				]
+			}
+		},
+		"bones": {
+			"1R": {
+				"rotate": [
+					{ "time": 1.6667, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 41.25 },
+					{ "time": 0.5, "x": 0, "y": -25.56, "curve": "stepped" },
+					{ "time": 1.6667, "x": 0, "y": -25.56 }
+				],
+				"scale": [
+					{ "time": 1.6667, "x": 1, "y": 1 }
+				]
+			}
+		}
+	},
+	"TRUCQUAY": {
+		"bones": {
+			"bone2": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1667, "x": 0, "y": -141.55 },
+					{ "time": 0.3333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.3333, "x": 1, "y": 1 }
+				]
+			},
+			"TRUCQUAY": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 2, "curve": "stepped" },
+					{ "time": 0.3333, "x": 0, "y": 2 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.1667, "x": -0.23, "y": 1 },
+					{ "time": 0.3333, "x": 1, "y": 1 }
+				],
+				"shear": [
+					{ "time": 0, "x": 0, "y": 3.6, "curve": "stepped" },
+					{ "time": 0.3333, "x": 0, "y": 3.6 }
+				]
+			}
+		}
+	}
+}
+}

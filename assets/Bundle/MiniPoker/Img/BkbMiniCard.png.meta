@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "e544c336-73b2-450e-8017-76ceec4c0f44",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 300,
+  "height": 97,
+  "platformSettings": {},
+  "subMetas": {
+    "BkbMiniCard": {
+      "ver": "1.0.4",
+      "uuid": "7007a743-55ee-43a8-af9f-5495bc7cc731",
+      "rawTextureUuid": "e544c336-73b2-450e-8017-76ceec4c0f44",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 300,
+      "height": 97,
+      "rawWidth": 300,
+      "rawHeight": 97,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

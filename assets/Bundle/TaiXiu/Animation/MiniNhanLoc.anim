@@ -1,0 +1,57 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "MiniNhanLoc",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.5,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": "2",
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.4,
+            "y": 0.4
+          }
+        },
+        {
+          "frame": 0.25,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.45,
+            "y": 0.45
+          }
+        },
+        {
+          "frame": 0.75,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.35,
+            "y": 0.35
+          }
+        },
+        {
+          "frame": 1.25,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.45,
+            "y": 0.45
+          }
+        },
+        {
+          "frame": 1.5,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.4,
+            "y": 0.4
+          }
+        }
+      ]
+    }
+  },
+  "events": []
+}

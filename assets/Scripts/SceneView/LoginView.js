@@ -43,6 +43,7 @@ cc.Class({
 			cc.sys.localStorage.setItem(CONFIG.KEY_USERNAME, username);
 			cc.sys.localStorage.setItem(CONFIG.KEY_PASSWORD, password);
 		}
+		Global.UIManager.showMiniLoading();
 		require("BaseNetwork").request(Global.ConfigLogin.LoginUrl, data, this.LoginAuthenProcess.bind(this));
 	},
 
@@ -80,6 +81,7 @@ cc.Class({
 	},
 
 	LoginAuthenProcess(data) {
+		Global.LoginTabView.onClickClose();
 		var rs = JSON.parse(data);
 		cc.log("check data login : ", data);
 		// Global.UIManager.hideMiniLoading();

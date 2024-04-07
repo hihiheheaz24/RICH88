@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "30cf429d-4569-4cd1-a2b7-16eccf0ae613",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 71,
+  "height": 71,
+  "platformSettings": {},
+  "subMetas": {
+    "ZOOM BTN": {
+      "ver": "1.0.4",
+      "uuid": "99cd93b3-aafb-40e3-bdc5-983b169e1f41",
+      "rawTextureUuid": "30cf429d-4569-4cd1-a2b7-16eccf0ae613",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 71,
+      "height": 71,
+      "rawWidth": 71,
+      "rawHeight": 71,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

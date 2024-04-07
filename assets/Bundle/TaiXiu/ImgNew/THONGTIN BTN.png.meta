@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "29442633-80a3-41ca-bf0e-20ade62bd2c0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 71,
+  "height": 71,
+  "platformSettings": {},
+  "subMetas": {
+    "THONGTIN BTN": {
+      "ver": "1.0.4",
+      "uuid": "989d58c0-06f3-4d4b-bc38-0cf479397652",
+      "rawTextureUuid": "29442633-80a3-41ca-bf0e-20ade62bd2c0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 71,
+      "height": 71,
+      "rawWidth": 71,
+      "rawHeight": 71,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -30,6 +30,8 @@ cc.Class({
 		notiMission: cc.Node,
 		btnLeague : cc.Node,
 		btnAdmob : cc.Node,
+		nodeNotLogin : cc.Node,
+		nodeLoginSucces : cc.Node
 		// lbVersion : cc.Label,
 	},
 
@@ -38,19 +40,19 @@ cc.Class({
 	},
 
 	onEnable(){
-		let count = 0;
-		Global.UIManager.showLoading();
-		this.schedule(
-			(this.loading = () => {
-				count += 0.01;
-				cc.log("check perceny : ", count)
-				Global.UIManager.progressLoading(count)
-				if (count >= 0.99) {
-					this.unschedule(this.loading);
-				}
-			}),
-			0.01
-		);
+		// let count = 0;
+		// Global.UIManager.showLoading();
+		// this.schedule(
+		// 	(this.loading = () => {
+		// 		count += 0.01;
+		// 		cc.log("check perceny : ", count)
+		// 		Global.UIManager.progressLoading(count)
+		// 		if (count >= 0.99) {
+		// 			this.unschedule(this.loading);
+		// 		}
+		// 	}),
+		// 	0.01
+		// );
 	},
 
 	onLoad() {
@@ -100,7 +102,35 @@ cc.Class({
 		Global.UIManager.hideMask();
 		Global.XocDia = null;
 		cc.log("chay vao open mini game ")
-		Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
+		this.nodeLoginSucces.active = true;
+		this.nodeNotLogin.active = false;
+		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
+	},
+
+	onClickOpenMiniGame(event, data){
+		if (!Global.isLogin) {
+			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+			return;
+		}
+		let idGame = parseInt(data);
+		cc.log("on click onpen game id : ", idGame)
+		Global.UIManager.showMiniLoading();
+		switch (idGame) {
+			case GAME_TYPE.XOCDIA:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
+				break;
+			case GAME_TYPE.TAI_XIU:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.TAI_XIU);
+				break;
+			case GAME_TYPE.MINI_POKER:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.MINI_POKER);
+				break;
+			case GAME_TYPE.MINI_SLOT:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.MINI_SLOT);
+				break;
+		}
+
+	
 	},
 
 	checkShowPopupNewUser(dataUser) {
@@ -134,7 +164,10 @@ cc.Class({
 	},
 
 	start() {
-		let funNext = () => { };
+		let funNext = () => { 
+			this.nodeNotLogin.active = true;
+			this.nodeLoginSucces.active = false;
+		};
 
 		if (Global.UIManager) {
 			cc.log("chay vao load res dau game");
@@ -181,6 +214,7 @@ cc.Class({
 	Connect() {
 		this.Init();
 		if (!Global.NetworkManager._connect || Global.NetworkManager._connect.connectionState !== "Connected") {
+			cc.log("chay vao get config login :")
 			var data = {};
 			require("BaseNetwork").request(Global.ConfigLogin.GameConfigUrl, data, this.GetConfig.bind(this));
 		} else {
