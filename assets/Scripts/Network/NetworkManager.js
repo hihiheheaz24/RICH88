@@ -43,20 +43,9 @@ cc.Class({
                     require("ReceiveResponse").getIns().reviceData(message);
                     break;
                 case RESPONSE_CODE.CTP_EVENT_CODE:
-
-                switch (key) {
-                    case value:
-                        
-                        break;
-                
-                    default:
-                        break;
-                }
-
                     require("CardReceiveResponse").getIns().reviceData(message);
                     break;
             }
-
             // Đã ngắt kết nối ở máy chủ, client chủ động ngắt kết nối
             if (opCode == 49) {
                 console.log('ngat ket noi tu server');
@@ -159,7 +148,7 @@ cc.Class({
         }
 
         if (requestCode !== "SBI9")
-        cc.log("!> send data game : " + JSON.stringify(data));
+        cc.log("!> send data game : " + JSON.stringify(arr));
 
         try {
             this._connect.invoke('SendToServerAsync', isCardCode, JSON.stringify(data));

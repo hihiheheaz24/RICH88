@@ -38,6 +38,11 @@ var BET_TYPE = {
 
 };
 
+var XocDiaStatus = {
+    Betting : 1,
+    Endgame : 2,
+};
+
 var GAME_CODE = {
     TLMN: "TMN",
     BINH: "MAB",
@@ -72,7 +77,7 @@ var linkConfig = '%sConfigBundleVPlay.txt';
 
 var linkFire = "";
 
-var LIST_GAME_ASSET = [GAME_TYPE.LODE];// list game ko assetbundle
+var LIST_GAME_ASSET = [];// list game ko assetbundle
 var LIST_REMOVE_BUNDLE_GAME = {};
 var LIST_VERSION_REMOVE = [];
 

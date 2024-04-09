@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "48f8112a-2dfa-4d75-8718-084de285338b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 400,
+  "height": 183,
+  "platformSettings": {},
+  "subMetas": {
+    "Toi-Trang": {
+      "ver": "1.0.4",
+      "uuid": "8777a441-13ae-483b-97a3-921e716271fd",
+      "rawTextureUuid": "48f8112a-2dfa-4d75-8718-084de285338b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 4,
+      "offsetY": 1.5,
+      "trimX": 8,
+      "trimY": 0,
+      "width": 392,
+      "height": 180,
+      "rawWidth": 400,
+      "rawHeight": 183,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

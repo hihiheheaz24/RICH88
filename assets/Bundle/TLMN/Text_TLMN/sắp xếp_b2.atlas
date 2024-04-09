@@ -1,0 +1,230 @@
+
+sắp xếp_b2.png
+size: 2000,986
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1_new_text_2_tuquy
+  rotate: false
+  xy: 1347, 869
+  size: 414, 115
+  orig: 416, 117
+  offset: 1, 1
+  index: -1
+1_new_text_4sam
+  rotate: true
+  xy: 1464, 553
+  size: 314, 109
+  orig: 316, 112
+  offset: 1, 1
+  index: -1
+1_new_text_doithong_3_bich
+  rotate: false
+  xy: 690, 234
+  size: 885, 104
+  orig: 885, 104
+  offset: 0, 0
+  index: -1
+1_new_text_tuquy2
+  rotate: true
+  xy: 1347, 453
+  size: 414, 115
+  orig: 417, 117
+  offset: 1, 1
+  index: -1
+1_new_text_tuquy3
+  rotate: false
+  xy: 662, 117
+  size: 414, 115
+  orig: 416, 117
+  offset: 1, 1
+  index: -1
+grey_bich
+  rotate: false
+  xy: 1507, 362
+  size: 42, 47
+  orig: 44, 49
+  offset: 1, 1
+  index: -1
+grey_co
+  rotate: true
+  xy: 1948, 940
+  size: 44, 43
+  orig: 46, 46
+  offset: 1, 2
+  index: -1
+grey_crow
+  rotate: false
+  xy: 1763, 896
+  size: 136, 88
+  orig: 138, 90
+  offset: 1, 1
+  index: -1
+grey_ro
+  rotate: false
+  xy: 1657, 62
+  size: 39, 46
+  orig: 42, 48
+  offset: 1, 1
+  index: -1
+grey_tep
+  rotate: false
+  xy: 1347, 348
+  size: 45, 45
+  orig: 47, 47
+  offset: 1, 1
+  index: -1
+khung_khung
+  rotate: false
+  xy: 2, 145
+  size: 658, 155
+  orig: 665, 157
+  offset: 4, 1
+  index: -1
+khung_light_behind
+  rotate: false
+  xy: 2, 302
+  size: 686, 682
+  orig: 688, 684
+  offset: 1, 1
+  index: -1
+khung_line
+  rotate: true
+  xy: 1991, 500
+  size: 395, 7
+  orig: 397, 9
+  offset: 1, 1
+  index: -1
+light_mini_1
+  rotate: false
+  xy: 1901, 910
+  size: 27, 27
+  orig: 32, 32
+  offset: 3, 3
+  index: -1
+light_mini_2
+  rotate: false
+  xy: 1901, 939
+  size: 45, 45
+  orig: 50, 51
+  offset: 3, 3
+  index: -1
+light_mini_3
+  rotate: true
+  xy: 1347, 395
+  size: 56, 57
+  orig: 63, 63
+  offset: 4, 3
+  index: -1
+text_3_doi_thong
+  rotate: false
+  xy: 1078, 110
+  size: 632, 102
+  orig: 635, 105
+  offset: 2, 2
+  index: -1
+text_4_doi_thong
+  rotate: false
+  xy: 2, 41
+  size: 644, 102
+  orig: 646, 105
+  offset: 1, 2
+  index: -1
+text_5_doi_thong
+  rotate: false
+  xy: 648, 6
+  size: 632, 102
+  orig: 635, 105
+  offset: 2, 2
+  index: -1
+text_6_doi
+  rotate: true
+  xy: 1733, 23
+  size: 267, 102
+  orig: 269, 104
+  offset: 1, 1
+  index: -1
+text_dong_mau
+  rotate: true
+  xy: 1862, 341
+  size: 553, 127
+  orig: 556, 130
+  offset: 2, 2
+  index: -1
+text_sanh_rong
+  rotate: true
+  xy: 1733, 292
+  size: 575, 127
+  orig: 577, 130
+  offset: 1, 2
+  index: -1
+trang_tri_con_rong
+  rotate: false
+  xy: 1282, 12
+  size: 373, 96
+  orig: 376, 98
+  offset: 1, 1
+  index: -1
+tuquy_khung
+  rotate: true
+  xy: 1577, 214
+  size: 653, 154
+  orig: 661, 156
+  offset: 3, 1
+  index: -1
+tuquy_light_phia_sau
+  rotate: true
+  xy: 690, 340
+  size: 644, 655
+  orig: 707, 717
+  offset: 32, 31
+  index: -1
+tuquy_line
+  rotate: true
+  xy: 1991, 106
+  size: 392, 7
+  orig: 394, 9
+  offset: 1, 1
+  index: -1
+tuquy_text_tu_quy
+  rotate: true
+  xy: 1862, 2
+  size: 337, 115
+  orig: 341, 119
+  offset: 2, 2
+  index: -1
+tuquy_trangtri_bich
+  rotate: true
+  xy: 1456, 363
+  size: 46, 49
+  orig: 50, 54
+  offset: 2, 2
+  index: -1
+tuquy_trangtri_co
+  rotate: true
+  xy: 1406, 352
+  size: 48, 45
+  orig: 52, 50
+  offset: 2, 3
+  index: -1
+tuquy_trangtri_ro
+  rotate: true
+  xy: 1948, 897
+  size: 41, 47
+  orig: 47, 52
+  offset: 3, 2
+  index: -1
+tuquy_trangtri_tep
+  rotate: false
+  xy: 1406, 402
+  size: 48, 49
+  orig: 53, 53
+  offset: 3, 2
+  index: -1
+tuquy_trangtri_vuongmien
+  rotate: true
+  xy: 1464, 411
+  size: 140, 92
+  orig: 144, 96
+  offset: 2, 2
+  index: -1

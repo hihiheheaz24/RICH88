@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "94b3fbfe-63b6-46fb-a23a-c528f59a1b2e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 320,
+  "height": 102,
+  "platformSettings": {},
+  "subMetas": {
+    "Tengame": {
+      "ver": "1.0.4",
+      "uuid": "3e7c8c01-a350-42df-8234-24c72b5e8f6f",
+      "rawTextureUuid": "94b3fbfe-63b6-46fb-a23a-c528f59a1b2e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 320,
+      "height": 102,
+      "rawWidth": 320,
+      "rawHeight": 102,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

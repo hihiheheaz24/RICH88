@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "49a07de0-d931-49cb-b81f-f9aefb226d76",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 512,
+  "height": 512,
+  "platformSettings": {},
+  "subMetas": {
+    "logo rik88 (1)": {
+      "ver": "1.0.4",
+      "uuid": "feb3e2bd-ff86-4241-baae-b88923a292bb",
+      "rawTextureUuid": "49a07de0-d931-49cb-b81f-f9aefb226d76",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 15,
+      "offsetY": 17.5,
+      "trimX": 97,
+      "trimY": 108,
+      "width": 348,
+      "height": 261,
+      "rawWidth": 512,
+      "rawHeight": 512,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

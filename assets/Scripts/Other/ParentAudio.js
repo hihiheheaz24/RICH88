@@ -115,12 +115,18 @@ cc.Class({
         }
         if (!this.isActiveMusic) return;
         cc.log("chay vao stop muasic", this.isActiveMusic)
-        this.ingameAudio.play();
-        if(this.ingameAudio)  this.ingameAudio.loop = true;
+        
+        if(this.ingameAudio){
+            this.ingameAudio.play();
+            this.ingameAudio.loop = true;
+        } 
        
     },
     stopInGame() {
-        this.ingameAudio.stop();
+        if(this.ingameAudio){
+            this.ingameAudio.stop();
+        }
+      
     },
 
     onDestroy() {

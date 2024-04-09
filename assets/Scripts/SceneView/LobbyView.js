@@ -128,6 +128,22 @@ cc.Class({
 			case GAME_TYPE.MINI_SLOT:
 				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.MINI_SLOT);
 				break;
+			case GAME_TYPE.LODE:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.LODE);
+				break;
+			default:
+				if (data === "TMN") {
+					let msg = {};
+					msg[AuthenticateParameterCode.RoomType] = 1;
+					msg[AuthenticateParameterCode.GameId] = "TMN";
+					msg[AuthenticateParameterCode.Blind] = 0;
+					msg[AuthenticateParameterCode.RoomId] = 25;
+					cc.log("send ow itemlobby : ", msg);
+					require("SendCardRequest").getIns().MST_Client_Join_Game(msg);
+					Global.UIManager.showMiniLoading();
+					break;
+				}
+				break
 		}
 
 	
@@ -514,7 +530,7 @@ cc.Class({
 		MainPlayerInfo.CurrentGameCode = strGame;
 		MainPlayerInfo.CurrentGameId = Global.getGameIdByName(strGame);
 		MainPlayerInfo.CurrentGameType = 1;
-		Global.nodeInOutToRight(null, this.nodeMiddle);
+		// Global.nodeInOutToRight(null, this.nodeMiddle);
 
 		// if (Global.IsNewUser && MainPlayerInfo.CurrentGameCode === "TMN") {
 		// 	if (Global.TodayMission) {

@@ -82,12 +82,26 @@ cc.Class({
         if(Global[MainPlayerInfo.CurrentGameCode + roomId]){
             Global[MainPlayerInfo.CurrentGameCode + roomId].node.active = true;
             Global[MainPlayerInfo.CurrentGameCode + roomId].initGame(data);
-            Global.AudioManager.playInGame();
+            // Global.AudioManager.playInGame();
             return;
         }
 
         Global.UIManager.showLoading();
 
+        // let funFinish = (component) => {
+        //     cc.log("load xong prefabs " + gameType)
+        //     Global.UIManager.hideLoading();
+        //     cc.log("==> MainPlayerInfo.CurrentGameCode la : ", MainPlayerInfo.CurrentGameCode);
+        //     cc.log("==> roomId la : ", roomId);
+        //     let gameView = cc.instantiate(prefab).getComponent(componentGlobal);
+        //     this.parentGame.addChild(gameView.node);
+        //     Global.AudioManager.playInGame();
+        //     Global[MainPlayerInfo.CurrentGameCode + roomId] = gameView;
+        //     if (Global[MainPlayerInfo.CurrentGameCode + roomId]["initGame"]) Global[MainPlayerInfo.CurrentGameCode + roomId].initGame(data);
+		// };
+        // Global.UIManager.getBundleAndInitGame(gameType,  Global.UIManager.downloadProgress(gameType),funFinish )
+
+        // return;
         cc.resources.load(url, cc.Prefab, (count, total) => {
             Global.UIManager.progressLoading(count / total);
         }, (err2, prefab) => {

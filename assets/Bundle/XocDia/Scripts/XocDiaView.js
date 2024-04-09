@@ -873,5 +873,11 @@ cc.Class({
         .start();
     },
 
+    onClickBack(){
+        Global.LobbyView.OnShowLobby();
+        Global.XocDia = null;
+        this.node.destroy();
+    },
+
     // update (dt) {},
 });

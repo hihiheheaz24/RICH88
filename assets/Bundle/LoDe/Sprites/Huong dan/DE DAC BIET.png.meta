@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "b7502b64-2dd2-4198-8d61-6f2e4e605aaf",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1017,
+  "height": 735,
+  "platformSettings": {},
+  "subMetas": {
+    "DE DAC BIET": {
+      "ver": "1.0.4",
+      "uuid": "532283f1-bafc-413f-9f98-732fc853b1a7",
+      "rawTextureUuid": "b7502b64-2dd2-4198-8d61-6f2e4e605aaf",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1017,
+      "height": 735,
+      "rawWidth": 1017,
+      "rawHeight": 735,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

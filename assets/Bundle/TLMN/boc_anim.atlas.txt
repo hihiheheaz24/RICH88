@@ -1,0 +1,13 @@
+
+boc_anim.png
+size: 64,32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Tala_arrow
+  rotate: false
+  xy: 2, 2
+  size: 31, 25
+  orig: 31, 25
+  offset: 0, 0
+  index: -1

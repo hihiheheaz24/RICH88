@@ -1201,9 +1201,9 @@ cc.Class({
 				component = "TaiXiu";
 				break;
 			case GAME_TYPE.TLMN:
-				str = "TLMN"; // ten cua no trong thu muc
-				strGame = "TLMNView"; // ten cua global
-				component = "TLMNView";
+				str = "TLMNNew"; // ten cua no trong thu muc
+				strGame = "TienLenMN"; // ten cua global
+				component = "TienLenMN";
 				break;
 			case GAME_TYPE.SAM:
 				str = "Sam"; // ten cua no trong thu muc
@@ -1257,11 +1257,12 @@ cc.Class({
 				}
 			);
 		} else {
-			cc.log("chay vao load bundle")
+			cc.log("chay vao load bundle : ", gameType.toString())
 			cc.assetManager.loadBundle(gameType.toString(), (err, bundle) => {
 				if (err) {
 					return cc.log("loi roi nay " + err);
 				}
+				cc.log("Check bundle la : ", bundle)
 				bundle.load(
 					str,
 					cc.Prefab,
@@ -1272,7 +1273,10 @@ cc.Class({
 						}
 					},
 					(err, prefab) => {
-						if (err) return;
+						if (err){
+							cc.log("co loi khi load : ", err)
+							return;
+						} 
 						Global[strGame] = cc.instantiate(prefab).getComponent(component);
 						funFinish(Global[strGame]);
 						this.removeDownload(gameType);

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "1e39af7c-0505-40b8-ac01-246060ef9808",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 560,
+  "height": 52,
+  "platformSettings": {},
+  "subMetas": {
+    "Mức cược_ 100k": {
+      "ver": "1.0.4",
+      "uuid": "6e65bf33-ee5a-4d74-9792-99d1d8343ad5",
+      "rawTextureUuid": "1e39af7c-0505-40b8-ac01-246060ef9808",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 560,
+      "height": 52,
+      "rawWidth": 560,
+      "rawHeight": 52,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

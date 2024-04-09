@@ -31,7 +31,6 @@ cc.Class({
 
 	requestLogin(username, password, capcha, isPlayNow = true) {
 		var data = {
-			GameCode: 14,
 			AccountName: username,
 			Password: password,
 			MerchantId: "1",
@@ -49,7 +48,7 @@ cc.Class({
 
 	requestLoginTelegram(teleName) {
 		var data = {
-			GameCode: 14,
+			GameCode: 7,
 			AccountName: teleName,
 			MerchantId: "1",
 			Verify: Global.CapchaController.veriLogin,
@@ -81,7 +80,6 @@ cc.Class({
 	},
 
 	LoginAuthenProcess(data) {
-		Global.LoginTabView.onClickClose();
 		var rs = JSON.parse(data);
 		cc.log("check data login : ", data);
 		// Global.UIManager.hideMiniLoading();
@@ -101,6 +99,7 @@ cc.Class({
 				Global.UIManager.showSetNamePopup(rs.d.NickName, this.UpdateNickName.bind(this));
 			}
 		} else {
+			Global.LoginTabView.onClickClose();
 			if (Global.SetNamePopup) Global.SetNamePopup.Hide();
 			Global.AcessToken = rs.d.AccessToken;
 			cc.log("check login : ", rs.d);

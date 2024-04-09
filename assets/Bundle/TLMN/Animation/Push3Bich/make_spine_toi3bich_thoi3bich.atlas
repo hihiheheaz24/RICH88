@@ -1,0 +1,265 @@
+
+make_spine_toi3bich_thoi3bich.png
+size: 694,540
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blue_light
+  rotate: false
+  xy: 2, 238
+  size: 331, 146
+  orig: 402, 320
+  offset: 43, 86
+  index: -1
+boder_thoi_3_bich
+  rotate: false
+  xy: 2, 463
+  size: 447, 75
+  orig: 454, 77
+  offset: 3, 1
+  index: -1
+boder_toi_3_bich
+  rotate: false
+  xy: 2, 386
+  size: 432, 75
+  orig: 439, 77
+  offset: 2, 1
+  index: -1
+card_3bich_blue
+  rotate: false
+  xy: 335, 236
+  size: 106, 148
+  orig: 111, 153
+  offset: 2, 4
+  index: -1
+card_3bich_red
+  rotate: false
+  xy: 334, 86
+  size: 106, 148
+  orig: 111, 153
+  offset: 2, 4
+  index: -1
+emoil_hehe_01
+  rotate: false
+  xy: 443, 209
+  size: 82, 87
+  orig: 84, 89
+  offset: 1, 1
+  index: -1
+emoil_hehe_09
+  rotate: false
+  xy: 443, 209
+  size: 82, 87
+  orig: 84, 89
+  offset: 1, 1
+  index: -1
+emoil_hehe_02
+  rotate: true
+  xy: 310, 2
+  size: 82, 88
+  orig: 84, 90
+  offset: 1, 1
+  index: -1
+emoil_hehe_08
+  rotate: true
+  xy: 310, 2
+  size: 82, 88
+  orig: 84, 90
+  offset: 1, 1
+  index: -1
+emoil_hehe_03
+  rotate: false
+  xy: 443, 298
+  size: 82, 89
+  orig: 84, 91
+  offset: 1, 1
+  index: -1
+emoil_hehe_07
+  rotate: false
+  xy: 443, 298
+  size: 82, 89
+  orig: 84, 91
+  offset: 1, 1
+  index: -1
+emoil_hehe_04
+  rotate: true
+  xy: 128, 5
+  size: 82, 89
+  orig: 84, 91
+  offset: 1, 1
+  index: -1
+emoil_hehe_06
+  rotate: true
+  xy: 128, 5
+  size: 82, 89
+  orig: 84, 91
+  offset: 1, 1
+  index: -1
+emoil_hehe_05
+  rotate: true
+  xy: 219, 5
+  size: 82, 89
+  orig: 84, 91
+  offset: 1, 1
+  index: -1
+emoil_wow_01
+  rotate: false
+  xy: 527, 234
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_02
+  rotate: false
+  xy: 527, 234
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_03
+  rotate: false
+  xy: 442, 131
+  size: 75, 76
+  orig: 77, 78
+  offset: 1, 1
+  index: -1
+emoil_wow_04
+  rotate: false
+  xy: 527, 311
+  size: 75, 76
+  orig: 77, 78
+  offset: 1, 1
+  index: -1
+emoil_wow_05
+  rotate: false
+  xy: 527, 311
+  size: 75, 76
+  orig: 77, 78
+  offset: 1, 1
+  index: -1
+emoil_wow_06
+  rotate: false
+  xy: 442, 54
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_07
+  rotate: false
+  xy: 527, 157
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_08
+  rotate: false
+  xy: 519, 4
+  size: 75, 74
+  orig: 77, 76
+  offset: 1, 1
+  index: -1
+emoil_wow_09
+  rotate: true
+  xy: 604, 312
+  size: 75, 74
+  orig: 77, 76
+  offset: 1, 1
+  index: -1
+emoil_wow_10
+  rotate: false
+  xy: 519, 80
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_11
+  rotate: false
+  xy: 593, 389
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_12
+  rotate: false
+  xy: 604, 235
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_13
+  rotate: false
+  xy: 604, 158
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_14
+  rotate: false
+  xy: 596, 80
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_15
+  rotate: false
+  xy: 596, 80
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+emoil_wow_16
+  rotate: false
+  xy: 596, 80
+  size: 75, 75
+  orig: 77, 77
+  offset: 1, 1
+  index: -1
+red_light
+  rotate: false
+  xy: 2, 89
+  size: 330, 147
+  orig: 402, 320
+  offset: 45, 86
+  index: -1
+text__red_3
+  rotate: false
+  xy: 400, 28
+  size: 40, 56
+  orig: 42, 58
+  offset: 1, 1
+  index: -1
+text__red_bich
+  rotate: false
+  xy: 2, 22
+  size: 124, 65
+  orig: 126, 67
+  offset: 1, 1
+  index: -1
+text__red_thoi
+  rotate: false
+  xy: 451, 463
+  size: 140, 75
+  orig: 142, 77
+  offset: 1, 1
+  index: -1
+text_blue_3
+  rotate: true
+  xy: 442, 13
+  size: 39, 58
+  orig: 41, 60
+  offset: 1, 1
+  index: -1
+text_blue_bich
+  rotate: false
+  xy: 436, 389
+  size: 142, 72
+  orig: 144, 74
+  offset: 1, 1
+  index: -1
+text_blue_toi
+  rotate: false
+  xy: 593, 466
+  size: 99, 72
+  orig: 101, 74
+  offset: 1, 1
+  index: -1
