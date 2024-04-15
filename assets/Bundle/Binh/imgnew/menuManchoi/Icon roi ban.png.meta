@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "65873aa0-1e61-4e54-ab41-083d544072d6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 65,
+  "height": 66,
+  "platformSettings": {},
+  "subMetas": {
+    "Icon roi ban": {
+      "ver": "1.0.4",
+      "uuid": "f0dd9676-873f-4f1e-b0ca-776a5a2e1df8",
+      "rawTextureUuid": "65873aa0-1e61-4e54-ab41-083d544072d6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 62,
+      "height": 66,
+      "rawWidth": 65,
+      "rawHeight": 66,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

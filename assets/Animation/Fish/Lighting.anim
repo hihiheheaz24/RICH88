@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Lighting",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "2545d458-082b-4069-ab77-bef28ad81db9"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "45c07b62-030a-4b81-a7e0-474504d5725e"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "8326e8df-aac5-49f8-94c3-34250065e277"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "7adad46d-cdd1-4b2f-bf96-928c7399fe6a"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "3bc727a0-352a-40dd-8342-a83ea2093152"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "c1d8ac39-cda1-478c-9b71-4b3764cf81e3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

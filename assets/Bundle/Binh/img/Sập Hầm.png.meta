@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "84f5171b-d6d4-4ba3-ba42-78cbcec26100",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 276,
+  "height": 106,
+  "platformSettings": {},
+  "subMetas": {
+    "Sập Hầm": {
+      "ver": "1.0.4",
+      "uuid": "0ea4ea8d-4d0b-4c01-9c0f-b68c26d3fbe4",
+      "rawTextureUuid": "84f5171b-d6d4-4ba3-ba42-78cbcec26100",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 274,
+      "height": 104,
+      "rawWidth": 276,
+      "rawHeight": 106,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

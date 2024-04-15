@@ -1,0 +1,76 @@
+
+nhiemvu.png
+size: 860,472
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BlackHole_Light
+  rotate: false
+  xy: 2, 2
+  size: 457, 468
+  orig: 497, 501
+  offset: 19, 20
+  index: -1
+cloud_soft 1
+  rotate: false
+  xy: 629, 53
+  size: 110, 120
+  orig: 128, 128
+  offset: 8, 0
+  index: -1
+nhiemvu/chest
+  rotate: true
+  xy: 741, 27
+  size: 146, 83
+  orig: 148, 86
+  offset: 1, 2
+  index: -1
+nhiemvu/chest-f
+  rotate: false
+  xy: 629, 10
+  size: 99, 41
+  orig: 99, 41
+  offset: 0, 0
+  index: -1
+nhiemvu/frame
+  rotate: false
+  xy: 461, 175
+  size: 322, 295
+  orig: 325, 298
+  offset: 1, 1
+  index: -1
+nhiemvu/nhiemvu
+  rotate: true
+  xy: 785, 249
+  size: 221, 50
+  orig: 224, 54
+  offset: 1, 2
+  index: -1
+nhiemvu/shadow
+  rotate: true
+  xy: 837, 337
+  size: 133, 21
+  orig: 135, 23
+  offset: 1, 1
+  index: -1
+nhiemvu/so
+  rotate: false
+  xy: 785, 230
+  size: 37, 17
+  orig: 39, 19
+  offset: 1, 1
+  index: -1
+shine
+  rotate: false
+  xy: 461, 2
+  size: 166, 171
+  orig: 175, 175
+  offset: 3, 4
+  index: -1
+tt-user/light
+  rotate: true
+  xy: 826, 132
+  size: 115, 30
+  orig: 115, 30
+  offset: 0, 0
+  index: -1

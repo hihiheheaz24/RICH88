@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "ac723bc1-528b-44b1-9ec4-02c9dc5a12cb",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 2000,
+  "height": 1250,
+  "platformSettings": {},
+  "subMetas": {
+    "logo maubinh online": {
+      "ver": "1.0.4",
+      "uuid": "9692315f-8a1c-4b08-a3a9-b5e8cae3bd88",
+      "rawTextureUuid": "ac723bc1-528b-44b1-9ec4-02c9dc5a12cb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -90,
+      "offsetY": -89,
+      "trimX": 64,
+      "trimY": 402,
+      "width": 1692,
+      "height": 624,
+      "rawWidth": 2000,
+      "rawHeight": 1250,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -99,7 +99,13 @@ cc.Class({
 				Global.UIManager.showSetNamePopup(rs.d.NickName, this.UpdateNickName.bind(this));
 			}
 		} else {
-			Global.LoginTabView.onClickClose();
+			if(Global.LoginTabView){
+				Global.LoginTabView.onClickClose();
+			}
+			if(Global.RegisterTabView){
+				Global.RegisterTabView.onClickClose();
+			}
+			
 			if (Global.SetNamePopup) Global.SetNamePopup.Hide();
 			Global.AcessToken = rs.d.AccessToken;
 			cc.log("check login : ", rs.d);

@@ -76,6 +76,7 @@ cc.Class({
     onClickShowHistory(){
         cc.log("check item la : ", Global.GameView.historyPopup)
         this.onClose();
+        cc.log("check global : ", Global.GameView.historyPopup)
         Global.GameView.historyPopup.show();
         // require("SendCardRequest").getIns().MST_Client_TLMN_Send_Get_Log();
     },

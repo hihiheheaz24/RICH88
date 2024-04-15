@@ -1,0 +1,71 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "EffectChangeGun",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "New Sprite": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 0.6,
+              "value": false
+            }
+          ]
+        },
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "2ae0386f-bf98-4e86-9168-bed2baee4e19"
+                }
+              },
+              {
+                "frame": 0.1,
+                "value": {
+                  "__uuid__": "92a1c2a6-a107-4939-8d1c-175b033306a5"
+                }
+              },
+              {
+                "frame": 0.2,
+                "value": {
+                  "__uuid__": "177a85e8-bbe3-4e2d-abe0-bb1b94c4d082"
+                }
+              },
+              {
+                "frame": 0.3,
+                "value": {
+                  "__uuid__": "107d4c11-c4c2-4a31-914c-d53971c987b1"
+                }
+              },
+              {
+                "frame": 0.4,
+                "value": {
+                  "__uuid__": "8610e624-6515-46e3-865e-703b8b294a96"
+                }
+              },
+              {
+                "frame": 0.5,
+                "value": {
+                  "__uuid__": "f354a162-7655-4810-ba51-eb498b6f2bdb"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

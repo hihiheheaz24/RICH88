@@ -117,6 +117,7 @@ cc.Class({
             let gameView = cc.instantiate(prefab).getComponent(componentGlobal);
             this.parentGame.addChild(gameView.node);
             Global.AudioManager.playInGame();
+            Global.GameView = gameView;
             Global[MainPlayerInfo.CurrentGameCode + roomId] = gameView;
             if (Global[MainPlayerInfo.CurrentGameCode + roomId]["initGame"]) Global[MainPlayerInfo.CurrentGameCode + roomId].initGame(data);
         });

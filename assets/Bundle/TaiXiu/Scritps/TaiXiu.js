@@ -91,7 +91,7 @@ cc.Class({
 
     
     onLoad () {
-        this.onClickTheLeDuDay();
+        
         this._super();
         this.getComponent("ParentChangePositionEDB").resignEdb(this.edbChatTaiXiu);
         this.poolChat = new cc.NodePool();
@@ -103,15 +103,16 @@ cc.Class({
         this._isStateWatting = false;
         this.getComponent("DragMiniGame").gameType = GAME_TYPE.TAI_XIU;
         this.keyBoard = this.node.getComponentInChildren("KeyboardTaiXiu");
-        cc.loader.loadRes("TaiXiu/NhanLocTX" , (err , prefab)=>{
-        })
+        // this.gameType = GAME_TYPE.TAI_XIU
+        // cc.loader.loadRes("TaiXiu/NhanLocTX" , (err , prefab)=>{
+        // })
       //  cc.log("nhan dc tai xiu")
       this.content = this.scrListChat.content;
         this._timeStartHide = 0;
        this.isResult = false;
        this._currentChatMiss = 0;
 
-
+       this.onClickTheLeDuDay();
        if(Global.GameConfig.FeatureConfig.ActiveSoiCauTaiXiu == EFeatureStatus.Open){
            this.btnSoiCau.active= true;
        }else{
@@ -858,7 +859,8 @@ cc.Class({
         if(Global.TopVinhDanh){
             Global.TopVinhDanh.show();
         }else{
-            cc.loader.loadRes("TaiXiu/TopVinhDanh" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/TopVinhDanh" , (err , prefab)=>{
                 if(err) return;
                 let item = cc.instantiate(prefab).getComponent("TopVinhDanh");
                 Global.UIManager.parentPopup.addChild(item.node);
@@ -876,7 +878,8 @@ cc.Class({
         if(Global.HDDuDay){
             Global.HDDuDay.show();
         }else{
-            cc.loader.loadRes("TaiXiu/HuongDanDuDay" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/HuongDanDuDay" , (err , prefab)=>{
                 if(err) return;
                 let item = cc.instantiate(prefab).getComponent("HuongDanDuDay");
                 Global.UIManager.parentPopup.addChild(item.node);
@@ -894,7 +897,8 @@ cc.Class({
             Global.TopDuDay.show();
         }else{
             Global.UIManager.showMiniLoading();
-            cc.loader.loadRes("TaiXiu/TopDuDay" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/TopDuDay" , (err , prefab)=>{
                 if(err) return;
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.TopDuDay.show();
@@ -911,7 +915,8 @@ cc.Class({
         if(Global.SoiCauTaiXiu){
             Global.SoiCauTaiXiu.show();
         }else{
-            cc.loader.loadRes("TaiXiu/SoiCauTaiXiu" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/SoiCauTaiXiu" , (err , prefab)=>{
                 if(err) return;
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.SoiCauTaiXiu.show();
@@ -926,8 +931,9 @@ cc.Class({
         if(Global.HuongDanChoiTaiXiu){
             Global.HuongDanChoiTaiXiu.show();
         }else{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
             Global.UIManager.showMiniLoading();
-            cc.loader.loadRes("TaiXiu/HuongDanChoi" , (err , prefab)=>{
+            bundle.load("Prefabs/HuongDanChoi" , (err , prefab)=>{
                 if(err) return;
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.HuongDanChoiTaiXiu.show();
@@ -964,7 +970,8 @@ cc.Class({
             Global.ChiTietPhienTaiXiu.setInfo(this._curentObjGameSesionID);
             Global.ChiTietPhienTaiXiu.show();
         }else{
-            cc.loader.loadRes("TaiXiu/ChiTietPhien" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/ChiTietPhien" , (err , prefab)=>{
                 if(err) return;
                 let node = cc.instantiate(prefab);
                 node.getComponent("ChiTietPhienTaiXiu").setInfo(this._curentObjGameSesionID);
@@ -982,7 +989,8 @@ cc.Class({
         if(Global.HistoryTaiXiu){
             Global.HistoryTaiXiu.show();
         }else{
-            cc.loader.loadRes("TaiXiu/HistoryTaiXiu" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/HistoryTaiXiu" , (err , prefab)=>{
                 if(err) return;
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.HistoryTaiXiu.show();

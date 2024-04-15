@@ -1,0 +1,91 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "EffectFire4",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.1,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "bd37cff7-2c02-474c-b98e-e536d9142570"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "976e1d7b-13b2-4574-8fcb-c9dd38f7040e"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "c9e50be2-5c77-4baf-a8ef-011b0cc3d952"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "1ee960ec-30b3-41d3-858c-71eeab662360"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "ddfe49d9-dfae-4b06-905b-0cc8fb05542f"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "299abe1b-b830-4d28-b204-a20e89ba47ab"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "bea6fb1c-59f6-4e51-be27-0641bb532592"
+            }
+          },
+          {
+            "frame": 0.7,
+            "value": {
+              "__uuid__": "c3e22fa9-ac1b-49eb-8f57-0ad97f5490a2"
+            }
+          },
+          {
+            "frame": 0.8,
+            "value": {
+              "__uuid__": "fb885c37-80e8-4917-9f4d-d02dbd0e950c"
+            }
+          },
+          {
+            "frame": 0.9,
+            "value": {
+              "__uuid__": "90cd1341-8693-44c7-b914-df77500cceca"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "66abc158-6710-4eec-8681-5ef9e9e6aa59"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 1,
+      "func": "EndEffect",
+      "params": []
+    }
+  ]
+}

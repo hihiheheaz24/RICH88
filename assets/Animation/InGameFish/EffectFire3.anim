@@ -1,0 +1,57 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "EffectFire3",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.7,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "fish_nbomb_drop_01": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 394
+            },
+            {
+              "frame": 0.7,
+              "value": -5.396
+            }
+          ]
+        }
+      },
+      "fish_nbomb_drop_01 copy": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 404
+            },
+            {
+              "frame": 0.7,
+              "value": 73
+            }
+          ]
+        }
+      },
+      "fish_nbomb_drop_02": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 404
+            },
+            {
+              "frame": 0.7,
+              "value": -66.607
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

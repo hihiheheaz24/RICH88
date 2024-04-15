@@ -118,7 +118,7 @@ cc.Class({
 					Global.LinkUpdateStore = data.linkUpdateStore;
 					CONFIG.CONFIG_LINK = data.ConfigUrl;
 					// CONFIG.CONFIG_LINK = "https://tele-apis.vpl.mobi/api/config/gconfbd46a2b5fadcbc" //sv test chuyen tien
-                    CONFIG.CONFIG_LINK = "https://api-dev.vpl.mobi/api/config/gconfbd46a2b5fadcbc" //sv test chuyen tien
+                    CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv test chuyen tien
 
 
 					var dataSend = {

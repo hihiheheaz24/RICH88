@@ -39,7 +39,6 @@ cc.Class({
         this.chooseLinePop = null;
         this.helpPopup = null;
 
-
         
     },
     properties: {
@@ -712,34 +711,22 @@ cc.Class({
       if (Global.HistoryMiniSlot) {
         Global.HistoryMiniSlot.show();
         }else{
-            // let bundle = cc.assetManager.getBundle(this.gameType.toString());
-        
-            cc.loader.loadRes("Prefabs/MS_PopupHistory" , cc.Prefab , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefab/MS_PopupHistory" , cc.Prefab , (err , prefab)=>{
                 if(err) return;
                 Global.UIManager.hideMiniLoading();
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.HistoryMiniSlot.show();
             })
         }
-
-   
-    // cc.resources.load("PopupMiniGame/MiniSlot/MS_PopupHistory", (err, prefab) => {
-    //     if (err) return;
-    //     Global.UIManager.hideMiniLoading();
-    //     Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
-    // })
-
-
-   
         Global.UIManager.showMark();
     },
     onClichTop() {
       //  this.playSound(Sound.SOUND_SLOT.CLICK);
       if (Global.RankMiniSlot == null) {
         Global.UIManager.showMiniLoading();
-        // let bundle = cc.assetManager.getBundle(this.gameType.toString());
-        // cc.log("check bundle la : ", bundle)
-        cc.loader.loadRes("Prefabs/MS_PopupRank" , (err , prefab)=>{
+        let bundle = cc.assetManager.getBundle(this.gameType.toString());
+        bundle.load("Prefab/MS_PopupRank" , (err , prefab)=>{
             if(err) return;
             Global.UIManager.hideMiniLoading();
             Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
@@ -758,24 +745,20 @@ cc.Class({
 
         }else{
 
-            // let bundle = cc.assetManager.getBundle(this.gameType.toString());
-            cc.loader.loadRes("Prefabs/MS_PopupGuide" , cc.Prefab , (err , prefab)=>{
-                if(err) return;
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefab/MS_PopupGuide" , cc.Prefab , (err , prefab)=>{
+                if(err){
+                    cc.log("co loi xay ra ", err);
+                    return;
+                }
                 Global.UIManager.hideMiniLoading();
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.GuideMiniSlot.show();
             })
         }
 
-     
-        // cc.resources.load("PopupMiniGame/MiniSlot/MS_PopupGuide", (err, prefab) => {
-        //     if (err) return;
-        //     Global.UIManager.hideMiniLoading();
-        //     Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
-        // })
 
-
-            Global.UIManager.showMark();
+            // Global.UIManager.showMark();
     },
     // onSetData(even, data) {
     //     this.dataSet = {};

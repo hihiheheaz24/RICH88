@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "EffectFire2",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "85e4542d-d25b-47cc-a923-0108572cec98"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "b1eb7f5e-b1ca-4b32-ab57-8567082da69c"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "85e4542d-d25b-47cc-a923-0108572cec98"
+            }
+          },
+          {
+            "frame": 0.7,
+            "value": {
+              "__uuid__": "2112cf32-8528-461c-9ed6-704a6dc4e09d"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

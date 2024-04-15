@@ -1057,4 +1057,18 @@ window.Global = {
         let pos = targetNode.parent.convertToWorldSpaceAR(targetNode.getPosition());
         return spaceNode.convertToNodeSpaceAR(pos);
     },
+    calculateBezierPoints(startPoint, controlPoint1, controlPoint2, endPoint, segments) {
+        const points = [cc.Vec2];
+        for (let i = 0; i <= segments; i++) {
+          const t = i / segments;
+          const x = (1 - t) ** 3 * startPoint.x + 3 * (1 - t) ** 2 * t * controlPoint1.x + 3 * (1 - t) * t ** 2 * controlPoint2.x + t ** 3 * endPoint.x;
+          const y = (1 - t) ** 3 * startPoint.y + 3 * (1 - t) ** 2 * t * controlPoint1.y + 3 * (1 - t) * t ** 2 * controlPoint2.y + t ** 3 * endPoint.y;
+          points.push(cc.v2(x, y));
+        }
+        return points;
+      },
+      distanceBetweenPoints(pos1, pos2) {
+        let distance2Point = Math.sqrt(Math.pow(pos2.x - pos1.x, 2) + Math.pow(pos2.y - pos1.y, 2));
+        return distance2Point;
+      },
 };

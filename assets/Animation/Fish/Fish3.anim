@@ -1,0 +1,31 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Fish3",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.2,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "8242941e-bfa3-4d8f-8d0f-1800f8f7b654"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "fe16124a-096a-401a-b902-86abcba788e7"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

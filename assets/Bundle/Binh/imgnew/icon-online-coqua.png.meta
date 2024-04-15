@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "212c14fc-c6ba-4dc6-918e-6afb905c3228",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 120,
+  "height": 109,
+  "platformSettings": {},
+  "subMetas": {
+    "icon-online-coqua": {
+      "ver": "1.0.4",
+      "uuid": "3d12d154-d94b-4e01-b204-e16dd4595f0a",
+      "rawTextureUuid": "212c14fc-c6ba-4dc6-918e-6afb905c3228",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 120,
+      "height": 109,
+      "rawWidth": 120,
+      "rawHeight": 109,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

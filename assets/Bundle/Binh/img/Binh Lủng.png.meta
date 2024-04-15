@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "f36914cf-8b4f-4d3f-9a5c-d64ecdb5d192",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 161,
+  "height": 44,
+  "platformSettings": {},
+  "subMetas": {
+    "Binh Lủng": {
+      "ver": "1.0.4",
+      "uuid": "b660c7d1-81b2-4f2e-ac89-d2dd0a96d8bc",
+      "rawTextureUuid": "f36914cf-8b4f-4d3f-9a5c-d64ecdb5d192",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 161,
+      "height": 44,
+      "rawWidth": 161,
+      "rawHeight": 44,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

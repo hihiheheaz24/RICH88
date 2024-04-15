@@ -1,0 +1,20 @@
+
+effect_chia_bai.png
+size: 358,246
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+lá bài
+  rotate: false
+  xy: 186, 13
+  size: 170, 231
+  orig: 170, 231
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 2, 2
+  size: 182, 242
+  orig: 182, 242
+  offset: 0, 0
+  index: -1

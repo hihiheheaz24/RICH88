@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "f1546803-aaee-4863-9c3f-90881c2824aa",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 262,
+  "height": 364,
+  "platformSettings": {},
+  "subMetas": {
+    "Lung-bai": {
+      "ver": "1.0.4",
+      "uuid": "479f148d-0734-41f8-b5da-7bc95e082940",
+      "rawTextureUuid": "f1546803-aaee-4863-9c3f-90881c2824aa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 258,
+      "height": 360,
+      "rawWidth": 262,
+      "rawHeight": 364,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -34,6 +34,7 @@ cc.Class({
         this.initData();
         if(this.listDataHistory[0]){
             this.generateHistoryImage(this.listDataHistory[0]);
+            cc.log("check loig van 0 ", this.listDataHistory[0])
         }
         else{
             Global.UIManager.showCommandPopup("Chưa ghi nhận lịch sử ván đánh");
@@ -97,11 +98,11 @@ cc.Class({
                 isShow = true;
             }
         }
-        if(!isShow){
-            if(this.index < 10)
-                this.onClickNext();
-            return;
-        }
+        // if(!isShow){
+        //     if(this.index < 10)
+        //         this.onClickNext();
+        //     return;
+        // }
         this.updatePositionPlayers();
         for (let i = 0; i < this.players.length; i++) {
             const player = this.players[i];

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "9d7c3226-e6af-4796-a680-2d5679e64d74",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 296,
+  "height": 34,
+  "platformSettings": {},
+  "subMetas": {
+    "Maubinh-online (1)": {
+      "ver": "1.0.4",
+      "uuid": "99e92f1f-81b1-40a0-bcc1-13eb7291ec46",
+      "rawTextureUuid": "9d7c3226-e6af-4796-a680-2d5679e64d74",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 296,
+      "height": 34,
+      "rawWidth": 296,
+      "rawHeight": 34,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

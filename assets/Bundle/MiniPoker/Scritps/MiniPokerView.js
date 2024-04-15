@@ -400,7 +400,8 @@ cc.Class({
         if (Global.HuongDanChoiMiniPoker) {
             Global.HuongDanChoiMiniPoker.show();
         } else {
-            cc.loader.loadRes("MiniPoker/HelpMiniPoker", (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.idGame.toString());
+            bundle.load("Prefab/HelpMiniPoker", (err, prefab) => {
                 if (err) return;
                 Global.UIManager.parentPopup.addChild(cc.instantiate(prefab));
                 Global.HuongDanChoiMiniPoker.show();
@@ -414,7 +415,8 @@ cc.Class({
         if (Global.HistoryMiniPoker) {
             Global.HistoryMiniPoker.show();
         } else {
-            cc.loader.loadRes("MiniPoker/HistoryMiniPoker", (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.idGame.toString());
+            bundle.load("Prefab/HistoryMiniPoker", (err, prefab) => {
                 if (err) return;
                 Global.HistoryMiniPoker = cc.instantiate(prefab).getComponent("HistoryMiniPoker");
                 Global.UIManager.parentPopup.addChild(Global.HistoryMiniPoker.node);
@@ -430,7 +432,8 @@ cc.Class({
         if (Global.RankMiniPoker) {
             Global.RankMiniPoker.show();
         } else {
-            cc.loader.loadRes("MiniPoker/RankMiniPoker", (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.idGame.toString());
+            bundle.load("Prefab/RankMiniPoker", (err, prefab) => {
                 if (err) return;
                 Global.RankMiniPoker = cc.instantiate(prefab).getComponent("RankMiniPoker");
                 Global.UIManager.parentPopup.addChild(Global.RankMiniPoker.node);

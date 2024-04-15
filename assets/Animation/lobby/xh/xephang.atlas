@@ -1,0 +1,55 @@
+
+xephang.png
+size: 532,326
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shine
+  rotate: true
+  xy: 299, 158
+  size: 166, 171
+  orig: 175, 175
+  offset: 3, 4
+  index: -1
+star01
+  rotate: false
+  xy: 463, 74
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+tt-user/light
+  rotate: true
+  xy: 431, 41
+  size: 115, 30
+  orig: 115, 30
+  offset: 0, 0
+  index: -1
+xephang/crown
+  rotate: false
+  xy: 299, 15
+  size: 130, 141
+  orig: 134, 146
+  offset: 1, 1
+  index: -1
+xephang/frame
+  rotate: true
+  xy: 2, 2
+  size: 322, 295
+  orig: 325, 298
+  offset: 1, 1
+  index: -1
+xephang/shadow
+  rotate: false
+  xy: 431, 15
+  size: 99, 24
+  orig: 101, 26
+  offset: 1, 1
+  index: -1
+xephang/xephang
+  rotate: true
+  xy: 472, 140
+  size: 184, 54
+  orig: 189, 58
+  offset: 2, 2
+  index: -1

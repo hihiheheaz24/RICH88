@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "68cb0b4b-70de-4304-ab87-ffa4636aa393",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 236,
+  "height": 231,
+  "platformSettings": {},
+  "subMetas": {
+    "am thanh - roi ban": {
+      "ver": "1.0.4",
+      "uuid": "a0a65763-e4b7-439d-b7eb-51f3f864344a",
+      "rawTextureUuid": "68cb0b4b-70de-4304-ab87-ffa4636aa393",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 236,
+      "height": 231,
+      "rawWidth": 236,
+      "rawHeight": 231,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

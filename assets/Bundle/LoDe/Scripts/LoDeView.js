@@ -26,6 +26,7 @@ cc.Class({
         this.pointBet = 0;
         this.dataBet = {};
         this.betOne = 0;
+        this.gameType = GAME_TYPE.LODE;
     },
 
     configGame(){
@@ -178,7 +179,8 @@ cc.Class({
 
     clickShowTabChonSo(){
         if (Global.ChonSoLoDe == null) {
-            cc.resources.load("Popup/ChonSoLoDe", cc.Prefab, (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/ChonSoLoDe", cc.Prefab, (err, prefab) => {
                 let item = cc.instantiate(prefab).getComponent("ChonSoLoDe");
                 this.parentPopup.addChild(item.node);
                 item.show(this.dataBet);
@@ -192,7 +194,8 @@ cc.Class({
 
         Global.UIManager.showMiniLoading();
         if (Global.ResultView == null) {
-            cc.resources.load("Popup/ResultView", cc.Prefab, (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/ResultView", cc.Prefab, (err, prefab) => {
                 let item = cc.instantiate(prefab).getComponent("ResultView");
                 this.parentPopup.addChild(item.node);
                 item.show();
@@ -268,7 +271,8 @@ cc.Class({
     onClickShowHistory(){
         Global.UIManager.showMiniLoading();
         if (Global.LoDeHistoty == null) {
-			cc.resources.load("Popup/LoDeHistoty", cc.Prefab, (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+			bundle.load("Prefabs/LoDeHistoty", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("LoDeHistoty");
 				Global.LoDeHistoty = item;
 				item.show();
@@ -281,7 +285,8 @@ cc.Class({
 
     onClickShowGuide(){
         if (Global.GuideViewLoDe == null) {
-			cc.resources.load("Popup/GuideView", cc.Prefab, (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+			bundle.load("Prefabs/GuideView", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("GuideViewLoDe");
 				Global.GuideViewLoDe = item;
 				item.show();

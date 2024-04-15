@@ -197,7 +197,7 @@ var SendRequest = cc.Class({
     //lode
 
     MST_Client_LoDe_Open_Game() {
-        Global.NetworkManager.sendRequest(REQUEST_CODE.MSG_CLIENT_OPEN_GAME_XSMB, {});
+        this.RequestMessageNoData(REQUEST_CODE.MSG_CLIENT_OPEN_GAME_XSMB);
     },
 
     MST_Client_LoDe_Betting_Game(msg) {

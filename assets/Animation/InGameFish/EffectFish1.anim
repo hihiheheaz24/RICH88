@@ -1,0 +1,67 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "EffectFish1",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "c43f74b2-a99e-40f3-b936-ad4f0d8689e5"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "fa545c84-2917-4c3b-9a2c-5c5882a025d6"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "69309dd5-ed56-4d9f-aff1-7226d23a23e5"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "f0195df9-7d8d-4bec-a792-7faab3394726"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "fe7cdc00-d8e6-4a8b-936c-aed33aa1a738"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "3dcbd559-fc0e-4aa6-ad54-d759bb3e945a"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "87071a3a-327c-4af7-b67f-2760156a65a3"
+            }
+          },
+          {
+            "frame": 0.7,
+            "value": {
+              "__uuid__": "3b300ea9-2185-4631-9310-fad3be3e8ad6"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

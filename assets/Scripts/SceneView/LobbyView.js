@@ -562,6 +562,27 @@ cc.Class({
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
+		MainPlayerInfo.CurrentGameType = 1;
+        MainPlayerInfo.CurrentTableId = 0;
+        MainPlayerInfo.CurrentGameId = 7;
+		MainPlayerInfo.CurrentGameCode = "TMN";
+		let msg = {};
+		msg[AuthenticateParameterCode.GameId] = MainPlayerInfo.CurrentGameCode;
+		msg[AuthenticateParameterCode.Blind] = 0;
+		cc.log("send ow itemlobby : ", msg);
+		require("SendCardRequest").getIns().MST_Client_Join_Game(msg);
+		Global.UIManager.showMiniLoading();
+	},
+
+	onClickPlayNowBinh() {
+		if (!Global.isLogin) {
+			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+			return;
+		}
+		MainPlayerInfo.CurrentGameType = 1;
+        MainPlayerInfo.CurrentTableId = 0;
+        MainPlayerInfo.CurrentGameId = 5;
+		MainPlayerInfo.CurrentGameCode = "MAB";
 		let msg = {};
 		msg[AuthenticateParameterCode.GameId] = MainPlayerInfo.CurrentGameCode;
 		msg[AuthenticateParameterCode.Blind] = 0;

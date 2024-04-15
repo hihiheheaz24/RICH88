@@ -620,6 +620,7 @@ cc.Class({
             gate.listChipInGate = [];
             gate.listChipRewardInGate = [];
             gate.listChipMyBet = [];
+            gate.totalMybetInGate = 0;
             gate.getChildByName("lbValueBet").getComponent(cc.Label).string = 0;
             gate.getChildByName("lbMyBet").active = false;
         }
@@ -709,6 +710,20 @@ cc.Class({
         }
 
         this.popupGuide.getComponent("GuidePopupXocDia").show();
+
+        Global.UIManager.showMiniLoading();
+        if (Global.RankMiniPoker) {
+            Global.RankMiniPoker.show();
+        } else {
+            let bundle = cc.assetManager.getBundle(this.idGame.toString());
+            bundle.load("Prefab/RankMiniPoker", (err, prefab) => {
+                if (err) return;
+                Global.RankMiniPoker = cc.instantiate(prefab).getComponent("RankMiniPoker");
+                Global.UIManager.parentPopup.addChild(Global.RankMiniPoker.node);
+                Global.RankMiniPoker.show();
+            })
+
+        }
        
     },
 

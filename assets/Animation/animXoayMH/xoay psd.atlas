@@ -1,0 +1,20 @@
+
+xoay psd.png
+size: 897,950
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 1
+  rotate: false
+  xy: 2, 189
+  size: 688, 759
+  orig: 690, 761
+  offset: 1, 1
+  index: -1
+để có trải nghiệm tốt hơn
+  rotate: true
+  xy: 692, 2
+  size: 946, 203
+  orig: 948, 205
+  offset: 1, 1
+  index: -1
