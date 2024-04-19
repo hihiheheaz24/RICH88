@@ -43,14 +43,14 @@ cc.Class({
     },
     
     checkStatusTab(){
-        if (Global.GameConfig.FeatureConfig.CashOutByBankFeature == EFeatureStatus.Open) {
-            this.toggleCashBank.check();
-            this.onClickTabBank();
-        } 
-        else{
-            this.toggleCashCard.check();
-            this.onClickTabCard();
-        }
+        // if (Global.GameConfig.FeatureConfig.CashOutByBankFeature == EFeatureStatus.Open) {
+        //     this.toggleCashBank.check();
+        //     this.onClickTabBank();
+        // } 
+        // else{
+        //     this.toggleCashCard.check();
+        //     this.onClickTabCard();
+        // }
     },
 
     onClickTabBank(){

@@ -31,32 +31,20 @@ cc.Class({
 		btnLeague : cc.Node,
 		btnAdmob : cc.Node,
 		nodeNotLogin : cc.Node,
-		nodeLoginSucces : cc.Node
+		nodeLoginSucces : cc.Node,
+		itemSlotApi : cc.Node,
+		gameListApi : cc.Node,
+		webView : cc.WebView,
+		btnCloseApi : cc.Button,
 		// lbVersion : cc.Label,
 	},
 
 	onClickTest() {
 
 	},
-
-	onEnable(){
-		// let count = 0;
-		// Global.UIManager.showLoading();
-		// this.schedule(
-		// 	(this.loading = () => {
-		// 		count += 0.01;
-		// 		cc.log("check perceny : ", count)
-		// 		Global.UIManager.progressLoading(count)
-		// 		if (count >= 0.99) {
-		// 			this.unschedule(this.loading);
-		// 		}
-		// 	}),
-		// 	0.01
-		// );
-	},
-
+	
 	onLoad() {
-
+		this.webView.node.parent.active = false;
 		if(cc.sys.isBrowser){
 			if ('wakeLock' in navigator) {
 				// Yêu cầu quyền truy cập để giữ màn hình sáng
@@ -75,6 +63,61 @@ cc.Class({
 		require("Util").onSendTrackingFirebaseScreen("Lobby");
 		MainPlayerInfo.CurrentGameId = 7;
 		MainPlayerInfo.CurrentGameCode = "TMN";
+	},
+
+	hanldeListGameSlotAPI(data){
+		cc.log("Chehclk game loist : ", data)
+		for (let i = 0; i < data.length; i++) {
+			const objData = data[i];
+			let item = cc.instantiate(this.itemSlotApi);
+			item.getChildByName("lbName").getComponent(cc.Label).string= objData.gameName;
+			item.active = true;
+			this.gameListApi.addChild(item);
+
+			var eventHandler = new cc.Component.EventHandler();
+            eventHandler.target = this.node;
+            eventHandler.component = "LobbyView";
+            eventHandler.handler = "onClickShowGameApi";
+            eventHandler.customEventData = objData.gameID;
+            item.getComponent(cc.Button).clickEvents.push(eventHandler);
+		}
+	},
+
+	handleShowGameApi(data) {
+		cc.log("show data la  ", data)
+		Global.UIManager.hideMiniLoading();
+		// if (cc.sys.isMobile) {
+		// 	cc.sys.openURL(data);
+		// }
+		// else {
+		// 	this.webView.node.parent.active = true;
+		// 	this.webView.url = data;
+		// }
+
+		cc.sys.openURL(data);
+
+		// this.webView.node.angle = -90;
+		// let canvas = cc.director.getScene().getChildByName("Canvas");
+		// canvas.designResolution = cc.size(1920,1080);
+	},
+
+	handleCloseGameApi(data) {
+		cc.log("tien con lai la : ", data)
+		this.webView.node.parent.active = false;
+		this.webView.url = "";
+		this.OnUpdateMoney(data)
+	},
+
+	onClickCloseGameApi(){
+		require("SendRequest").getIns().MST_Client_Pramatic_Close_Game();
+	},
+
+	onClickShowGameApi(event, data){
+		Global.UIManager.showMiniLoading();
+		let msg = {};
+		msg[1] = data;
+		cc.log("send start game : ", msg)
+		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg)
 	},
 
 	onClickBtnEvent() {
@@ -104,6 +147,7 @@ cc.Class({
 		cc.log("chay vao open mini game ")
 		this.nodeLoginSucces.active = true;
 		this.nodeNotLogin.active = false;
+		require("SendRequest").getIns().MST_Client_Pramatic_Get_Game_list();
 		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
 	},
 
@@ -323,6 +367,13 @@ cc.Class({
 		Global.UIManager.showQuestPopup();
 	},
 
+	onClickThieuArt(){
+		if (Global.isLogin) {
+			Global.UIManager.showCommandPopup("Chỗ này chưa có art");
+			return;
+		}
+	},
+
 	ClickShowVipInfoPopup() {
 		if (!Global.isLogin) {
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
@@ -369,6 +420,7 @@ cc.Class({
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
+		cc.log("chay vao lick event 000")
 		//Global.AudioManager.ClickButton();
 		Global.UIManager.showEventPopup(STATE_EVENT.EVENT);
 	},
@@ -634,7 +686,9 @@ cc.Class({
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
-		Global.UIManager.showShopPopup(JSON.parse(data));
+		if(data){
+			Global.UIManager.showShopPopup(JSON.parse(data));
+		}
 	},
 
 	CheckCastOut() {

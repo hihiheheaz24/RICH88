@@ -52,6 +52,9 @@ cc.Class({
     },
 
     ClickTabEvent() {
+        this.eventObj.active = false;
+        this.noEvent.active = true;
+        return;
         this.eventObj.active = true;
         this.noEvent.active = false;
         require("SendRequest").getIns().MST_Client_Get_Event_Config_Info();

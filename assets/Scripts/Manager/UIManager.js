@@ -87,6 +87,7 @@ cc.Class({
 			var _time = Date.now() / 1000;
 			let time_out_bg = _time - this.time_enter_background;
 			if (cc.sys.isNative && time_out_bg > 1800) cc.game.restart();
+			return;
 			this.time_enter_background = 0;
 			cc.log("time out bg la ???????? ", time_out_bg);
 
@@ -308,23 +309,33 @@ cc.Class({
 	},
 
 	showCashOutPopup() {
-		if (!MainPlayerInfo.phoneNumber) {
-			this.showCommandPopup("Bạn cần xác thực số điện thoại trước");
-			// this.textGift.placeholder = "Bạn cần xác thực số điện thoại trước";
-			return;
-		}
-		if (Global.GameConfig.FeatureConfig.CashOutFeature == EFeatureStatus.Open) {
-			if (Global.CashOut == null) {
-				cc.resources.load("Popup/CashOutPopup", cc.Prefab, (err, prefab) => {
-					let item = cc.instantiate(prefab).getComponent("CashOutPopup");
-					item.show();
-					this.parentPopup.addChild(item.node);
-				});
-			} else {
-				Global.CashOut.show();
-			}
+		// if (!MainPlayerInfo.phoneNumber) {
+		// 	this.showCommandPopup("Bạn cần xác thực số điện thoại trước");
+		// 	// this.textGift.placeholder = "Bạn cần xác thực số điện thoại trước";
+		// 	return;
+		// }
+		// if (Global.GameConfig.FeatureConfig.CashOutFeature == EFeatureStatus.Open) {
+		// 	if (Global.CashOut == null) {
+		// 		cc.resources.load("Popup/CashOutPopup", cc.Prefab, (err, prefab) => {
+		// 			let item = cc.instantiate(prefab).getComponent("CashOutPopup");
+		// 			item.show();
+		// 			this.parentPopup.addChild(item.node);
+		// 		});
+		// 	} else {
+		// 		Global.CashOut.show();
+		// 	}
+		// } else {
+		// 	Global.UIManager.showVipInfoPopup();
+		// }
+
+		if (Global.CashOut == null) {
+			cc.resources.load("Popup/CashOutPopup", cc.Prefab, (err, prefab) => {
+				let item = cc.instantiate(prefab).getComponent("CashOutPopup");
+				item.show();
+				this.parentPopup.addChild(item.node);
+			});
 		} else {
-			Global.UIManager.showVipInfoPopup();
+			Global.CashOut.show();
 		}
 	},
 
@@ -365,7 +376,6 @@ cc.Class({
 	},
 
 	showShopPopup(statusShop, isInGame = false) {
-		return;
 		cc.log("======> isingame = ", isInGame, " config la : ", Global.GameConfig.FeatureConfig.CashinIngameFeature);
 		if (isInGame && Global.GameConfig.FeatureConfig.CashinIngameFeature != EFeatureStatus.Open) return;
 
@@ -735,6 +745,7 @@ cc.Class({
 	},
 
 	showEventPopup(status, isClick = true) {
+		cc.log("chay vao lick event")
 		if (Global.EventPopup == null) {
 			cc.resources.load("Popup/EventPopup", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("EventPopup");

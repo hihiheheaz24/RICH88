@@ -10,7 +10,6 @@ cc.Class({
         lbMomoCode: cc.Label,
         btnCopyName: cc.Button,
         btnCopyCode: cc.Button,
-        lbContent : cc.Label,
 
         listItemNap : cc.ScrollView,
         itemNap : cc.Node,
@@ -36,7 +35,6 @@ cc.Class({
         this.lbMobile.string = this.data.SendToPhoneNum;
         this.lbMomoName.string = this.data.SendToUserName;
         this.lbMomoCode.string = this.data.SendMessage;
-        this.lbContent.string = " - Để nạp tiền, truy cập vào MOMO chọn chuyển tiền \n - Nhập số điện thoại và nội dung chuyển khoản ở trên \n - Kiểm tra lại thông tin trước khi chuyển \n Lưu ý: \n - Chuyển khoản tối thiếu 10.000 VNĐ \n - Tỷ giá nạp : " + this.rateChange + "\n - NPH sẽ không giải quyết các trường hợp người chơi chuyển nhầm tài khoản";
 
         this.showListItemMomo();
     },

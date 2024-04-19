@@ -82,15 +82,7 @@ var OutGameLogicManager = cc.Class({
             this.HandleGetShopSpinConfig(packet);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_BUY_DAILY_SPIN_RESPONSE) {
             this.HandleBuySpin(packet);
-        } else if (responseCode == RESPONSE_CODE.MST_SERVER_GET_LIST_CASHOUT_CODE) {
-            this.HandleListCashoutCode(packet);
-        }
-        else if (responseCode == RESPONSE_CODE.MST_SERVER_RECHANGE_CASHOUTCODE_SUCCESS) {
-            this.HandleCashoutCodeSuccess(packet);
-
-        } else if (responseCode == RESPONSE_CODE.MST_SERVER_CANCEL_CASHOUTCODE_SUCCESS) {
-            this.HandleCancelCashoutCodeSuccess(packet);
-        } else if (responseCode == RESPONSE_CODE.MST_SERVER_TELCO_HISTORY) {
+        }  else if (responseCode == RESPONSE_CODE.MST_SERVER_TELCO_HISTORY) {
             this.HandleTelcoHistory(packet);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_JACKPOT_INFO) {
             this.HandleJackpotInfo(packet);

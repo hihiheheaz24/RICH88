@@ -71,8 +71,8 @@ cc.Class({
 
     show(){
         this.node.active = true;
-        this.nodeInputInfoBank.active = true;
-        this.nodeInfoBank.active = false;
+        // this.nodeInputInfoBank.active = true;
+        // this.nodeInfoBank.active = false;
         this.showListItemBank();
     },
 

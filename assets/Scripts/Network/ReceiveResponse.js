@@ -413,15 +413,8 @@ var ReceiveResponse = cc.Class({
             OutGameLogicManager.getIns().OutGameHandleResponse(operationResponse);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_GET_SHOP_CONFIG) {
             TogetherLogicManager.getIns().TogetherHandleResponse(operationResponse);
-        } else if (responseCode == RESPONSE_CODE.MST_SERVER_GET_LIST_CASHOUT_CODE) {
-            OutGameLogicManager.getIns().OutGameHandleResponse(operationResponse);
-        }
-        else if (responseCode == RESPONSE_CODE.MST_SERVER_RECHANGE_CASHOUTCODE_SUCCESS) {
-            OutGameLogicManager.getIns().OutGameHandleResponse(operationResponse);
-        }
-        else if (responseCode == RESPONSE_CODE.MST_SERVER_CANCEL_CASHOUTCODE_SUCCESS) {
-            OutGameLogicManager.getIns().OutGameHandleResponse(operationResponse);
-        }
+        } 
+       
         else if (responseCode == RESPONSE_CODE.MST_SERVER_TELCO_HISTORY) {
             OutGameLogicManager.getIns().OutGameHandleResponse(operationResponse);
         }
@@ -637,6 +630,24 @@ var ReceiveResponse = cc.Class({
         }
         else if (responseCode == RESPONSE_CODE.MSG_SERVER_MINIPOKER_GET_DETAILS_HISTORY) {
             MiniGameLogicManager.getIns().MiniGameHandleResponse(operationResponse);
+        }
+
+        //region slot api
+        else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_GET_GAME_LIST_RESPONSE){
+            let gameList = JSON.parse(packet[1]);
+            Global.LobbyView.hanldeListGameSlotAPI(gameList)
+        }
+
+        else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_START_GAME_RESPONSE){
+            Global.LobbyView.handleShowGameApi(packet[1])
+        }
+
+        else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CLOSE_GAME_RESPONSE){
+            Global.LobbyView.handleCloseGameApi(packet[1])
+        }
+
+        else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CONNECT_ERROR){
+            Global.UIManager.showCommandPopup(packet[1]);
         }
 
     },

@@ -13,7 +13,6 @@ cc.Class({
 		tabCashInObj: cc.Node,
 		tabCashOutObj: cc.Node,
 		tabIapObj: cc.Node,
-		tabTradeGold: cc.Node,
 
 		btnCardIn: cc.Toggle,
 		btnMomoIn: cc.Toggle,
@@ -43,8 +42,6 @@ cc.Class({
 
 		listItemDiamond: cc.ScrollView,
 		itemDiamond: cc.Node,
-		btnTradeGold : cc.Toggle,
-		btnTradeDiamond : cc.Toggle,
 	},
 	onLoad() {
 		this.initUI();
@@ -72,21 +69,6 @@ cc.Class({
 			// this.setConfigStore(); //fix cung
 		}
 		cc.log("check status shop ", statusShop)
-		switch (statusShop) {
-			case 1:
-				this.ClickTabIAP();
-				this.btnTradeGold.uncheck();
-				this.btnTradeDiamond.check();
-				break;
-			case 2:
-				setTimeout(() => {
-					this.btnTradeGold.check();
-				this.btnTradeDiamond.uncheck();
-				}, 50);
-				this.ClickTabTradeGold();
-				
-				break;
-		}
 
 		//this.ClickChangeTab(null, this.status);
 	},
@@ -105,39 +87,39 @@ cc.Class({
 
 	CheckStatusTab() {
 		//show tab
-		if (this.status == STATUS_SHOP.CARD_IN && Global.GameConfig.FeatureConfig.CashInByCardFeature == EFeatureStatus.Open) {
-			// this.toggleCashIn.check();
-			// this.ClickTabCardIn();
-		} else if (this.status == STATUS_SHOP.MOMO && Global.GameConfig.FeatureConfig.CashInByMomoFeature == EFeatureStatus.Open) {
-			this.toggleMomo.check();
-			this.ClickTabMomo();
-		} else if (this.status == STATUS_SHOP.IAP && Global.GameConfig.FeatureConfig.CashInByIAPFeature == EFeatureStatus.Open) {
-			this.toggleIAP.check();
-			this.ClickTabIAP();
-		} else if (this.status == STATUS_SHOP.SMS && Global.GameConfig.FeatureConfig.CashInBySmsFeature == EFeatureStatus.Open) {
-			this.toggleSMS.check();
-			this.ClickTabSMS();
-		} else if (this.status == STATUS_SHOP.BANKING && Global.GameConfig.FeatureConfig.CashInByBankFeature == EFeatureStatus.Open) {
-			this.toggleBank.check();
-			this.clickTabBanking();
-		} else {
-			if (Global.GameConfig.FeatureConfig.CashInByCardFeature == EFeatureStatus.Open) {
-				// this.toggleCashIn.check();
-				// this.ClickTabCardIn();
-			} else if (Global.GameConfig.FeatureConfig.CashInByMomoFeature == EFeatureStatus.Open) {
-				this.toggleMomo.check();
-				this.ClickTabMomo();
-			} else if (Global.GameConfig.FeatureConfig.CashInByIAPFeature == EFeatureStatus.Open) {
-				this.toggleIAP.check();
-				this.ClickTabIAP();
-			} else if (Global.GameConfig.FeatureConfig.CashInBySmsFeature == EFeatureStatus.Open) {
-				this.toggleSMS.check();
-				this.ClickTabSMS();
-			} else if (Global.GameConfig.FeatureConfig.CashInByBankFeature == EFeatureStatus.Open) {
-				this.toggleBank.check();
-				this.clickTabBanking();
-			}
-		}
+		// if (this.status == STATUS_SHOP.CARD_IN && Global.GameConfig.FeatureConfig.CashInByCardFeature == EFeatureStatus.Open) {
+		// 	// this.toggleCashIn.check();
+		// 	// this.ClickTabCardIn();
+		// } else if (this.status == STATUS_SHOP.MOMO && Global.GameConfig.FeatureConfig.CashInByMomoFeature == EFeatureStatus.Open) {
+		// 	this.toggleMomo.check();
+		// 	this.ClickTabMomo();
+		// } else if (this.status == STATUS_SHOP.IAP && Global.GameConfig.FeatureConfig.CashInByIAPFeature == EFeatureStatus.Open) {
+		// 	this.toggleIAP.check();
+		// 	this.ClickTabIAP();
+		// } else if (this.status == STATUS_SHOP.SMS && Global.GameConfig.FeatureConfig.CashInBySmsFeature == EFeatureStatus.Open) {
+		// 	this.toggleSMS.check();
+		// 	this.ClickTabSMS();
+		// } else if (this.status == STATUS_SHOP.BANKING && Global.GameConfig.FeatureConfig.CashInByBankFeature == EFeatureStatus.Open) {
+		// 	this.toggleBank.check();
+		// 	this.clickTabBanking();
+		// } else {
+		// 	if (Global.GameConfig.FeatureConfig.CashInByCardFeature == EFeatureStatus.Open) {
+		// 		// this.toggleCashIn.check();
+		// 		// this.ClickTabCardIn();
+		// 	} else if (Global.GameConfig.FeatureConfig.CashInByMomoFeature == EFeatureStatus.Open) {
+		// 		this.toggleMomo.check();
+		// 		this.ClickTabMomo();
+		// 	} else if (Global.GameConfig.FeatureConfig.CashInByIAPFeature == EFeatureStatus.Open) {
+		// 		this.toggleIAP.check();
+		// 		this.ClickTabIAP();
+		// 	} else if (Global.GameConfig.FeatureConfig.CashInBySmsFeature == EFeatureStatus.Open) {
+		// 		this.toggleSMS.check();
+		// 		this.ClickTabSMS();
+		// 	} else if (Global.GameConfig.FeatureConfig.CashInByBankFeature == EFeatureStatus.Open) {
+		// 		this.toggleBank.check();
+		// 		this.clickTabBanking();
+		// 	}
+		// }
 
 		//(MainPlayerInfo.phoneNumber || cc.sys.os !== cc.sys.OS_ANDROID)
 		// if (Global.GameConfig.FeatureConfig.CashInByCardFeature == EFeatureStatus.Open) {
@@ -283,12 +265,10 @@ cc.Class({
 		this.tabMomoContent.hide();
 		this.tabSMSContent.hide();
 		this.tabBankingContent.hide();
-		this.tabTradeGold.active = false;
 	},
 	ClickTabTradeGold() {
 		cc.log("chay vao show redode")
 		this.status = STATUS_SHOP.TRADE_GOLD;
-		this.tabTradeGold.active = true;
 		this.tabCashInContent.hide();
 		this.tabMomoContent.hide();
 		this.tabSMSContent.hide();
@@ -378,6 +358,7 @@ cc.Class({
 	GetInputPhoneMomo() { },
 
 	UpdateItemConfig() {
+		return;
 		let data = Global.DataConfigShopDiamond;
 		this.listItemDiamond.content.removeAllChildren();
 		cc.log("check data diamad : ", data)

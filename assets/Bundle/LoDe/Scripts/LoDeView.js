@@ -318,7 +318,8 @@ cc.Class({
         dataBet.winMoney = this.lbTotalWin.string;
 
         if (Global.InfoBetting == null) {
-			cc.resources.load("Popup/InfoBetting", cc.Prefab, (err, prefab) => {
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+			bundle.load("Prefabs/InfoBetting", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("InfoBetting");
 				Global.InfoBetting = item;
 				this.parentPopup.addChild(item.node);

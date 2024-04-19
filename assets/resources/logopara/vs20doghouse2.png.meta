@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "ca24b8f1-4f4c-4d83-a6eb-0bb633bbed7c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 325,
+  "height": 234,
+  "platformSettings": {},
+  "subMetas": {
+    "vs20doghouse2": {
+      "ver": "1.0.4",
+      "uuid": "4fbd4661-8780-4eb6-b185-cbcb7b46c1b2",
+      "rawTextureUuid": "ca24b8f1-4f4c-4d83-a6eb-0bb633bbed7c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 325,
+      "height": 234,
+      "rawWidth": 325,
+      "rawHeight": 234,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

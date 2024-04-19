@@ -381,5 +381,16 @@ var SendRequest = cc.Class({
     MST_Client_Xoc_Dia_Get_Detail_Session_Info(msg) {
         Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_DETAIL_HISTORY, msg);
     },
+
+    //slot api 
+    MST_Client_Pramatic_Get_Game_list() {
+        this.RequestMessageNoData(REQUEST_CODE.MST_CLIENT_PARAMATIC_GET_GAME_LIST);
+    },
+    MST_Client_Pramatic_Start_Game(msg) {
+        Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_PARAMATIC_START_GAME, msg);
+    },
+    MST_Client_Pramatic_Close_Game(msg) {
+        this.RequestMessageNoData(REQUEST_CODE.MST_CLIENT_PARAMATIC_CLOSE_GAME, msg);
+    },
 });
 module.exports = SendRequest

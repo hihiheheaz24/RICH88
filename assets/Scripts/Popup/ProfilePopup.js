@@ -47,8 +47,28 @@ cc.Class({
         lbLeaguePoint : cc.Label,
         iconLeague : cc.Sprite,
         listIconLeague : [cc.SpriteFrame],
-        listSprStar : [cc.SpriteFrame]
+        listSprStar : [cc.SpriteFrame],
+
+        lsc : cc.Node,
+        lsgd : cc.Node
     },
+
+    onClickShowLsc(){
+        Global.onPopOn(this.lsc);
+    },
+
+    closeLsc(){
+        Global.onPopOff(this.lsc);
+    },
+
+    onClickShowLsgd(){
+        Global.onPopOn(this.lsgd);
+    },
+
+    closeLsgd(){
+        Global.onPopOff(this.lsgd);
+    },
+
 
     onLoad(){
         Global.ProfilePopup = this;
@@ -113,7 +133,7 @@ cc.Class({
         this.textName.string = dataPlayer.NickName;
         Global.GetAvataById(this.avata, dataPlayer.AccountId)
        
-        this.textId.string = dataPlayer.AccountId
+        this.textId.string = "ID Người Chơi: "  + dataPlayer.AccountId
         this.btnLogOut.node.active = false;
         if(Global.GameView){
             this.node.getChildByName("background").scale = cc.v2(0.7,0.7);
