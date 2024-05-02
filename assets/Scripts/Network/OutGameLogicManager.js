@@ -24,8 +24,6 @@ var OutGameLogicManager = cc.Class({
             this.HandleServerChatList(packet);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_CONFIRM_MESSAGE) {
             this.HandleConfirmResponce(packet);
-        } else if (responseCode == RESPONSE_CODE.MST_SERVER_UPDATE_PLAYER_BALANCE) {
-            this.HandleUpdateBalanceResponce(packet);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_MINIPOKER_SPIN_RESPONSE) {
             this.HandleResultSpinMiniPoker(packet);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_CASHOUT_NOTIFICATION) {

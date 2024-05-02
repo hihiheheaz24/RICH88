@@ -1,0 +1,48 @@
+
+rut tien.png
+size: 1038,115
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rut tien/ButtonAdd
+  rotate: false
+  xy: 2, 2
+  size: 297, 111
+  orig: 300, 115
+  offset: 1, 1
+  index: -1
+rut tien/Buttons
+  rotate: false
+  xy: 301, 2
+  size: 297, 111
+  orig: 300, 115
+  offset: 1, 1
+  index: -1
+rut tien/Icon
+  rotate: false
+  xy: 993, 53
+  size: 43, 60
+  orig: 48, 71
+  offset: 4, 7
+  index: -1
+rut tien/IconGlow
+  rotate: false
+  xy: 939, 39
+  size: 52, 74
+  orig: 59, 78
+  offset: 2, 2
+  index: -1
+rut tien/Text
+  rotate: false
+  xy: 777, 57
+  size: 160, 56
+  orig: 164, 61
+  offset: 3, 3
+  index: -1
+rut tien/TextBlur
+  rotate: false
+  xy: 600, 59
+  size: 175, 54
+  orig: 181, 61
+  offset: 3, 4
+  index: -1

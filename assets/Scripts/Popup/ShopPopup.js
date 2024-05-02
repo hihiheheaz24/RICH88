@@ -9,7 +9,7 @@ cc.Class({
 	},
 
 	properties: {
-		nodeInputCard: cc.Node,
+		// nodeInputCard: cc.Node,
 		tabCashInObj: cc.Node,
 		tabCashOutObj: cc.Node,
 		tabIapObj: cc.Node,
@@ -45,7 +45,7 @@ cc.Class({
 	},
 	onLoad() {
 		this.initUI();
-		this.nodeInputCard.active = false;
+		// this.nodeInputCard.active = false;
 		// this.ClickTabIAP();
 	},
 
@@ -179,11 +179,11 @@ cc.Class({
 	},
 
 	showTabInputCard() {
-		Global.onPopOn(this.nodeInputCard);
+		// Global.onPopOn(this.nodeInputCard);
 	},
 
 	onClickMaskInputCard() {
-		Global.onPopOff(this.nodeInputCard);
+		// Global.onPopOff(this.nodeInputCard);
 	},
 
 	CheckActiveCashOut() {
@@ -413,7 +413,9 @@ cc.Class({
 	},
 
 	GetCardTypeByAmount(cardAmount) {
+		cc.log("chay vao day check amount : ", cardAmount)
 		let index = CARD_AMOUNT_VALUE.indexOf(cardAmount);
+		cc.log("check index la : ", index)
 		if (index == -1) return 0;
 		return index;
 	},

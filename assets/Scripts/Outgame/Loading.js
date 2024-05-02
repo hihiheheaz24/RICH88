@@ -50,8 +50,8 @@ cc.Class({
 
     // },
     setFrogress(per){
-        let max = this.nodeCoin.parent.width; 
-        this.nodeCoin.x = per*max - 383;
+        // let max = this.nodeCoin.parent.width; 
+        // this.nodeCoin.x = per*max - 383;
         this.progressBar.fillRange = per;
         this.lbPer.string = parseInt(per*100) + "%";
     }

@@ -43,6 +43,7 @@ cc.Class({
 		this.initConfigBundle();
 
 		cc.game.on(cc.game.EVENT_HIDE, () => {
+			console.log("Game Mở tab khác : ");
 			console.log("Check connect server ====> Ứng dụng bị tạm ẩn hoặc bị tắt")
 			// console.log("check time show bonus : ", Global.NetworkManager.GetTimeRemain());
 			// let timeLeft = Global.NetworkManager.GetTimeRemain();
@@ -80,8 +81,10 @@ cc.Class({
 			// if (Global.TaiXiu) Global.TaiXiu.updateTimeStartHide();
 		});
 		cc.game.on(cc.game.EVENT_SHOW, () => {
+			console.log("về lại tab game chính");
 			console.log("Check connect server ====> Ứng dụng được mở trở lại")
 			// Global.LobbyView.sendPing();
+				Global.LobbyView.onClickCloseGameApi();
 			if (this.time_enter_background < 1) return;
 
 			var _time = Date.now() / 1000;
@@ -135,10 +138,11 @@ cc.Class({
 		// 	}, 0);
 		// });
 
-		// this.parentPopupLogin.on("child-removed", (itemPopup) => {
-		// 	console.log("chay vao remove item", itemPopup);
-		// 	if (this.parentPopupLogin.children.length > 0) Global.onPopOn(this.parentPopupLogin.children[0]);
-		// });
+		this.parentMiniGame.on("child-removed", (miniGame) => {
+			console.log("chay vao remove item", miniGame);
+			Global.UIManager.hideMask();
+			// if (this.parentPopupLogin.children.length > 0) Global.onPopOn(this.parentPopupLogin.children[0]);
+		});
 	},
 
 	initGameScence() {
@@ -165,10 +169,6 @@ cc.Class({
 
 	showButtonMiniGame(isActive) {
 		// this.btnMiniGame.active = isActive;
-	},
-
-	hideMark(){
-
 	},
 
 	autoLogin() {
@@ -365,6 +365,21 @@ cc.Class({
 		} else {
 			Global.ConfirmPopupPO.show(message, yesEvent, noEvent);
 		}
+	},
+
+	showChangePassword(accountId, event) {
+		if (Global.ChangePassword == null) {
+			cc.resources.load("Popup/ChangePassword", cc.Prefab, (err, prefab) => {
+				let item = cc.instantiate(prefab).getComponent("ChangePassword");
+				Global.ChangePassword = item;
+				item.show();
+				this.parentPopup.addChild(item.node);
+			});
+		}
+		else{
+			Global.ChangePassword.show();
+		}
+	
 	},
 
 	showSetNamePopup(accountId, event) {
@@ -1304,6 +1319,7 @@ cc.Class({
 				if (!component.isMinimizeGame) component.startGame();
 				component.isMinimizeGame = false;
 				this.hideMiniLoading();
+				Global.UIManager.showMask();
 			}
 		};
 		

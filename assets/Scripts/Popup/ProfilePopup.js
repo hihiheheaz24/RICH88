@@ -62,7 +62,8 @@ cc.Class({
     },
 
     onClickShowLsgd(){
-        Global.onPopOn(this.lsgd);
+        Global.UIManager.showHistoryPopup();
+        // Global.onPopOn(this.lsgd);
     },
 
     closeLsgd(){

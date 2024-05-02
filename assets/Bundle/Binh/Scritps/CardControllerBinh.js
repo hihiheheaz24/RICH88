@@ -1294,7 +1294,7 @@ cc.Class({
     this.frameTruFalseGroup.position = cc.v2(posTaget.x - 20, posTaget.y + 498 + 145);
     this.textSoChiGroup.position = cc.v2(posTaget.x - 200, posTaget.y + 450 + 145);
     this.iconTrueFalseGroup.position = cc.v2(posTaget.x - 240, posTaget.y + 270 + 145);
-    this.swapNode.position = cc.v2(posTaget.x + 240, posTaget.y + 145);
+    // this.swapNode.position = cc.v2(posTaget.x + 240, posTaget.y + 145);
     this.SkeletonGroup.position = cc.v2(posTaget.x + 50, posTaget.y + 350 + 145);
     cc.tween(this.maskCard).to(0.3, { opacity: 100 }).start();
     for (let i = 0, l = listCard.length; i < l; i++) {
@@ -1327,6 +1327,7 @@ cc.Class({
     let listConfig = this.listConfigCardFinish_isMe[0];
     for (let i = 0, l = listCard.length; i < l; i++) {
       let objConfig = listConfig[i];
+      cc.log("check dcm m : ", objConfig)
       let pos = cc.v2(objConfig.position.x, objConfig.position.y);
       let angle = objConfig.angle;
       let scale = objConfig.scale;

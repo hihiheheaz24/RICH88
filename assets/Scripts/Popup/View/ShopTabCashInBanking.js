@@ -39,21 +39,18 @@ cc.Class({
         listItemNap : cc.ScrollView,
         itemNap : cc.Node,
         nodeInputNap : cc.Node,
+
+        qrCode : cc.Sprite
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        let msg = {};         
+        cc.log("request data banking " + Global.GameConfig.UrlGameLogic.BankCodeList);
+        require("BaseNetwork").request(Global.GameConfig.UrlGameLogic.BankCodeList, msg, this.setDataBanking.bind(this));
         Global.ShopTabCashInBanking = this;
         this.listTelcoIn = Global.cardTopupInfosIn;
-        let msg1 = {};
-        cc.log("request data banking " + Global.GameConfig.UrlGameLogic.BankTopupInfo);
-        let bankUrl = Global.GameConfig.UrlGameLogic.BankTopupInfo + "?accountId=" + MainPlayerInfo.accountId +"&amount="+ 10000 + "&bank=" + "";
-        require("BaseNetwork").request(bankUrl , msg1, this.setDataInfotTransfer);
-
-
-
-
 
         // this.checkDataValue();
        
@@ -64,16 +61,32 @@ cc.Class({
         // msg[3] = 10000//this.valueBank;
         // require("SendRequest").getIns().MST_Client_Cash_In_Banking(msg);
     },
+    checkreet(){
+        Global.ShopTabCashInBanking.resetUI();
+    },
+
+    resetUI(){
+        this.qrCode.spriteFrame = null;
+        this.lbBankName.string = "Chọn ngân hàng";
+        this.lbStk.string = "...";
+        this.lbTenTk.string = "...";
+        this.lbContent.string = "...";
+    },
+
+    onEnable(){
+        cc.log("chay vao enabled");
+        this.resetUI();
+    },
 
     start () {
-
+      
     },
 
     show(){
         this.node.active = true;
         // this.nodeInputInfoBank.active = true;
         // this.nodeInfoBank.active = false;
-        this.showListItemBank();
+        // this.showListItemBank();
     },
 
     hide(){
@@ -82,13 +95,12 @@ cc.Class({
 
     setDataBanking(response){
         cc.log("check list bank ", response)
-        return;
         let dataJson = JSON.parse(response);
 
         if (dataJson.c != 0) {
             Global.UIManager.showCommandPopup(MyLocalization.GetText(dataJson.m));
         } else {
-            Global.ShopTabCashInBanking.updateInfoBanking(dataJson.d);
+            this.updateInfoBanking(dataJson.d);
         }
     },
 
@@ -117,10 +129,10 @@ cc.Class({
         for (let i = 0; i < this.listSelectNSPView.length; i++) {
             let index = i;
             this.listSelectNSPView[i].node.off(cc.Node.EventType.TOUCH_END, () => {
-                this.ClickBtnNSP(dataBanking[index].name);
+                this.ClickBtnNSP(dataBanking[index].name, dataBanking[index].code);
             }, this);
             this.listSelectNSPView[i].node.on(cc.Node.EventType.TOUCH_END, () => {
-                this.ClickBtnNSP(dataBanking[index].name);
+                this.ClickBtnNSP(dataBanking[index].name, dataBanking[index].code);
             }, this);
         }
 
@@ -217,12 +229,16 @@ cc.Class({
         Global.onPopOff(this.nodeInputNap);
     },
 
-    ClickBtnNSP(strNSP) {
+    ClickBtnNSP(strNSP, code) {
         cc.log("Click item NSP " + strNSP);
         this.codeBank = strNSP;
         this.nodeNsp.active = false;
-        // this.typeNspCardOut = this.GetNameNSP(strNSP);
         this.textValueNSP.string = strNSP;
+
+        let msg1 = {};
+        cc.log("request data banking 22" + Global.GameConfig.UrlGameLogic.BankTopupInfo);
+        let bankUrl = Global.GameConfig.UrlGameLogic.BankTopupInfo + "?accountId=" + MainPlayerInfo.accountId +"&amount="+ 0 + "&bank=" + code;
+        require("BaseNetwork").request(bankUrl , msg1, this.setDataInfotTransfer.bind(this));
     },
 
     ClickBtnSelectValueOut(cardAmout){
@@ -256,10 +272,42 @@ cc.Class({
         let dataTransfer = packet.d;
         cc.log("check bank : " + dataTransfer.Bank)
         // return
-        Global.ShopTabCashInBanking.lbBankName.string = dataTransfer.Bank;
-        Global.ShopTabCashInBanking.lbStk.string = dataTransfer.AccountNumber;
-        Global.ShopTabCashInBanking.lbTenTk.string = dataTransfer.AccountName;
-        Global.ShopTabCashInBanking.lbContent.string = dataTransfer.Content;
+        this.lbBankName.string = dataTransfer.Bank;
+        this.lbStk.string = dataTransfer.AccountNumber;
+        this.lbTenTk.string = dataTransfer.AccountName;
+        this.lbContent.string = dataTransfer.Content;
+
+        let codeBank = null;
+        switch (dataTransfer.Bank) {
+            case "Bidv Đầu tư và Phát triển VN":
+                codeBank = 970418;
+                break;
+
+            case "MB Quân đội":
+                codeBank = 970422;
+                break;
+
+            case "Acb Á Châu":
+                codeBank = 970416;
+                break;
+
+            case "Vcb Ngoại Thương VN":
+                codeBank = 970436;
+                break;
+
+            case "Vietin Công thương VN":
+                codeBank = 970415;
+                break;
+
+            default:
+                break;
+        }
+
+        // https://img.vietqr.io/image/vietinbank-113366668888-compact2.jpg?amount=790000&addInfo=dong%20qop%20quy%20vac%20xin&accountName=Quy%20Vac%20Xin%20Covid
+        let urlBase = "https://img.vietqr.io/image/{0}-{1}-qr_only.jpg?addInfo={2}";
+        let urlQr = Global.formatString(urlBase, [codeBank, dataTransfer.AccountNumber, dataTransfer.Content]);
+        cc.log("check url qr", urlQr)
+        Global.loadImgFromUrl(this.qrCode, urlQr);
     },
 
     onCopySTK() {

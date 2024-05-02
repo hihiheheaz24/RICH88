@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "2681796a-58ed-4cf0-8caf-c89bc8541c08",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1080,
+  "height": 1920,
+  "platformSettings": {},
+  "subMetas": {
+    "PREVIEW SK DU DAY": {
+      "ver": "1.0.4",
+      "uuid": "b01b6645-2834-4704-9bb2-46dc4c24875a",
+      "rawTextureUuid": "2681796a-58ed-4cf0-8caf-c89bc8541c08",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1080,
+      "height": 1920,
+      "rawWidth": 1080,
+      "rawHeight": 1920,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

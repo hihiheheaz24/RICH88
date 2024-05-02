@@ -1,0 +1,132 @@
+
+dragon.png
+size: 2035,228
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+AuraSuperXayda/1
+  rotate: false
+  xy: 762, 26
+  size: 190, 200
+  orig: 217, 227
+  offset: 8, 1
+  index: -1
+AuraSuperXayda/2
+  rotate: false
+  xy: 954, 17
+  size: 181, 209
+  orig: 217, 227
+  offset: 19, 1
+  index: -1
+AuraSuperXayda/3
+  rotate: false
+  xy: 2, 2
+  size: 209, 224
+  orig: 217, 227
+  offset: 1, 1
+  index: -1
+AuraSuperXayda/4
+  rotate: true
+  xy: 213, 14
+  size: 212, 203
+  orig: 217, 227
+  offset: 1, 2
+  index: -1
+Lightning/LightNing/1
+  rotate: false
+  xy: 1406, 87
+  size: 106, 49
+  orig: 108, 52
+  offset: 1, 2
+  index: -1
+Lightning/LightNing/2
+  rotate: false
+  xy: 1300, 83
+  size: 104, 53
+  orig: 106, 55
+  offset: 1, 1
+  index: -1
+Lightning/LightNing/3
+  rotate: false
+  xy: 1514, 90
+  size: 101, 46
+  orig: 103, 48
+  offset: 1, 1
+  index: -1
+Lightning/LightNing/4
+  rotate: false
+  xy: 1687, 91
+  size: 99, 45
+  orig: 101, 49
+  offset: 1, 2
+  index: -1
+dragon/Ball1
+  rotate: false
+  xy: 1915, 65
+  size: 74, 77
+  orig: 97, 113
+  offset: 2, 20
+  index: -1
+dragon/Ball2
+  rotate: false
+  xy: 1915, 144
+  size: 82, 82
+  orig: 88, 87
+  offset: 3, 2
+  index: -1
+dragon/Ball3
+  rotate: false
+  xy: 1788, 73
+  size: 63, 63
+  orig: 69, 69
+  offset: 3, 3
+  index: -1
+dragon/Ball4
+  rotate: false
+  xy: 1617, 70
+  size: 68, 66
+  orig: 72, 72
+  offset: 2, 3
+  index: -1
+dragon/BgText
+  rotate: false
+  xy: 1300, 138
+  size: 310, 88
+  orig: 321, 97
+  offset: 1, 4
+  index: -1
+dragon/Blink
+  rotate: true
+  xy: 1999, 182
+  size: 44, 18
+  orig: 47, 21
+  offset: 2, 2
+  index: -1
+dragon/Char
+  rotate: true
+  xy: 1137, 13
+  size: 213, 161
+  orig: 215, 163
+  offset: 1, 1
+  index: -1
+dragon/Mouth
+  rotate: true
+  xy: 2019, 210
+  size: 16, 14
+  orig: 19, 16
+  offset: 2, 1
+  index: -1
+dragon/Text
+  rotate: false
+  xy: 1612, 138
+  size: 301, 88
+  orig: 309, 95
+  offset: 1, 6
+  index: -1
+dragon/TextGlow
+  rotate: false
+  xy: 418, 115
+  size: 342, 111
+  orig: 354, 119
+  offset: 5, 4
+  index: -1

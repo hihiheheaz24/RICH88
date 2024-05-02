@@ -8,7 +8,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.designResolution = cc.size(1920, 1080)
+        this.designResolution = cc.size(1358, 1920)
         this.lastWitdh = 0;
         this.lastHeight = 0;
         this.canvas = this.node.getComponent(cc.Canvas);

@@ -45,7 +45,7 @@ cc.Class({
         // else this.icMail.spriteFrame = this.sprReadedMail;
 
         this.lbTitle.string = data.MailHeader.substring(0, 15) + '...';
-        // this.lbContent.string = data.MailContent.substring(0, 15) + '...';
+        this.lbContent.string = data.MailContent.substring(0, 15) + '...';
         this.contentMail = data.MailContent;
         this.mailHeader = data.MailHeader;
 
@@ -79,7 +79,7 @@ cc.Class({
 
     onClickShowMail(){
         cc.log("chay vao set content mail")
-        this.icMail.spriteFrame = this.sprReadedMail;
+        // this.icMail.spriteFrame = this.sprReadedMail;
         Global.MailPopup.listItemMail.content.children.forEach(itemMail => {
             cc.log("check item mail : ", itemMail)
             itemMail.getChildByName("lbTile").color = cc.Color.WHITE;

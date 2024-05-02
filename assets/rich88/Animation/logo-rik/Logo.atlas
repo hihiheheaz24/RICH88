@@ -1,0 +1,174 @@
+
+Logo.png
+size: 2041,1167
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Comp 1/Comp 1_00000
+  rotate: false
+  xy: 1190, 95
+  size: 237, 217
+  orig: 600, 600
+  offset: 227, 199
+  index: -1
+Comp 1/Comp 1_00002
+  rotate: false
+  xy: 1573, 81
+  size: 254, 241
+  orig: 600, 600
+  offset: 210, 181
+  index: -1
+Comp 1/Comp 1_00004
+  rotate: false
+  xy: 1261, 314
+  size: 310, 241
+  orig: 600, 600
+  offset: 153, 181
+  index: -1
+Comp 1/Comp 1_00006
+  rotate: false
+  xy: 2, 203
+  size: 318, 232
+  orig: 600, 600
+  offset: 144, 186
+  index: -1
+Comp 1/Comp 1_00008
+  rotate: false
+  xy: 1573, 324
+  size: 321, 231
+  orig: 600, 600
+  offset: 140, 191
+  index: -1
+Comp 1/Comp 1_00010
+  rotate: true
+  xy: 959, 159
+  size: 322, 229
+  orig: 600, 600
+  offset: 138, 192
+  index: -1
+Comp 1/Comp 1_00012
+  rotate: false
+  xy: 2, 437
+  size: 323, 241
+  orig: 600, 600
+  offset: 136, 181
+  index: -1
+Comp 1/Comp 1_00014
+  rotate: false
+  xy: 690, 565
+  size: 325, 242
+  orig: 600, 600
+  offset: 134, 180
+  index: -1
+Comp 1/Comp 1_00016
+  rotate: true
+  xy: 1017, 483
+  size: 324, 242
+  orig: 600, 600
+  offset: 133, 181
+  index: -1
+Comp 1/Comp 1_00018
+  rotate: false
+  xy: 639, 328
+  size: 318, 235
+  orig: 600, 600
+  offset: 132, 187
+  index: -1
+Comp 1/Comp 1_00020
+  rotate: false
+  xy: 634, 103
+  size: 282, 223
+  orig: 600, 600
+  offset: 131, 191
+  index: -1
+Comp 1/Comp 1_00022
+  rotate: true
+  xy: 1829, 80
+  size: 242, 210
+  orig: 600, 600
+  offset: 131, 199
+  index: -1
+Comp 1/Comp 1_00023
+  rotate: false
+  xy: 322, 2
+  size: 243, 206
+  orig: 600, 600
+  offset: 130, 201
+  index: -1
+Logo/BG
+  rotate: false
+  xy: 2, 680
+  size: 686, 485
+  orig: 688, 487
+  offset: 1, 1
+  index: -1
+Logo/Dice_1
+  rotate: false
+  xy: 1896, 434
+  size: 116, 121
+  orig: 118, 123
+  offset: 1, 1
+  index: -1
+Logo/Dice_2
+  rotate: false
+  xy: 2, 41
+  size: 153, 160
+  orig: 155, 162
+  offset: 1, 1
+  index: -1
+Logo/I
+  rotate: false
+  xy: 1941, 855
+  size: 62, 310
+  orig: 64, 312
+  offset: 1, 1
+  index: -1
+Logo/Impact_light_0
+  rotate: false
+  xy: 1941, 753
+  size: 97, 100
+  orig: 128, 128
+  offset: 16, 22
+  index: -1
+Logo/K
+  rotate: true
+  xy: 322, 210
+  size: 224, 310
+  orig: 228, 312
+  offset: 2, 1
+  index: -1
+Logo/R
+  rotate: true
+  xy: 327, 436
+  size: 242, 310
+  orig: 245, 312
+  offset: 1, 1
+  index: -1
+Logo/RIK
+  rotate: false
+  xy: 1340, 855
+  size: 596, 310
+  orig: 599, 312
+  offset: 1, 1
+  index: -1
+Logo/RIKGlow
+  rotate: false
+  xy: 690, 809
+  size: 648, 356
+  orig: 653, 364
+  offset: 2, 5
+  index: -1
+Logo/RIKLight
+  rotate: false
+  xy: 1340, 557
+  size: 599, 296
+  orig: 603, 300
+  offset: 2, 2
+  index: -1
+Logo/StartBG_1
+  rotate: false
+  xy: 1941, 663
+  size: 91, 88
+  orig: 94, 91
+  offset: 2, 2
+  index: -1

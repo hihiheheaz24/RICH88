@@ -146,10 +146,10 @@ cc.Class({
         for (let i = 0; i < this.listSelectNSPView.length; i++) {
             let index = i;
             this.listSelectNSPView[i].node.off(cc.Node.EventType.TOUCH_END, () => {
-                this.ClickBtnNSP(dataBanking[index].name);
+                this.ClickBtnNSP(dataBanking[index].code);
             }, this);
             this.listSelectNSPView[i].node.on(cc.Node.EventType.TOUCH_END, () => {
-                this.ClickBtnNSP(dataBanking[index].name);
+                this.ClickBtnNSP(dataBanking[index].code);
             }, this);
         }
 
@@ -175,10 +175,10 @@ cc.Class({
             Global.UIManager.showConfirmPopup("Vui lòng chọn ngân hàng muốn rút");
             return;
         }
-        if(this.inPutPin.string === ""){
-            Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
-            return;
-        }
+        // if(this.inPutPin.string === ""){
+        //     Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
+        //     return;
+        // }
        
         if(this.valueCashOutCost === 0){
             Global.UIManager.showCommandPopup("Vui lòng chọn mệnh giá");
@@ -192,14 +192,13 @@ cc.Class({
             [this.valueCashOutCost, this.textValueChip.string, this.inputStk.string, this.textValueNSP.string
             ]),
             () => {
-                if (!MainPlayerInfo.checkCardOut(this.valueCashOutCost)) return;
                 let msgData = {};
                 msgData[1] = NSP_TYPE.BANK;
                 msgData[2] = this.valueCashOut;//this.GetCardTypeByAmount(this.valueCashOut);
-                msgData[4] = this.inputNameTk
-                msgData[10] = this.inPutPin.string;
-                msgData[11] = this.codeBank;
-                msgData[12] = this.inputStk;
+                msgData[5] = this.inputNameTk.string;
+                // msgData[10] = this.inPutPin.string;
+                msgData[3] = this.codeBank;
+                msgData[4] = this.inputStk.string;
                 Global.UIManager.showMiniLoading();
                 require("SendRequest").getIns().MST_Client_Telco_CashOut(msgData);
             }

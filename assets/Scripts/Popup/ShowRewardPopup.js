@@ -264,7 +264,7 @@ cc.Class({
         let lb = cc.find("Lb", this.rewardKichHoatContent).getComponent(cc.Label);
         MainPlayerInfo.ingameBalance = data[2];
 		MainPlayerInfo.diamondBalance = data[4];
-        Global.LobbyView.UpdateInfoView(data[2]);
+        MainPlayerInfo.setMoneyUser(data[2])
         lb.string = data[6];
     },
 

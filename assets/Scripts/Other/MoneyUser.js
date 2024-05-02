@@ -33,6 +33,8 @@ cc.Class({
     onLoad () {
         this.lbMoney = this.getComponent("LbMonneyChange");
         Global.MoneyUser.dangKy(this);
+        cc.log("chay vao dang ky label")
+        this.emitNewMoney();
     },
     onDestroy(){
        if(Global.MoneyUser) Global.MoneyUser.huyDangKy(this);

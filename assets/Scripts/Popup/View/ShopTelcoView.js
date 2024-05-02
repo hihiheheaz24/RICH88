@@ -86,10 +86,4 @@ cc.Class({
         require("SendRequest").getIns().MST_Client_Telco_CashOut(msgData);
     },
 
-    onClickItemInputCard(){
-        Global.ShopPopup.showTabInputCard();
-        Global.ShopPopup.valueCardIn = this.goldItem;
-        cc.log("check ec : ", Global.ShopPopup.valueCardIn)
-        Global.ShopPopup.typeCardIn = Global.ShopPopup.GetCardTypeByAmount(this.goldItem);
-    },
 });

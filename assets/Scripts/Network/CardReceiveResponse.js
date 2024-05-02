@@ -42,6 +42,7 @@ var CardReceiveResponse = cc.Class({
       case CODE_RUN.MST_SERVER_SEND_TOAST:
         if (Global.GameView !== null) {
           Global.GameView.showNoti(packet[1]);
+          Global.UIManager.hideMiniLoading();
         }
         break;
 

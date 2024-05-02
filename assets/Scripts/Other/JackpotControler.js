@@ -39,7 +39,6 @@ cc.Class({
 
     },
     reviceData(data){
-        cc.log("data jackpot nhan dc la " +data )
 
         clearTimeout(this.funJpChuaLogin);
         this.listMoneyJackpot = {};
@@ -59,9 +58,10 @@ cc.Class({
         }
         clearTimeout(this.funJp);
         this.funJp =  setTimeout(()=>{
-            if(Global.isLogin)
-                require("SendCardRequest").getIns().MST_Client_Jackpot_CardGame_Info();
-
+            if(Global.isLogin){
+                require ("SendRequest").getIns().MST_Client_Jackpot_Info();
+                // require("SendCardRequest").getIns().MST_Client_Jackpot_CardGame_Info();
+            }
         } , this.timeCacheJackot*1000)
         this.timeCacheJackot = this.timeRequestjackpot;
     },

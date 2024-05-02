@@ -27,10 +27,10 @@ var ReceiveResponse = cc.Class({
 
 
 
-        switch(responseCode){
+        switch (responseCode) {
             case RESPONSE_CODE.MST_SERVER_PING:
-            Global.setPingTime(packet);
-            return;
+                Global.setPingTime(packet);
+                return;
             case RESPONSE_CODE.MSG_SERVER_DICE_GET_TOP_WIN_LOSE_CHAIN:
                 Global.TaiXiu.responseServer(responseCode, packet);
                 return;
@@ -67,6 +67,7 @@ var ReceiveResponse = cc.Class({
             case RESPONSE_CODE.MST_SERVER_SEND_TOAST:
                 cc.log("Chay vao show toast")
                 Global.UIManager.showNoti(packet[1])
+                Global.UIManager.hideMiniLoading();
                 break;
 
             case RESPONSE_CODE.MST_SERVER_GET_ENTERED_REF_CODE_INFO:
@@ -138,12 +139,26 @@ var ReceiveResponse = cc.Class({
 
             case RESPONSE_CODE.MST_SERVER_UPDATE_PLAYER_BALANCE:
                 if(Global.FishCaMap)Global.FishCaMap.responseSever(responseCode , packet);
-                // let playerId = packet[1];
-                // let money = packet[2];
-                // if(playerId == MainPlayerInfo.accountId){
-                //     cc.log("chay váo et cung tien")
-                //     MainPlayerInfo.setMoneyUser(money);
-                // }
+                let playerId = packet[1];
+                let money = packet[2];
+                if(playerId == MainPlayerInfo.accountId){
+                    cc.log("chay váo et cung tien")
+                    MainPlayerInfo.setMoneyUser(money);
+                }
+                return;
+
+            case RESPONSE_CODE.MST_SERVER_CASHIN_COMPLETED:
+                let typeCashIn = packet[1];
+                let uag = packet[2];
+                MainPlayerInfo.setMoneyUser(uag);
+                switch (typeCashIn) {
+                    case 4:
+                        Global.ShopPopup.tabMomoContent.resetUI();
+                        break;
+                    case 5:
+                        Global.ShopTabCashInBanking.resetUI();
+                        break;
+                }
                 return;
 
 
@@ -292,8 +307,12 @@ var ReceiveResponse = cc.Class({
             if (Global.LobbyView) {
                 Global.LobbyView.UpdateMailStatus();
             }
-
-        } else if (responseCode == RESPONSE_CODE.MST_SERVER_UPDATE_PLAYER_BALANCE) {
+        }  
+        else if (responseCode == RESPONSE_CODE.MST_SERVER_JACKPOT_INFO) {
+            cc.log("cehck jackoit")
+            OutGameLogicManager.getIns().OutGameHandleResponse(operationResponse);
+        }
+        else if (responseCode == RESPONSE_CODE.MST_SERVER_UPDATE_PLAYER_BALANCE) {
             TogetherLogicManager.getIns().TogetherHandleResponse(operationResponse);
         } else if (responseCode == RESPONSE_CODE.MST_SERVER_CLEAR_ALL_NORMAL_FISH) {
             InGameLogicManager.getIns().InGameHandleResponse(operationResponse);
@@ -639,7 +658,7 @@ var ReceiveResponse = cc.Class({
         }
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_START_GAME_RESPONSE){
-            Global.LobbyView.handleShowGameApi(packet[1])
+            Global.LobbyView.handleShowGameApi(packet[1], packet[2])
         }
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CLOSE_GAME_RESPONSE){
@@ -648,6 +667,7 @@ var ReceiveResponse = cc.Class({
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CONNECT_ERROR){
             Global.UIManager.showCommandPopup(packet[1]);
+            Global.UIManager.hideMiniLoading();
         }
 
     },

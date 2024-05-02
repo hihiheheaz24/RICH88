@@ -43,7 +43,7 @@ cc.Class({
         actionEffectOpen(this.node);
     },
     onClickClose(){
-        Global.UIManager.hideMark();
+        // Global.UIManager.hideMask();
         actionEffectClose(this.node , ()=>{
             this.node.active = false;
         })

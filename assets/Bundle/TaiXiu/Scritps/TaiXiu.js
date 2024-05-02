@@ -112,7 +112,7 @@ cc.Class({
        this.isResult = false;
        this._currentChatMiss = 0;
 
-       this.onClickTheLeDuDay();
+    //    this.onClickTheLeDuDay();
        if(Global.GameConfig.FeatureConfig.ActiveSoiCauTaiXiu == EFeatureStatus.Open){
            this.btnSoiCau.active= true;
        }else{

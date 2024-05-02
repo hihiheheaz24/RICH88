@@ -26,7 +26,7 @@ cc.Class({
 
     SetInfoMail() {
         this.listItemMail.resetScr();
-        this.listItemMail.init(MainPlayerInfo.listMail, MainPlayerInfo.listMail.length * 107 , 107);
+        this.listItemMail.init(MainPlayerInfo.listMail, MainPlayerInfo.listMail.length * 181 , 181);
     },
     
     Hide() {

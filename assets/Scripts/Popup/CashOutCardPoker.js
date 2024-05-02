@@ -242,10 +242,10 @@ cc.Class({
     },
 
     onSendCashOutCard() {
-        if(this.inPutPin.string === ""){
-            Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
-            return;
-        }
+        // if(this.inPutPin.string === ""){
+        //     Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
+        //     return;
+        // }
         if(this.valueCashOutCost === 0){
             Global.UIManager.showCommandPopup("Vui lòng chọn mệnh giá");
             return;
@@ -254,11 +254,10 @@ cc.Class({
             [this.valueCashOutCost, this.textValueNSP.string,
             this.textValueChip.string]),
             () => {
-                if (!MainPlayerInfo.checkCardOut(this.valueCashOutCost)) return;
                 let msgData = {};
                 msgData[1] = this.typeNspCardOut;
                 msgData[2] = this.GetCardTypeByAmount(this.valueCashOut);
-                msgData[10] = this.inPutPin.string;
+                // msgData[10] = this.inPutPin.string;
                 Global.UIManager.showMiniLoading();
                 require("SendRequest").getIns().MST_Client_Telco_CashOut(msgData);
             }

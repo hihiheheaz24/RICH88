@@ -61,7 +61,6 @@ cc.Class({
     },
 
     UpdateListNotify(packet) {
-        return;
         let obj = JSON.parse(packet[1]) ;
         if(obj.Type == NOTIFICATION_TYPE.NORMAL){
             this.listNomrl.push(obj);
@@ -124,7 +123,6 @@ cc.Class({
     },
 
     showUI(content){
-        return;
         this.description.string = content;
         this.description.node.parent.active = true;
         this.boxNotify.active = true;

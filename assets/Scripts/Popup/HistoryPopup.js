@@ -2,7 +2,7 @@ cc.Class({
     extends: cc.Component,
     ctor() {
         this.numberPage = 10;
-        this.numberRow = 8;
+        this.numberRow = 6;
         this.listRow = [];
         this.listPlayHistory = [];
         this.currentPage = 0;

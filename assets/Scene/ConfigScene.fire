@@ -186,7 +186,7 @@
       "array": [
         0,
         0,
-        362.8646441856798,
+        280.59223082615813,
         0,
         0,
         0,
@@ -286,7 +286,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1080,
+      "width": 1358,
       "height": 1920
     },
     "_anchorPoint": {
@@ -348,8 +348,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 348,
-      "height": 261
+      "width": 688,
+      "height": 487
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -361,7 +361,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        19.093,
+        167.825,
         0,
         0,
         0,
@@ -386,7 +386,7 @@
     "_id": "5fX25XkkJFSqqXUY74op4D"
   },
   {
-    "__type__": "cc.Sprite",
+    "__type__": "sp.Skeleton",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -395,27 +395,37 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "feb3e2bd-ff86-4241-baae-b88923a292bb"
+    "paused": false,
+    "defaultSkin": "default",
+    "defaultAnimation": "Idle",
+    "_preCacheMode": 1,
+    "_cacheMode": 1,
+    "loop": true,
+    "premultipliedAlpha": true,
+    "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "Idle",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
+    "_N$skeletonData": {
+      "__uuid__": "5c15883b-acae-47a8-86c7-8580f8def712"
     },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_atlas": null,
-    "_id": "1fg3tpm0RBcZ5KPdW6KPpf"
+    "_N$_defaultCacheMode": 1,
+    "_N$debugSlots": false,
+    "_N$debugBones": false,
+    "_N$debugMesh": false,
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": "22uFYekNVO1b6iXuj3m2+3"
   },
   {
     "__type__": "cc.Node",
@@ -1037,7 +1047,7 @@
       "__uuid__": "d9274500-8b59-4495-a32e-29abbd3463e7"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",

@@ -165,10 +165,10 @@ cc.Class({
     },
 
     onCashOutMomo() {
-        if(this.inPutPin.string === ""){
-            Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
-            return;
-        }
+        // if(this.inPutPin.string === ""){
+        //     Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
+        //     return;
+        // }
         if(this.valueCashOutCost === 0){
             Global.UIManager.showCommandPopup("Vui lòng chọn mệnh giá");
             return;
@@ -181,12 +181,11 @@ cc.Class({
         Global.UIManager.showConfirmPopup(Global.formatString(MyLocalization.GetText("CAST_OUT_NOTIFY_MOMO"),
             [this.valueCashOutCost, str, this.textValueChip.string]),
             () => {
-                if(!MainPlayerInfo.checkCardOut(this.valueCashOutCost)) return;
                 let msgData = {};
                 msgData[1] = MOMO;
                 msgData[2] = this.GetCardTypeByAmount(this.valueCashOut);
                 msgData[3] = str;
-                msgData[10] = this.inPutPin.string;
+                // msgData[10] = this.inPutPin.string;
                 Global.UIManager.showMiniLoading();
                 require("SendRequest").getIns().MST_Client_Telco_CashOut(msgData);
             }

@@ -1,0 +1,125 @@
+
+XocDia.png
+size: 1995,501
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+XocDia/BGLight
+  rotate: false
+  xy: 2, 2
+  size: 370, 497
+  orig: 373, 526
+  offset: 1, 28
+  index: -1
+XocDia/Chip
+  rotate: true
+  xy: 1336, 341
+  size: 158, 154
+  orig: 182, 182
+  offset: 13, 1
+  index: -1
+XocDia/Dia
+  rotate: true
+  xy: 374, 145
+  size: 354, 292
+  orig: 354, 292
+  offset: 0, 0
+  index: -1
+XocDia/FxWave
+  rotate: true
+  xy: 1614, 375
+  size: 124, 83
+  orig: 124, 83
+  offset: 0, 0
+  index: -1
+XocDia/QuanViShadow_1
+  rotate: false
+  xy: 1336, 287
+  size: 90, 52
+  orig: 126, 102
+  offset: 10, 1
+  index: -1
+XocDia/QuanViShadow_2
+  rotate: true
+  xy: 1925, 398
+  size: 101, 66
+  orig: 153, 89
+  offset: 42, 5
+  index: -1
+XocDia/QuanViShadow_3
+  rotate: true
+  xy: 1925, 315
+  size: 81, 67
+  orig: 97, 147
+  offset: 3, 31
+  index: -1
+XocDia/QuanViShadow_4
+  rotate: true
+  xy: 1779, 402
+  size: 97, 76
+  orig: 138, 134
+  offset: 6, 12
+  index: -1
+XocDia/QuanVi_1
+  rotate: true
+  xy: 1782, 310
+  size: 90, 68
+  orig: 126, 102
+  offset: 10, 2
+  index: -1
+XocDia/QuanVi_2
+  rotate: true
+  xy: 1857, 390
+  size: 109, 66
+  orig: 152, 89
+  offset: 42, 6
+  index: -1
+XocDia/QuanVi_3
+  rotate: false
+  xy: 1699, 319
+  size: 81, 81
+  orig: 96, 147
+  offset: 2, 31
+  index: -1
+XocDia/QuanVi_4
+  rotate: true
+  xy: 1699, 403
+  size: 96, 78
+  orig: 138, 134
+  offset: 6, 12
+  index: -1
+XocDia/Text - Dia
+  rotate: true
+  xy: 1492, 308
+  size: 191, 120
+  orig: 196, 122
+  offset: 4, 1
+  index: -1
+XocDia/Text - DiaBlur
+  rotate: true
+  xy: 1212, 282
+  size: 217, 122
+  orig: 240, 127
+  offset: 5, 1
+  index: -1
+XocDia/Text - Xoc
+  rotate: true
+  xy: 1083, 265
+  size: 234, 127
+  orig: 238, 141
+  offset: 1, 13
+  index: -1
+XocDia/Text - XocBlur
+  rotate: true
+  xy: 949, 254
+  size: 245, 132
+  orig: 257, 145
+  offset: 7, 8
+  index: -1
+XocDia/bat
+  rotate: 270
+  xy: 655, 187
+  size: 312, 292
+  orig: 312, 292
+  offset: 0, 0
+  index: -1

@@ -21,7 +21,7 @@ cc.Class({
     },
     onClickClose() {
         Global.HistoryMiniSlot = null;
-        Global.UIManager.hideMark();
+        // Global.UIManager.hideMask();
         actionEffectClose(this.node , ()=>{
             this.node.active = false;
         })

@@ -8,7 +8,6 @@ cc.Class({
         this.typeCardIn = 0;
         this.valueCardIn = 0;
         this.listShopView = [];
-        this.listSelectValueView = [];
         this.listNSP = [];
         this.listSelectNSPView = [];
     },
@@ -16,19 +15,12 @@ cc.Class({
     properties: {
         serialIF: cc.EditBox,
         numberIF: cc.EditBox,
-        textValue: cc.Label,
-        objListButtonCardIn: cc.Node,
+        // textValue: cc.Label,
         shopView: cc.Node,
         selectValueView: cc.Node,
-        objListButtonNSP: cc.Node,
-        selectNSPView: cc.Node,
-        textValueNSP: cc.Label,
-        // momo
         textMomoName: cc.Label,
         textMomoPhone: cc.Label,
         textMomoCode: cc.Label,
-        btnSelectNSPValue: cc.Button,
-        //iconMomo: cc.Node,
     },
     onLoad(){
         this.initNodeMove(Global.ShopPopup.node);
@@ -36,6 +28,8 @@ cc.Class({
         this.resignEdb(this.serialIF);
         this.resignEdb(this.numberIF);
         this.resignNext(this.serialIF , "numberIF");
+
+        this.show();
     },
     Init() {
         this.listTelcoIn = Global.cardTopupInfosIn;
@@ -44,54 +38,36 @@ cc.Class({
         }
         this.isInit = true;
         this.listShopView[this.listShopView.length] = this.shopView.getComponent("ShopTelcoView");
-        this.listSelectValueView[this.listSelectValueView.length] = this.selectValueView.getComponent("ShopTelcoView");
-        this.listSelectNSPView[this.listSelectNSPView.length] = this.selectNSPView.getComponent("ShopTelcoView");
         cc.log("listSelectNSPView : " + this.listSelectNSPView.length);
     },
 
     show() {
         this.node.active = true;
-        this.btnSelectNSPValue.interactable = true;
-        //this.iconMomo.active = false;
-        this.textValueNSP.string = "Chọn nhà mạng"
         this.Init();
-        this.CheckNSPActive();
-    },
-
-    onClickMask(){
-        this.objListButtonNSP.active = false;
-        this.objListButtonCardIn.active = false;
+        // this.CheckNSPActive();
     },
 
     CheckNSPActive() {
         this.listNSP = [];
-        // if (Global.GameConfig.FeatureConfig.CashInByMomoFeature == EFeatureStatus.Open) {
-        //     this.typeNspCardIn = NSP_TYPE.MOMO;
-        //     this.listNSP[this.listNSP.length] = "Momo";
-        // } else {
-
-        // }
         if (Global.GameConfig.FeatureConfig.CashInByMobiFeature == EFeatureStatus.Open) {
             this.typeNspCardIn = NSP_TYPE.MOBIFONE;
-            this.textValueNSP.string = "MobiFone";
+            // this.textValueNSP.string = "MobiFone";
             this.listNSP[this.listNSP.length] = "MobiFone";
         } else {
         }
         if (Global.GameConfig.FeatureConfig.CashInByVinaFeature == EFeatureStatus.Open) {
             this.typeNspCardIn = NSP_TYPE.VINAPHONE;
-            this.textValueNSP.string = "VinaPhone";
+            // this.textValueNSP.string = "VinaPhone";
             this.listNSP[this.listNSP.length] = "VinaPhone";
 
         } else {
         }
         if (Global.GameConfig.FeatureConfig.CashInByViettelFeature == EFeatureStatus.Open) {
             this.typeNspCardIn = NSP_TYPE.VIETTEL;
-            this.textValueNSP.string = "Viettel";
+            // this.textValueNSP.string = "Viettel";
             this.listNSP[this.listNSP.length] = "Viettel";
-        } else {
         }
 
-        this.SetListNSP();
         this.ClickSelectNSP(null, this.typeNspCardIn);
     },
 
@@ -107,100 +83,38 @@ cc.Class({
         this.SetListValueNSP(listCard);
     },
 
-    ClickShowListValue() {
-        this.objListButtonCardIn.active = !this.objListButtonCardIn.active;
-    },
-    ClickShowListNSP() {
-        this.objListButtonNSP.active = !this.objListButtonNSP.active;
-    },
-
-    SetListNSP() {
-        if (this.listSelectNSPView.length > 0)
-            for (let i = 0; i < this.listSelectNSPView.length; i++) {
-                if (this.listSelectNSPView != null)
-                    this.listSelectNSPView[i].node.active = false;
-            }
-
-        for (let i = 0; i < this.listNSP.length; i++) {
-            if (i < this.listSelectNSPView.length) {
-                this.listSelectNSPView[i].SetUp(this.listNSP[i], 0);
-            } else {
-                let itemTrans = cc.instantiate(this.selectNSPView);
-                itemTrans.parent = this.selectNSPView.parent;
-                let itemView = itemTrans.getComponent("ShopTelcoView");
-                itemView.SetUp(this.listNSP[i], 0);
-                this.listSelectNSPView[this.listSelectNSPView.length] = itemView;
-            }
-        }
-
-        for (let i = 0; i < this.listSelectNSPView.length; i++) {
-            let index = i;
-            this.listSelectNSPView[i].node.off(cc.Node.EventType.TOUCH_END, () => {
-                this.ClickBtnNSP(this.listNSP[index]);
-            }, this);
-            this.listSelectNSPView[i].node.on(cc.Node.EventType.TOUCH_END, () => {
-                this.ClickBtnNSP(this.listNSP[index]);
-            }, this);
-        }
-
-    },
-
     SetListValueNSP(listCard) {
         for (let i = 0; i < this.listShopView.length; i++) {
             this.listShopView[i].node.active = false;
-            this.listSelectValueView[i].node.active = false;
         }
 
         cc.log("check list card : ", listCard);
         for (let i = 0; i < listCard.length; i++) {
             if (i < this.listShopView.length) {
                 this.listShopView[i].SetUp(listCard[i].CardAmount, listCard[i].GoldAmount);
-                this.listSelectValueView[i].SetUp(listCard[i].CardAmount, listCard[i].GoldAmount);
             } else {
                 let itemTrans = cc.instantiate(this.shopView);
                 itemTrans.parent = this.shopView.parent;
                 let itemView = itemTrans.getComponent("ShopTelcoView");
                 itemView.SetUp(listCard[i].CardAmount, listCard[i].GoldAmount);
                 this.listShopView[this.listShopView.length] = itemView;
-
-                let item2Trans = cc.instantiate(this.selectValueView);
-                item2Trans.parent = this.selectValueView.parent;
-                let item2View = item2Trans.getComponent("ShopTelcoView");
-                item2View.SetUp(listCard[i].CardAmount, listCard[i].GoldAmount);
-                this.listSelectValueView[this.listSelectValueView.length] = item2View;
             }
         }
-        for (let i = 0; i < this.listSelectValueView.length; i++) {
+        for (let i = 0; i < this.listShopView.length; i++) {
             let index = i;
-
-
-            this.listShopView[i].node.scale = 0;
-            cc.tween(this.listShopView[i].node)
-            .to(0.15 * i, {scale: 1},{easing: "backOut" })
-            .start();
-            
-
-            this.listSelectValueView[i].node.off(cc.Node.EventType.TOUCH_END, () => {
+            this.listShopView[i].node.off(cc.Node.EventType.TOUCH_END, () => {
                 this.ClickBtnSelectValueIn(listCard[index].CardAmount);
             }, this);
-            this.listSelectValueView[i].node.on(cc.Node.EventType.TOUCH_END, () => {
+            this.listShopView[i].node.on(cc.Node.EventType.TOUCH_END, () => {
                 this.ClickBtnSelectValueIn(listCard[index].CardAmount);
             }, this);
         }
     },
 
     ClickBtnSelectValueIn(cardAmout) {
-        this.objListButtonCardIn.active = false;
-        this.typeCardIn = Global.ShopPopup.GetCardTypeByAmount(cardAmout);
-        this.textValue.string = Global.formatNumber(cardAmout);
-    },
-
-    ClickBtnNSP(strNSP) {
-        cc.log("strNSP : " + strNSP);
-        this.objListButtonNSP.active = false;
-        this.typeNspCardIn = this.GetNameNSP(strNSP);
-        this.textValueNSP.string = strNSP;
-        cc.log("this.typeNspCardIn : " + this.typeNspCardIn);
+        this.typeCardIn = cardAmout;
+        cc.log("check type card in : ", this.typeCardIn)
+        // this.textValue.string = Global.formatNumber(cardAmout);
     },
 
     GetMomoConfig(response) {
@@ -236,27 +150,32 @@ cc.Class({
     },
 
     ClickConfirmCardIn() {
-        this.typeCardIn = Global.ShopPopup.GetCardTypeByAmount(Global.ShopPopup.valueCardIn);
-        cc.log("check check dcm : ", this.typeCardIn)
-        cc.log("??? " ,Global.ShopPopup.valueCardIn)
-        if (this.serialIF.string !== "" && this.numberIF.string !== "") {
-            Global.UIManager.showConfirmPopup(
-                Global.formatString(MyLocalization.GetText("NOTIFY_CASHIN_TELCO"), 
-                [Global.ShopPopup.GetNspNameByType(this.typeNspCardIn), Global.formatNumber(Global.ShopPopup.valueCardIn)]), 
-                () => this.SendCardIn(this.serialIF.string, this.numberIF.string)
-                );         
-        }
-        else{
-            Global.UIManager.showCommandPopup(MyLocalization.GetText("PASS_WORD_SPACE"), null);
+        // cc.log("check check dcm : ", this.typeCardIn)
+        // if (this.serialIF.string !== "" && this.numberIF.string !== "") {
+        //     // Global.UIManager.showConfirmPopup(
+        //     //     Global.formatString(MyLocalization.GetText("NOTIFY_CASHIN_TELCO"), 
+        //     //     [Global.ShopPopup.GetNspNameByType(this.typeNspCardIn), Global.formatNumber(this.typeCardIn)]), 
+        //     //     () => this.SendCardIn(this.serialIF.string, this.numberIF.string)
+        //     //     );     
+            
+        //     this.SendCardIn(this.serialIF.string, this.numberIF.string)
+        // }
+        // else{
+        //     Global.UIManager.showCommandPopup(MyLocalization.GetText("PASS_WORD_SPACE"), null);
+        // }
+        if (this.typeCardIn == 0) {
+            Global.UIManager.showCommandPopup(MyLocalization.GetText("CAST_OUT_AMOUNT_ERROR"));
+        } else if (Global.ShopPopup.CheckSpace(this.serialIF.string) && Global.ShopPopup.CheckSpace(this.numberIF.string)) {
+            Global.UIManager.showConfirmPopup(Global.formatString(MyLocalization.GetText("NOTIFY_CASHIN_TELCO"), [Global.ShopPopup.GetNspNameByType(this.typeNspCardIn), Global.formatNumber(this.typeCardIn)]), () => this.SendCardIn(this.serialIF.string, this.numberIF.string));
         }
     },
 
     SendCardIn(serial, number) {
         Global.UIManager.showMiniLoading();
         let msgData = {};
-        cc.log("S : " + this.typeCardIn);
+        cc.log("S : " + Global.ShopPopup.GetCardTypeByAmount(this.typeCardIn));
         cc.log("S : " + this.typeNspCardIn);
-        msgData[1] = this.typeCardIn;
+        msgData[1] = Global.ShopPopup.GetCardTypeByAmount(this.typeCardIn);
         msgData[2] = this.typeNspCardIn;
         msgData[3] = serial;
         msgData[4] = number;
@@ -267,9 +186,10 @@ cc.Class({
         this.typeCardIn = 0;
         this.serialIF.string = "";
         this.numberIF.string = "";
-        this.objListButtonNSP.active = false;
-        this.objListButtonCardIn.active = false;
-        this.textValue.string = MyLocalization.GetText("SELECT_VALUE");
+        for (let i = 0; i < this.listShopView.length; i++) {
+            const obj = this.listShopView[i];
+            obj.node.getComponent(cc.Toggle).isChecked = false;
+        }
     },
 
     hide() {

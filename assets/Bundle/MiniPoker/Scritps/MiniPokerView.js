@@ -452,7 +452,7 @@ cc.Class({
         this.isShow = false;
         this.node.removeFromParent(false)
         // Global.UIManager.checkHideMiniGame();
-        Global.UIManager.hideMark();
+        Global.UIManager.hideMask();
     },
 
 

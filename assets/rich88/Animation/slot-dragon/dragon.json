@@ -1,0 +1,432 @@
+{
+"skeleton": {
+	"hash": "ioaoCENTWjVya8jpdgWopH5jXRA",
+	"spine": "3.8.99",
+	"x": -178,
+	"y": -173,
+	"width": 353,
+	"height": 324,
+	"images": "./images/",
+	"audio": "H:/My Drive/Choco/Xanh9/dragon"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "Dragon", "parent": "root" },
+	{ "name": "Char", "parent": "Dragon", "x": -14.32, "y": 13.35 },
+	{ "name": "Char2", "parent": "Char", "length": 77.55, "rotation": 85.25, "x": 0.28, "y": 0.28 },
+	{ "name": "Mouth", "parent": "Char2", "x": 71.83, "y": 14.54 },
+	{ "name": "Blink", "parent": "Char2", "x": 85.66, "y": 20.31 },
+	{ "name": "Text", "parent": "Dragon", "x": -4.35, "y": 8.32, "color": "8018c6ff" },
+	{ "name": "TextGlow", "parent": "Text", "rotation": 91.22, "x": -4.01, "y": 7.48, "color": "8018c6ff" },
+	{ "name": "Ball", "parent": "Dragon", "x": 0.7, "y": 59.83, "color": "3d23b0ff" },
+	{ "name": "Ball1", "parent": "Ball", "x": -116.1, "y": 43.09, "color": "3d23b0ff" },
+	{ "name": "Ball4", "parent": "Ball", "x": -95.98, "y": -9.72, "color": "3d23b0ff" },
+	{ "name": "Ball3", "parent": "Ball", "x": 115.56, "y": 4.61, "color": "3d23b0ff" },
+	{ "name": "Ball5", "parent": "Ball", "x": 62.49, "y": 49.12, "color": "3d23b0ff" },
+	{ "name": "bone", "parent": "Ball5", "x": -0.37, "y": 10.91, "color": "37ff42ff" },
+	{ "name": "bone2", "parent": "Ball3", "y": 11.98, "color": "38ff43ff" },
+	{ "name": "Ball2", "parent": "Ball1", "x": -0.68, "y": 16.16, "color": "38ff43ff" },
+	{ "name": "Ball6", "parent": "Ball4", "x": -0.13, "y": 12.94, "color": "38ff43ff" },
+	{ "name": "FxAura", "parent": "Char", "x": 12.63, "y": 140.61, "scaleX": 1.831, "scaleY": 1.831 },
+	{ "name": "FxLightNing", "parent": "Dragon" },
+	{ "name": "MaskText", "parent": "Text", "rotation": -1.25, "x": -158.46, "y": 6.83, "color": "e45bffff" }
+],
+"slots": [
+	{ "name": "BG", "bone": "Dragon" },
+	{ "name": "Mask", "bone": "Dragon", "attachment": "Mask" },
+	{ "name": "Ball4", "bone": "Ball6", "attachment": "dragon/Ball4" },
+	{ "name": "Ball3", "bone": "bone", "attachment": "dragon/Ball3" },
+	{ "name": "Char", "bone": "Char2", "attachment": "dragon/Char" },
+	{ "name": "Blink", "bone": "Blink" },
+	{ "name": "Mouth", "bone": "Mouth" },
+	{ "name": "FxAura", "bone": "FxAura", "blend": "additive" },
+	{ "name": "Ball2", "bone": "bone2", "attachment": "dragon/Ball2" },
+	{ "name": "Ball1", "bone": "Ball2", "attachment": "dragon/Ball1" },
+	{ "name": "BgText", "bone": "Dragon", "attachment": "dragon/BgText" },
+	{ "name": "Text", "bone": "Text", "attachment": "dragon/Text" },
+	{ "name": "MaskText", "bone": "MaskText", "attachment": "MaskText" },
+	{ "name": "TextAdd", "bone": "Text", "attachment": "dragon/Text", "blend": "additive" },
+	{ "name": "TextGlow", "bone": "TextGlow", "blend": "additive" },
+	{ "name": "FxLightNing", "bone": "FxLightNing", "blend": "additive" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"Ball1": {
+				"dragon/Ball1": { "x": 10.58, "y": -3.58, "width": 97, "height": 113 }
+			},
+			"Ball2": {
+				"dragon/Ball2": { "x": -2.26, "y": 0.08, "width": 88, "height": 87 }
+			},
+			"Ball3": {
+				"dragon/Ball3": { "x": -0.32, "y": 1.64, "width": 69, "height": 69 }
+			},
+			"Ball4": {
+				"dragon/Ball4": { "x": 0.41, "y": -0.05, "width": 72, "height": 72 }
+			},
+			"BgText": {
+				"dragon/BgText": { "x": 0.5, "y": 19.5, "width": 321, "height": 97 }
+			},
+			"Blink": {
+				"dragon/Blink": { "x": 5.78, "y": 0.79, "rotation": -85.25, "width": 47, "height": 21 }
+			},
+			"Char": {
+				"dragon/Char": { "x": 56.88, "y": -9.87, "rotation": -85.25, "width": 215, "height": 163 }
+			},
+			"FxAura": {
+				"AuraSuperXayda/1": { "color": "ffb629ff", "x": 0.5, "y": 0.5, "width": 217, "height": 227 },
+				"AuraSuperXayda/2": { "color": "ffb629ff", "x": 0.5, "y": 0.5, "width": 217, "height": 227 },
+				"AuraSuperXayda/3": { "color": "ffb629ff", "x": 0.5, "y": 0.5, "width": 217, "height": 227 },
+				"AuraSuperXayda/4": { "color": "ffb629ff", "x": 0.5, "y": 0.5, "width": 217, "height": 227 }
+			},
+			"FxLightNing": {
+				"Lightning/LightNing/1": { "x": -99.33, "y": 22.77, "width": 108, "height": 52 },
+				"Lightning/LightNing/2": { "x": -82.5, "y": 10.07, "width": 106, "height": 55 },
+				"Lightning/LightNing/3": { "x": -2.14, "y": 12.54, "rotation": -148.18, "width": 103, "height": 48 },
+				"Lightning/LightNing/4": { "x": 79.04, "y": 6.11, "width": 101, "height": 49 },
+				"Lightning/LightNing/5": {
+					"path": "Lightning/LightNing/3",
+					"x": -130.18,
+					"y": 33.33,
+					"scaleX": 0.723,
+					"scaleY": 0.723,
+					"rotation": 144,
+					"width": 103,
+					"height": 48
+				},
+				"Lightning/LightNing/6": { "path": "Lightning/LightNing/2", "x": 102.96, "y": 15.35, "rotation": -147.56, "width": 106, "height": 55 }
+			},
+			"Mask": {
+				"Mask": {
+					"type": "clipping",
+					"end": "FxAura",
+					"vertexCount": 21,
+					"vertices": [ -127.73, 145.91, -130.57, 145.09, -132.7, 143.67, -169.16, 108.75, -171.05, 105.32, -172.23, 101.19, -173.04, -145.99, -171.65, -152.1, -167.48, -157.39, -161.92, -161.56, -155.53, -162.95, 125.22, -163.85, 168.12, -121.47, 167.81, 110.93, 165.34, 119.37, 161.63, 127.82, 157.51, 133.79, 150.09, 139.56, 142.68, 142.24, 133.46, 145.31, 120.9, 145.11 ],
+					"color": "ce3a3aff"
+				}
+			},
+			"MaskText": {
+				"MaskText": {
+					"type": "clipping",
+					"end": "TextAdd",
+					"vertexCount": 4,
+					"vertices": [ -1.52, 154.24, -16.29, -109.92, -55.86, -111.26, -42.97, 151.43 ],
+					"color": "ce3a3aff"
+				}
+			},
+			"Mouth": {
+				"dragon/Mouth": { "x": -0.49, "y": 0.87, "rotation": -85.25, "width": 19, "height": 16 }
+			},
+			"Text": {
+				"dragon/Text": { "x": 3.85, "y": 5.18, "width": 309, "height": 95 }
+			},
+			"TextAdd": {
+				"dragon/Text": { "x": 3.85, "y": 5.18, "width": 309, "height": 95 }
+			},
+			"TextGlow": {
+				"dragon/TextGlow": { "x": 6.61, "y": -4.49, "rotation": -91.22, "width": 354, "height": 119 }
+			}
+		}
+	}
+],
+"animations": {
+	"Idle": {
+		"slots": {
+			"Blink": {
+				"attachment": [
+					{ "time": 0.6667, "name": "dragon/Blink" },
+					{ "time": 0.8, "name": null },
+					{ "time": 2.1667, "name": "dragon/Blink" },
+					{ "time": 2.2667, "name": null }
+				]
+			},
+			"FxAura": {
+				"attachment": [
+					{ "name": "AuraSuperXayda/1" },
+					{ "time": 0.0667, "name": "AuraSuperXayda/2" },
+					{ "time": 0.1333, "name": "AuraSuperXayda/3" },
+					{ "time": 0.2, "name": "AuraSuperXayda/4" },
+					{ "time": 0.2667, "name": "AuraSuperXayda/1" },
+					{ "time": 0.3333, "name": "AuraSuperXayda/2" },
+					{ "time": 0.4, "name": "AuraSuperXayda/3" },
+					{ "time": 0.4667, "name": "AuraSuperXayda/4" },
+					{ "time": 0.5333, "name": "AuraSuperXayda/1" },
+					{ "time": 0.6, "name": "AuraSuperXayda/2" },
+					{ "time": 0.6667, "name": "AuraSuperXayda/3" },
+					{ "time": 0.7333, "name": "AuraSuperXayda/4" },
+					{ "time": 0.8, "name": "AuraSuperXayda/1" },
+					{ "time": 0.8667, "name": "AuraSuperXayda/2" },
+					{ "time": 0.9333, "name": "AuraSuperXayda/3" },
+					{ "time": 1, "name": "AuraSuperXayda/4" },
+					{ "time": 1.0667, "name": "AuraSuperXayda/1" },
+					{ "time": 1.1333, "name": "AuraSuperXayda/2" },
+					{ "time": 1.2, "name": "AuraSuperXayda/3" },
+					{ "time": 1.2667, "name": "AuraSuperXayda/4" },
+					{ "time": 1.3333, "name": "AuraSuperXayda/1" },
+					{ "time": 1.4, "name": "AuraSuperXayda/2" },
+					{ "time": 1.4667, "name": "AuraSuperXayda/3" },
+					{ "time": 1.5333, "name": "AuraSuperXayda/4" },
+					{ "time": 1.6, "name": "AuraSuperXayda/1" },
+					{ "time": 1.6667, "name": "AuraSuperXayda/2" },
+					{ "time": 1.7333, "name": "AuraSuperXayda/3" },
+					{ "time": 1.8, "name": "AuraSuperXayda/4" },
+					{ "time": 1.8667, "name": "AuraSuperXayda/1" },
+					{ "time": 1.9333, "name": "AuraSuperXayda/2" },
+					{ "time": 2, "name": "AuraSuperXayda/3" },
+					{ "time": 2.0667, "name": "AuraSuperXayda/4" },
+					{ "time": 2.1333, "name": "AuraSuperXayda/1" },
+					{ "time": 2.2, "name": "AuraSuperXayda/2" },
+					{ "time": 2.2667, "name": "AuraSuperXayda/3" },
+					{ "time": 2.3333, "name": "AuraSuperXayda/4" },
+					{ "time": 2.4, "name": "AuraSuperXayda/1" },
+					{ "time": 2.4667, "name": "AuraSuperXayda/2" },
+					{ "time": 2.5333, "name": "AuraSuperXayda/3" },
+					{ "time": 2.6, "name": "AuraSuperXayda/4" },
+					{ "time": 2.6667, "name": "AuraSuperXayda/1" },
+					{ "time": 2.7333, "name": "AuraSuperXayda/2" },
+					{ "time": 2.8, "name": "AuraSuperXayda/3" },
+					{ "time": 2.8667, "name": "AuraSuperXayda/4" },
+					{ "time": 2.9333, "name": "AuraSuperXayda/1" },
+					{ "time": 3, "name": "AuraSuperXayda/2" },
+					{ "time": 3.0667, "name": "AuraSuperXayda/3" },
+					{ "time": 3.1333, "name": "AuraSuperXayda/4" },
+					{ "time": 3.2, "name": "AuraSuperXayda/1" },
+					{ "time": 3.2667, "name": "AuraSuperXayda/2" },
+					{ "time": 3.3333, "name": "AuraSuperXayda/3" }
+				]
+			},
+			"FxLightNing": {
+				"attachment": [
+					{ "time": 1.0333, "name": "Lightning/LightNing/1" },
+					{ "time": 1.1, "name": "Lightning/LightNing/2" },
+					{ "time": 1.1667, "name": "Lightning/LightNing/3" },
+					{ "time": 1.2333, "name": null },
+					{ "time": 1.3, "name": "Lightning/LightNing/5" },
+					{ "time": 1.3667, "name": "Lightning/LightNing/6" },
+					{ "time": 1.4333, "name": "Lightning/LightNing/1" },
+					{ "time": 1.5, "name": null },
+					{ "time": 1.5667, "name": "Lightning/LightNing/3" },
+					{ "time": 1.6333, "name": "Lightning/LightNing/4" },
+					{ "time": 1.7, "name": "Lightning/LightNing/5" },
+					{ "time": 1.7667, "name": "Lightning/LightNing/6" },
+					{ "time": 1.8333, "name": "Lightning/LightNing/1" },
+					{ "time": 1.9, "name": null },
+					{ "time": 2.5, "name": "Lightning/LightNing/4" },
+					{ "time": 2.5667, "name": "Lightning/LightNing/5" },
+					{ "time": 2.6333, "name": "Lightning/LightNing/6" },
+					{ "time": 2.6667, "name": null },
+					{ "time": 2.8, "name": "Lightning/LightNing/1" },
+					{ "time": 2.8667, "name": "Lightning/LightNing/2" },
+					{ "time": 2.9333, "name": "Lightning/LightNing/3" },
+					{ "time": 2.9667, "name": null },
+					{ "time": 3.1, "name": "Lightning/LightNing/4" },
+					{ "time": 3.1667, "name": null }
+				]
+			},
+			"MaskText": {
+				"attachment": [
+					{ "name": null },
+					{ "time": 1.0333, "name": "MaskText" }
+				]
+			},
+			"TextAdd": {
+				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.3333, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.4667, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.7667, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.0333, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.6667, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.8333, "color": "ffffffff" }
+				]
+			},
+			"TextGlow": {
+				"color": [
+					{ "time": 0.3333, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.4667, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.7667, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.9, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.0333, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.8333, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "color": "ffffff65", "curve": "stepped" },
+					{ "time": 2.3333, "color": "ffffff65", "curve": 0.25, "c3": 0.75 },
+					{ "time": 2.5, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0.3333, "name": "dragon/TextGlow" },
+					{ "time": 1.0333, "name": "dragon/TextGlow" }
+				]
+			}
+		},
+		"bones": {
+			"Ball1": {
+				"translate": [
+					{ "x": 113.55, "y": -37.21, "curve": 0.375, "c2": 0.5, "c3": 0.75 },
+					{ "time": 0.8333, "x": 245, "y": -37.21, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2.5, "x": -17.9, "y": -37.21, "curve": 0.25, "c3": 0.625, "c4": 0.5 },
+					{ "time": 3.3333, "x": 113.55, "y": -37.21 }
+				]
+			},
+			"Ball4": {
+				"translate": [
+					{ "x": -5.96, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.6667, "x": 197.67, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "x": -5.96 }
+				]
+			},
+			"Ball2": {
+				"translate": [
+					{ "y": -44.23, "curve": 0.414, "c3": 0.917, "c4": 0.69 },
+					{ "time": 0.8333, "curve": 0.169, "c2": 0.4, "c3": 0.614 },
+					{ "time": 1.6667, "y": 31.94, "curve": 0.414, "c3": 0.917, "c4": 0.69 },
+					{ "time": 2.5, "curve": 0.169, "c2": 0.4, "c3": 0.614 },
+					{ "time": 3.3333, "y": -44.23 }
+				]
+			},
+			"Ball6": {
+				"translate": [
+					{ "y": 19.56, "curve": 0.174, "c2": 0.39, "c3": 0.543 },
+					{ "time": 0.8333, "y": -31.35, "curve": 0.535, "c3": 0.924, "c4": 0.79 },
+					{ "time": 1.6667, "curve": 0.199, "c2": 0.45, "c3": 0.639 },
+					{ "time": 2.5, "y": 44.22, "curve": 0.389, "c3": 0.919, "c4": 0.66 },
+					{ "time": 3.3333, "y": 19.56 }
+				]
+			},
+			"Ball5": {
+				"translate": [
+					{ "x": -83.99, "curve": 0.381, "c2": 0.55, "c3": 0.742 },
+					{ "time": 0.6667, "x": -159, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2.3333, "x": 44.93, "curve": 0.245, "c3": 0.637, "c4": 0.56 },
+					{ "time": 3.3333, "x": -83.99 }
+				]
+			},
+			"bone": {
+				"translate": [
+					{ "y": -16.03, "curve": 0.478, "c2": 0.23, "c3": 0.94, "c4": 0.82 },
+					{ "time": 0.6667, "y": -44.23, "curve": 0.197, "c2": 0.45, "c3": 0.596 },
+					{ "time": 1.5, "y": -69.85, "curve": 0.427, "c3": 0.944, "c4": 0.79 },
+					{ "time": 2.3333, "y": -44.23, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.1667, "y": -14.39, "curve": 0.325, "c3": 0.664, "c4": 0.38 },
+					{ "time": 3.3333, "y": -16.03 }
+				]
+			},
+			"Ball3": {
+				"translate": [
+					{ "x": 3.96, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.6667, "x": -225.72, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "x": 3.96 }
+				]
+			},
+			"bone2": {
+				"translate": [
+					{ "curve": 0.22, "c2": 0.47, "c3": 0.677 },
+					{ "time": 0.8333, "y": 35.1, "curve": 0.384, "c3": 0.902, "c4": 0.7 },
+					{ "time": 1.6667, "curve": 0.172, "c2": 0.39, "c3": 0.598 },
+					{ "time": 2.5, "y": -27.03, "curve": 0.407, "c3": 0.965, "c4": 0.71 },
+					{ "time": 3.3333 }
+				]
+			},
+			"FxAura": {
+				"translate": [
+					{ "y": 43.98 }
+				]
+			},
+			"Char2": {
+				"translate": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.8333, "y": 6.06, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.6667, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2.5, "y": 6.06, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333 }
+				]
+			},
+			"Text": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 1.0333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 1.0333 }
+				],
+				"scale": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2, "x": 0.976, "y": 0.976, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333, "x": 0.953, "y": 0.953, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.4667, "x": 1.206, "y": 1.206, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.7667, "x": 1.247, "y": 1.247, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.9, "x": 0.973, "y": 0.973, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.0333 }
+				],
+				"shear": [
+					{ "curve": "stepped" },
+					{ "time": 1.0333 }
+				]
+			},
+			"MaskText": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 1.8333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 1.8333, "curve": 0.111, "c2": 0.41, "c3": 0.75 },
+					{ "time": 2, "x": 126.32, "curve": 0.25, "c3": 0.856, "c4": 0.9 },
+					{ "time": 2.3333, "x": 235.95, "curve": 0.152, "c2": 0.15, "c3": 0.955, "c4": 0.64 },
+					{ "time": 2.5, "x": 367.36 }
+				],
+				"scale": [
+					{ "curve": "stepped" },
+					{ "time": 1.8333 }
+				],
+				"shear": [
+					{ "curve": "stepped" },
+					{ "time": 1.8333 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "Ball4", "offset": 3 },
+					{ "slot": "Ball2", "offset": -5 },
+					{ "slot": "Ball1", "offset": -3 }
+				]
+			},
+			{
+				"time": 0.8333,
+				"offsets": [
+					{ "slot": "Ball4", "offset": 4 },
+					{ "slot": "Ball3", "offset": 2 },
+					{ "slot": "Ball2", "offset": -6 },
+					{ "slot": "Ball1", "offset": -6 }
+				]
+			},
+			{
+				"time": 1.6667,
+				"offsets": [
+					{ "slot": "Ball3", "offset": 3 },
+					{ "slot": "Ball2", "offset": -3 },
+					{ "slot": "Ball1", "offset": -7 }
+				]
+			},
+			{
+				"time": 2.5,
+				"offsets": [
+					{ "slot": "Ball2", "offset": -2 },
+					{ "slot": "Ball1", "offset": -4 }
+				]
+			},
+			{
+				"time": 3.3333,
+				"offsets": [
+					{ "slot": "Ball4", "offset": 3 },
+					{ "slot": "Ball2", "offset": -5 },
+					{ "slot": "Ball1", "offset": -3 }
+				]
+			}
+		]
+	}
+}
+}

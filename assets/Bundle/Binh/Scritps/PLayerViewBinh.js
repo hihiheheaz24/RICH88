@@ -1,5 +1,3 @@
-const { callbackify } = require("util");
-
 var TypeAnTrang = {
   BA_SANH: 0,
   BA_THUNG: 1,
@@ -164,12 +162,12 @@ cc.Class({
     this.maxTime = 4;
   },
   onLoad() {
-    for (let i = 0; i < this.listPosShowMoneyEndGame.length; i++) {
-      const objPos = this.listPosShowMoneyEndGame[i];
-      if (cc.winSize.width / 1080 > 1) {
-        objPos.x = objPos.x * (cc.winSize.width / 1080);
-      }
-    }
+    // for (let i = 0; i < this.listPosShowMoneyEndGame.length; i++) {
+    //   const objPos = this.listPosShowMoneyEndGame[i];
+    //   if (cc.winSize.width / 1080 > 1) {
+    //     objPos.x = objPos.x * (cc.winSize.width / 1080);
+    //   }
+    // }
     this.timer = 0;
     // Random thời gian đầu tiên để swap card
     this.nextLaunchTime = this.randomLaunchTime();
@@ -963,7 +961,7 @@ cc.Class({
     this.node.addChild(nodeBoom);
     nodeBoom.addComponent(cc.Sprite);
     nodeBoom.setPosition(0, 0);
-    Global.AudioManager.playBoom();
+    // Global.AudioManager.playBoom();
     if (this.indexInTable == 0) {
       nodeBoom.setPosition(-300, -300);
       this.node.parent.setSiblingIndex(999);

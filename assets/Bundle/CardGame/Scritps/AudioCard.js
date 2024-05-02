@@ -86,6 +86,21 @@ cc.Class({
         this.audios[25].play();
     },
 
+    playRocketFly() {
+        // this.audios[27].play();
+    },
+
+    stopRocketFly() {
+        // this.audios[27].stop();
+    },
+
+    playBoom() {
+        // this.audios[28].play();
+      },
+      stopBoom() {
+        // this.audios[28].stop();
+      },
+
 
     playAgain() {
         let isCheck = false;

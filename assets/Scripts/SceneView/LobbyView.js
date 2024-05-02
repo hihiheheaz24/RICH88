@@ -37,13 +37,35 @@ cc.Class({
 		webView : cc.WebView,
 		btnCloseApi : cc.Button,
 		// lbVersion : cc.Label,
+		listGameCard : [cc.Node],
+		listGameMini : [cc.Node],
+		listGameSlots : [cc.Node],
+
+		toggleMusic : cc.Toggle,
+
+		nodeBottom : cc.Node,
+
+		lbBetTai : require("LbMonneyChange"),
+		lbBetXiu : require("LbMonneyChange"),
+		nodePageView : cc.Node,
+
+		nodeGameList : cc.Node,
+		nodeChooseTable : cc.Node,
 	},
 
-	onClickTest() {
-
-	},
-	
 	onLoad() {
+		// if(Global.isLogin){
+		// 	let isCheck = cc.sys.localStorage.getItem("music")
+		// 	this.toggleMusic.isChecked = isCheck === "on" ? true : false;
+		// 	return;
+		// }
+		this.nodeGameList.active = true;
+		this.nodeChooseTable.active = false;
+		this.pageView = this.nodePageView.getComponent(cc.PageView);
+		this.startAutoBanner();
+		let isCheck = cc.sys.localStorage.getItem("music")
+		this.toggleMusic.isChecked = isCheck === "on" ? true : false;
+		
 		this.webView.node.parent.active = false;
 		if(cc.sys.isBrowser){
 			if ('wakeLock' in navigator) {
@@ -60,17 +82,32 @@ cc.Class({
 				console.log('Trình duyệt không hỗ trợ Screen API.');
 			}
 		}
-		require("Util").onSendTrackingFirebaseScreen("Lobby");
+		// require("Util").onSendTrackingFirebaseScreen("Lobby");
 		MainPlayerInfo.CurrentGameId = 7;
 		MainPlayerInfo.CurrentGameCode = "TMN";
 	},
 
 	hanldeListGameSlotAPI(data){
 		cc.log("Chehclk game loist : ", data)
+		this.gameListApi.removeAllChildren();
 		for (let i = 0; i < data.length; i++) {
 			const objData = data[i];
-			let item = cc.instantiate(this.itemSlotApi);
-			item.getChildByName("lbName").getComponent(cc.Label).string= objData.gameName;
+			let item = null;
+            if (i < this.gameListApi.children.length) {
+                item = this.gameListApi.children[i];
+            }
+            else {
+                item = cc.instantiate(this.itemSlotApi);
+            }
+			cc.resources.load("logopara/" + objData.gameID, cc.SpriteFrame, (err, sprite) => {
+				cc.log("check game id la : ", objData.gameID)
+				if(err){
+					cc.error("err")
+				}
+				if(sprite)
+					item.getChildByName("mask").getChildByName("iconGame").getComponent(cc.Sprite).spriteFrame = sprite;
+
+			})
 			item.active = true;
 			this.gameListApi.addChild(item);
 
@@ -83,8 +120,19 @@ cc.Class({
 		}
 	},
 
-	handleShowGameApi(data) {
+	handleShowGameApi(data, chip) {
 		cc.log("show data la  ", data)
+		let canvas = cc.director.getScene().getChildByName("Canvas");
+		if (!cc.sys.isMobile) {
+			canvas.designResolution = cc.size(1920,1080);
+			console.log("check win soze : ", cc.winSize)
+			this.webView.node.setContentSize(cc.size(cc.winSize.width - 500, cc.winSize.height));
+			this.webView.node.position = cc.v2(0, 0);
+		}
+		else{
+			canvas.designResolution = cc.size(1358,1920);
+		}
+		cc.log("check uipdate money", chip)
 		Global.UIManager.hideMiniLoading();
 		// if (cc.sys.isMobile) {
 		// 	cc.sys.openURL(data);
@@ -93,23 +141,42 @@ cc.Class({
 		// 	this.webView.node.parent.active = true;
 		// 	this.webView.url = data;
 		// }
-
-		cc.sys.openURL(data);
-
+		Global.AudioManager.stopMusic();
+		this.webView.node.parent.active = true;
+		this.webView.url = data;
+		// Global.UrlGameApi = data;
+		
+		
+		this.onHideLobby();
+		// this.webView.node.setContentSize(cc.winSize)
+		// cc.sys.openURL(data);
+		MainPlayerInfo.setMoneyUser(chip);
 		// this.webView.node.angle = -90;
 		// let canvas = cc.director.getScene().getChildByName("Canvas");
 		// canvas.designResolution = cc.size(1920,1080);
+		// cc.director.loadScene("GameAPI");
+
+		
 	},
 
 	handleCloseGameApi(data) {
 		cc.log("tien con lai la : ", data)
 		this.webView.node.parent.active = false;
 		this.webView.url = "";
-		this.OnUpdateMoney(data)
+		MainPlayerInfo.setMoneyUser(data);
 	},
 
+
+
 	onClickCloseGameApi(){
+		this.webView.node.parent.active = false;
+		this.webView.url = "";
 		require("SendRequest").getIns().MST_Client_Pramatic_Close_Game();
+		this.OnShowLobby();
+		let isCheck = cc.sys.localStorage.getItem("music")
+		Global.AudioManager.isActiveMusic = isCheck === "on" ? true : false;
+		//
+		// canvas.designResolution = cc.size(1358,1920);
 	},
 
 	onClickShowGameApi(event, data){
@@ -118,6 +185,67 @@ cc.Class({
 		msg[1] = data;
 		cc.log("send start game : ", msg)
 		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg)
+	},
+
+	onClickSortGame(event, data) {
+		switch (data) {
+			case "1":
+				this.listGameCard.forEach(gameCard => {
+					gameCard.active = true;
+				});
+				this.listGameMini.forEach(gameMini => {
+					gameMini.active = true;
+				});
+				this.listGameSlots.forEach(gameSlot => {
+					gameSlot.active = true;
+				});
+				break;
+
+			case "2":
+				this.listGameCard.forEach(gameCard => {
+					gameCard.active = false;
+				});
+				this.listGameMini.forEach(gameMini => {
+					gameMini.active = true;
+				});
+				this.listGameSlots.forEach(gameSlot => {
+					gameSlot.active = false;
+				});
+				break;
+			case "3":
+				this.listGameCard.forEach(gameCard => {
+					gameCard.active = false;
+				});
+				this.listGameMini.forEach(gameMini => {
+					gameMini.active = false;
+				});
+				this.listGameSlots.forEach(gameSlot => {
+					gameSlot.active = true;
+				});
+				break;
+			case "4":
+				this.listGameCard.forEach(gameCard => {
+					gameCard.active = true;
+				});
+				this.listGameMini.forEach(gameMini => {
+					gameMini.active = false;
+				});
+				this.listGameSlots.forEach(gameSlot => {
+					gameSlot.active = false;
+				});
+				break;
+			default:
+				this.listGameCard.forEach(gameCard => {
+					gameCard.active = false;
+				});
+				this.listGameMini.forEach(gameMini => {
+					gameMini.active = false;
+				});
+				this.listGameSlots.forEach(gameSlot => {
+					gameSlot.active = false;
+				});
+				break;
+		}
 	},
 
 	onClickBtnEvent() {
@@ -135,7 +263,7 @@ cc.Class({
 		this.sendPing();
 		MainPlayerInfo.SetUpInfo(JSON.parse(packet[1]));
 		cc.log("show lobbyview 1 : ", MainPlayerInfo.ingameBalance);
-		this.UpdateInfoView(MainPlayerInfo.ingameBalance);
+		MainPlayerInfo.setMoneyUser(MainPlayerInfo.ingameBalance)
 		CONFIG.TX_BET_PERIOD = 60;
 		CONFIG.TX_AWARD_PERIOD = 20;
 		if (Global.GameConfig.TextNotifiAlterLogin) {
@@ -149,6 +277,7 @@ cc.Class({
 		this.nodeNotLogin.active = false;
 		require("SendRequest").getIns().MST_Client_Pramatic_Get_Game_list();
 		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
+		this.getDataLogin();
 	},
 
 	onClickOpenMiniGame(event, data){
@@ -224,11 +353,18 @@ cc.Class({
 	},
 
 	start() {
+		
 		let funNext = () => { 
+			if(Global.isLogin){
+				this.nodeNotLogin.active = false;
+				this.nodeLoginSucces.active = true;
+				return;
+			}
 			this.nodeNotLogin.active = true;
 			this.nodeLoginSucces.active = false;
 		};
 
+		
 		if (Global.UIManager) {
 			cc.log("chay vao load res dau game");
 			Global.UIManager.preLoadPopupInRes(funNext);
@@ -238,8 +374,10 @@ cc.Class({
 		}
 		Global.LobbyView = this;
 		if (!Global.isLogin) {
-			// this.requestJackpotChuaLogin();
-			Global.NotifyUI.isInGame = false;
+			this.requestJackpotChuaLogin();
+			this.requestBettingTaiXiu();
+			if(Global.NotifyUI)
+				Global.NotifyUI.isInGame = false;
 			// this.onHideLobby();
 		}
 	},
@@ -279,7 +417,7 @@ cc.Class({
 			require("BaseNetwork").request(Global.ConfigLogin.GameConfigUrl, data, this.GetConfig.bind(this));
 		} else {
 			Global.UIManager.hideMiniLoading();
-			this.UpdateInfoView(MainPlayerInfo.ingameBalance);
+			MainPlayerInfo.setMoneyUser(MainPlayerInfo.ingameBalance)
 			this.getDataLogin();
 		}
 	},
@@ -300,13 +438,14 @@ cc.Class({
 		cc.log("check money la : ", money)
 		this.txtGold.setMoney(money);
 		cc.log("chay vao day offf ads 222")
-		if(money <  Global.MinMoneyAdmob){
-			if(cc.sys.os === cc.sys.OS_ANDROID)
-				this.btnAdmob.active = true;
-		}
-		else{
-			this.btnAdmob.active = false;
-		}
+		
+		// if(money <  Global.MinMoneyAdmob){
+		// 	if(cc.sys.os === cc.sys.OS_ANDROID)
+		// 		this.btnAdmob.active = true;
+		// }
+		// else{
+		// 	this.btnAdmob.active = false;
+		// }
 	},
 
 	UpdateInfoView(ingameBlance = null) {
@@ -434,12 +573,24 @@ cc.Class({
 		Global.UIManager.showEventRanking(STATE_EVENT.EVENT);
 	},
 
+	onClickButtonArrow(event, data){
+		if(event.isChecked){
+			event.node.scale = cc.v2(1, -1);
+			Global.nodeInOutToBottom(this.nodeBottom, null);
+		}
+		else{
+			event.node.scale = cc.v2(1, 1);
+			Global.nodeInOutToBottom(null, this.nodeBottom);
+		}
+	},
+
 	ClickBtnMail() {
 		if (!Global.isLogin) {
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
 		Global.UIManager.showMailPopup();
+		this.onClickCloseListMenu();
 	},
 
 	onClickGetConfigTournament(event, data) {
@@ -505,7 +656,13 @@ cc.Class({
 			return;
 		}
 		//Global.AudioManager.ClickButton();
+		this.onClickCloseListMenu();
 		Global.UIManager.showGiftCodePopup();
+	},
+
+	onClickBtnChangePassword(){
+		Global.UIManager.showChangePassword();
+		this.onClickCloseListMenu();
 	},
 
 	onClickCommingSoon() {
@@ -547,7 +704,7 @@ cc.Class({
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
-		require("Util").onSendTrackingFirebase(data);
+		// require("Util").onSendTrackingFirebase(data);
 		Global.UIManager.showFAQ(data);
 	},
 
@@ -597,6 +754,40 @@ cc.Class({
 		// 		Global.UIManager.showConfirmPopup("Chưa có nhiệm vụ hiện tại");
 		// 	}
 		// }
+	},
+
+	onClickLogout(){
+		if (Global.NetworkManager._connect.connectionState !== "Connected") {
+            Global.CookieValue = null;
+            Global.isLogin = false;
+            require("ScreenManager").getIns().LoadScene(SCREEN_CODE.LOGIN);
+        } else {
+            Global.UIManager.showConfirmPopup(MyLocalization.GetText("QUIT_GAME"), () => {
+                Global.CookieValue = null;
+                Global.isLogin = false;
+                require("ScreenManager").getIns().LoadScene(SCREEN_CODE.LOGIN);
+            }, null);
+        }
+		this.onClickCloseListMenu();
+	},
+
+	onMusicClicked(event, data) {
+        if(Global.AudioManager) Global.AudioManager.isActiveMusic = event.isChecked;
+    },
+	
+	onClickShowListRoom(event, data){
+		this.nodeGameList.active = false;
+		this.nodeChooseTable.active = true;
+		MainPlayerInfo.CurrentGameCode = data;
+		MainPlayerInfo.CurrentGameId  = Global.getGameIdByName(data);
+
+
+		this.onClickSendGetListRoom();
+	},
+
+	onClickBackListRoom(){
+		this.nodeGameList.active = true;
+		this.nodeChooseTable.active = false;
 	},
 
 	onClickSendGetListRoom() {
@@ -701,16 +892,19 @@ cc.Class({
 	getDataLogin() {
 		if (Global.NetworkManager._connect && Global.NetworkManager._connect.connectionState !== "Connected") return;
 		cc.log("=======> chay vao get data login");
-		require("SendCardRequest").getIns().MST_Client_Jackpot_CardGame_Info();
+		// require("SendCardRequest").getIns().MST_Client_Jackpot_CardGame_Info();
+		require ("SendRequest").getIns().MST_Client_Jackpot_Info(); // new
 		require("SendRequest").getIns().MST_Client_Get_News();
-		require("SendRequest").getIns().MST_Client_Get_Mission_Info();
+		// require("SendRequest").getIns().MST_Client_Get_Mission_Info();
 		require("SendRequest").getIns().MST_Client_Get_Shop_Config();
 		this.onClickSendGetListRoom();
+		this.requestBettingTaiXiu();
 		this.unschedule(this.refreshListRoom);
 		this.schedule(this.refreshListRoom = ()=>{
-			if(!Global.GameView)
-				this.onClickSendGetListRoom();
-		}, 2)
+			this.requestBettingTaiXiu();
+			// if(!Global.GameView)
+			// 	this.onClickSendGetListRoom();
+		}, 5)
 	
 
 		let msgData = {};
@@ -748,11 +942,20 @@ cc.Class({
 	},
 
 	requestJackpotChuaLogin() {
+		cc.log("check url jackpot L ", Global.ConfigLogin.GetJackpotUrl)
 		require("BaseNetwork").request(Global.ConfigLogin.GetJackpotUrl, {}, (dataRevice) => {
-			cc.log(dataRevice);
-			cc.log(typeof dataRevice);
-			let objJackPot = dataRevice;
 			Global.JackpotController.reviceDataChuaLogin(JSON.parse(dataRevice));
+		});
+	},
+
+	requestBettingTaiXiu() {
+		let url = "https://aapi.nqrik88.online/api/config/tx46be304945c69";
+		require("BaseNetwork").request(url, {}, (dataRevice) => {
+			Global.JackpotController.reviceDataChuaLogin(JSON.parse(dataRevice));
+			cc.log("check data tai xiu betting : , ", JSON.parse(dataRevice))
+			let data =  JSON.parse(dataRevice);
+			this.lbBetTai.setMoney(data.TotalBetValue2);
+			this.lbBetXiu.setMoney(data.TotalBetValue1);
 		});
 	},
 
@@ -808,6 +1011,7 @@ cc.Class({
 	},
 
 	OnShowLobby() {
+		cc.log("c hay vao show lobby")
 		// this.contentTop.active = true;
 		this.nodeMiddle.active = true;
 		// if (Global.NetworkManager._connect.connectionState === "Connected") require("SendRequest").getIns().MST_Client_Get_History_Tour_Ranking();
@@ -834,7 +1038,7 @@ cc.Class({
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
-		require("Util").onSendTrackingFirebase(data);
+		// require("Util").onSendTrackingFirebase(data);
 		Global.UIManager.showHistoryPopup();
 	},
 	HideMenu() {
@@ -856,14 +1060,14 @@ cc.Class({
 		}
 		this.bgMenu.scale = 0;
 		this.bgMenu.opacity = 0;
-		this.bgMenu.active = !this.bgMenu.active;
+		this.bgMenu.parent.active = !this.bgMenu.parent.active;
 		cc.Tween.stopAllByTarget(this.bgMenu);
 		cc.tween(this.bgMenu).to(0.1, { opacity: 255 }).start();
 		cc.tween(this.bgMenu).to(0.25, { scale: 1 }, { easing: "backOut" }).start();
 	},
 
 	onClickCloseListMenu() {
-		this.bgMenu.active = false;
+		this.bgMenu.parent.active = false;
 	},
 
 	showRuleGame() {
@@ -879,4 +1083,25 @@ cc.Class({
 		Global.LobbyView = null;
 		require("WalletController").getIns().RemoveListener();
 	},
+
+	nextBanner() {
+        let curIndexPage = this.pageView.getCurrentPageIndex();
+        let maxIndex = this.pageView.getPages().length - 1;
+        if (curIndexPage == maxIndex) {
+            this.pageView.scrollToPage(0, 0.2);
+        } else {
+            this.pageView.scrollToPage(curIndexPage + 1, 0.2);
+        }
+
+    },
+
+    startAutoBanner() {
+        this.node.stopAllActions();
+        this.node.runAction(cc.repeatForever(cc.sequence(
+            cc.delayTime(3),
+            cc.callFunc(() => {
+                this.nextBanner();
+            })
+        )));
+    }
 });

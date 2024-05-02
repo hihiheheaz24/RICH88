@@ -23,7 +23,7 @@ cc.Class({
 
     onClickClose() {
         Global.RankMiniSlot = null;
-        Global.UIManager.hideMark();
+        // Global.UIManager.hideMask();
         actionEffectClose(this.node , ()=>{
             this.node.active = false;
         })

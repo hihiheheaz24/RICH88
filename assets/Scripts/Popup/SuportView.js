@@ -70,6 +70,14 @@ cc.Class({
     cc.sys.openURL(Global.ConfigLogin.FanpageUrl);
   },
 
+  onClickSupport() {
+    cc.sys.openURL(Global.ConfigLogin.HotLine);
+  },
+
+  onClickChanel() {
+    cc.sys.openURL(Global.ConfigLogin.HotSmsFanpage);
+  },
+
   onClickNull() {
     Global.UIManager.showCommandPopup("Tính năng đang phát triển");
   },

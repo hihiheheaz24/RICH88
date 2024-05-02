@@ -14,16 +14,36 @@ cc.Class({
         listItemNap : cc.ScrollView,
         itemNap : cc.Node,
         nodeInputNap : cc.Node,
+        qrCode : cc.WebView
     },
 
     onLoad() {
-        // if (cc.sys.isMobile) {
-        //     this.btnCopyName.node.active = true;
-        //     this.btnCopyCode.node.active = true;
+        // if (this.data) {
+        //     this.updateInfo(this.data);
         // } else {
-        //     this.btnCopyName.node.active = false;
-        //     this.btnCopyCode.node.active = false;
+        //     let msg = {};
+            
+        //     let momoUrl = Global.GameConfig.UrlGameLogic.MomoGetInfo + "?accountid=" + MainPlayerInfo.accountId;
+        //     cc.log("link la " + momoUrl);
+        //     require("BaseNetwork").request(momoUrl, msg, this.configSuccess);
         // }
+    },
+
+    resetUI(){
+        this.lbMobile.string = "...";
+        this.lbMomoName.string = "...";
+        this.lbMomoCode.string = "...";
+        this.qrCode.url = "";
+
+        let msg = {};    
+        let momoUrl = Global.GameConfig.UrlGameLogic.MomoGetInfo + "?accountid=" + MainPlayerInfo.accountId;
+        cc.log("link la " + momoUrl);
+        require("BaseNetwork").request(momoUrl, msg, this.configSuccess);
+    },
+
+    onEnable(){
+        cc.log("chay vao enabled");
+        this.resetUI();
     },
 
     updateInfo(data) {
@@ -36,7 +56,19 @@ cc.Class({
         this.lbMomoName.string = this.data.SendToUserName;
         this.lbMomoCode.string = this.data.SendMessage;
 
-        this.showListItemMomo();
+        // Dữ liệu cần gửi lên
+        let demo = "2|99|{0}|{1}||0|0|10000|{2}|transfer_myqr";
+        const postData = {
+            type: "text",
+            data: Global.formatString(demo, [this.data.SendToPhoneNum, this.data.SendToUserName, this.data.SendMessage]),
+            background: "rgb(255,255,255)",
+            foreground: "rgb(0,0,0)",
+            logo: "https://img.ziller.vn/ib/h8yW5TnAM3.png"
+        };
+        cc.log("check posdata : ", postData.data)
+        require("BaseNetwork").getQrMomo(postData, (data) => {
+            this.qrCode.url = JSON.parse(data).link;
+        });
     },
 
     showListItemMomo(){

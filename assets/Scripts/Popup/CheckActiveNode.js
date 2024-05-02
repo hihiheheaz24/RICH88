@@ -132,12 +132,30 @@ cc.Class({
             this.node.active = true;
 
         } else {
-            this.node.active = false;
+          
+            if(this.type === NodeType.RutTien){
+                this.node.active = true;              
+
+                // this.node.getComponent(cc.Button).clickEvents = []
+                // var eventHandler = new cc.Component.EventHandler();
+                // eventHandler.target = this.node;
+                // eventHandler.component = "CheckActiveNode";
+                // eventHandler.handler = "onClickCommingSoon";
+                // this.node.getComponent(cc.Button).clickEvents.push(eventHandler);
+            }
+            else{
+                this.node.active = false;
+            }
         }
 
 
 
     },
+
+    onClickCommingSoon(){
+        Global.UIManager.showNoti("Tính năng sắp được mở")
+    },
+
     emitNewData() {
         this.onEnable();
     }

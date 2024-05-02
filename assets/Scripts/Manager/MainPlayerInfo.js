@@ -38,9 +38,9 @@ window.MainPlayerInfo = {
 	
 	setMoneyUser(money){
 		cc.log("money uesr la " + money);
+		this.ingameBalance = money;
 		Global.MoneyUser.emitNewMonney();
 		Global.LobbyView.UpdateInfoView(money);
-		this.ingameBalance = money;
 	},
 
 	SetUpMail(listMail, numbetMailNotRead) {

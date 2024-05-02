@@ -26,6 +26,10 @@ var SendRequest = cc.Class({
     MST_Client_Shooting_Jackpot(msg) {
         Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_SHOOTING_JACKPOT, msg);
     },
+    MST_Client_Jackpot_Info() {
+        cc.log("check send jackpot : ")
+        this.RequestMessageNoData(REQUEST_CODE.MST_CLIENT_JACKPOT_INFO);
+    },
     MST_Client_Fish_Collision(msg) {
         Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_FISH_COLLISION, msg);
     },

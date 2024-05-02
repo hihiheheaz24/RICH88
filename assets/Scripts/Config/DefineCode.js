@@ -25,6 +25,15 @@ var GAME_TYPE = {
     FISH_CA_MAP: 31,
 };
 
+var CASHIN_TYPE = {
+    ALL : 0,
+    SMS : 1,
+    IAP : 2,
+    CARD : 3,
+    MOMO : 4,
+    BANK : 5
+}
+
 var BET_TYPE = {
     DE: 0,
     LO: 1,

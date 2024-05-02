@@ -22,9 +22,6 @@ var TogetherLogicManager = cc.Class({
         else if (responseCode == RESPONSE_CODE.MST_SERVER_CONFIRM_MESSAGE) {
             this.HandleConfirmResponse(packet);
         }
-        else if (responseCode == RESPONSE_CODE.MST_SERVER_UPDATE_PLAYER_BALANCE) {
-            this.HandleUpdateBalance(operationResponse);
-        }
         else if (responseCode == RESPONSE_CODE.MST_SERVER_MINIPOKER_SPIN_RESPONSE) {
             this.HandleResultSpinMiniPoker(operationResponse);
         }

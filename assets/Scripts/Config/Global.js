@@ -85,6 +85,7 @@ window.Global = {
     InGameManager: null,
     GameLogic: null,
     //popup
+    ChangePassword : null,
     LoginTabView : null,
     EventRanking: null,
     CommandPopup: null,
@@ -824,6 +825,7 @@ window.Global = {
             if (err) cc.log("=====> loi tai anh : ", err);
             if (!nodeImg) return;
             nodeImg.spriteFrame = new cc.SpriteFrame(spr);
+            cc.log("cehck img : ", spr)
         });
     },
 
@@ -990,7 +992,7 @@ window.Global = {
             //====== END AC NODE IN ====//
         }
     },
-    nodeInOutToBottom(nodeIn = null, nodeOut = null, posAdd) {
+    nodeInOutToBottom(nodeIn = null, nodeOut = null, posAdd = 0) {
         if (nodeIn !== null && nodeIn.getNumberOfRunningActions() > 0) return;
         if (nodeOut !== null && nodeOut.getNumberOfRunningActions() > 0) return;
         //====== ACTION NODE OUT ======//
@@ -999,10 +1001,10 @@ window.Global = {
             let posSaveOut = nodeOut.position;
             let posOut = nodeOut.getContentSize().height + posAdd;
             cc.tween(nodeOut)
-                .by(0.4, { position: cc.v2(0, -posOut) }, { easing: "expoOut" })
+                .by(0.4, { position: cc.v2(0, -posOut) }, { easing: "expoIn" })
                 .call(() => {
-                    nodeOut.active = false;
-                    nodeOut.position = posSaveOut;
+                    // nodeOut.active = false;
+                    // nodeOut.position = posSaveOut;
                     //====== ACTION NODE IN ======//
                     if (nodeIn) {
                         cc.Tween.stopAllByTarget(nodeIn);
@@ -1018,10 +1020,10 @@ window.Global = {
             //====== ACTION NODE IN ======//
             if (nodeIn) {
                 cc.Tween.stopAllByTarget(nodeIn);
-                let posSaveIn = nodeIn.position;
-                nodeIn.setPosition(cc.v2(nodeIn.position.x, nodeIn.position.y - nodeIn.getContentSize().height - posAdd));
+                let posSaveIn = cc.v2(0, nodeIn.getContentSize().height) //nodeIn.position;
+                // nodeIn.setPosition(cc.v2(nodeIn.position.x, nodeIn.position.y - nodeIn.getContentSize().height - posAdd));
                 nodeIn.active = true;
-                cc.tween(nodeIn).to(0.4, { position: posSaveIn }, { easing: "expoOut" }).start();
+                cc.tween(nodeIn).by(0.4, { position: posSaveIn }, { easing: "expoOut" }).start();
             }
             //====== END AC NODE IN ====//
         }

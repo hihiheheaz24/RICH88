@@ -222,7 +222,9 @@ cc.Class({
     },
 
     LoadLoginScene() {
-        require("ScreenManager").getIns().LoadScene(SCREEN_CODE.LOGIN);
+        // require("ScreenManager").getIns().LoadScene(SCREEN_CODE.LOGIN);
+        Global.LobbyView.nodeNotLogin.active = true;
+        Global.LobbyView.nodeLoginSucces.active = false;
     },
 
     SetTimeOnline(minute) {

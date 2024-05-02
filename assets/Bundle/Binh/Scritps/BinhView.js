@@ -96,12 +96,12 @@ cc.Class({
 
 	onLoad() {
 		this._super();
-		for (let i = 0; i < this.listPos.length; i++) {
-			const objPos = this.listPos[i];
-			if (cc.winSize.width / 1080 > 1) {
-				objPos.x = objPos.x * (cc.winSize.width / 1080);
-			}
-		}
+		// for (let i = 0; i < this.listPos.length; i++) {
+		// 	const objPos = this.listPos[i];
+		// 	if (cc.winSize.width / 1080 > 1) {
+		// 		objPos.x = objPos.x * (cc.winSize.width / 1080);
+		// 	}
+		// }
 		// if (Global.LeagueData) {
 		// 	this.btnLeague.active = true;
 		// } else {
@@ -271,6 +271,7 @@ cc.Class({
 
 				break;
 			case CODE_RUN.BINH_PUSH_START_COUNTDOWN:
+				cc.log("check count down start ,", packet)
 				this.countDownStartGame(packet);
 				break;
 
@@ -1342,32 +1343,35 @@ cc.Class({
 		}
 	},
 	countDownStartGame(data) {
+		let timer = data[TMN_ParameterCode.TimeConfigs];
+		if (timer) {
+			// cc.log("binh view ==> chay vao time countdown  co chay vao: " + data[TMN_ParameterCode.TimeConfigs]);
+			this.countDownTime(timer);
+		}
 		this.parentBtnInvite.active = false;
-		this.chatController.offNodeChat();
+
 		// cc.log("binh view ==> chay vao time countdown : " + data[TMN_ParameterCode.TimeConfigs]);
 		if (this.isNeedResetGame) {
 			this.resetForNewGame();
 			this.isNeedResetGame = false;
 		}
 		this.unschedule(this.funResetGame);
-		let timer = data[TMN_ParameterCode.TimeConfigs];
-		if (timer) {
-			// cc.log("binh view ==> chay vao time countdown  co chay vao: " + data[TMN_ParameterCode.TimeConfigs]);
-			this.countDownTime(timer);
-		}
+		
 		this.isThoatBan = true;
 		this.stateTable = StateTable.Waiting;
 		if (this.isNeedResetPosition) {
 			this.updatePositionPlayers();
 		}
 		this.isNeedResetPosition = false;
+		this.chatController.offNodeChat();
 	},
 	countDownTime(timer) {
 		// this.activeClockCountDown();
 		this.lbTimeCountDown.node.parent.active = true;
-		let posTaget = Global.BinhView.cardController.listPosFirtCardFinish[0];
-		this.timeCountDownGroup.setPosition(posTaget.x, posTaget.y + 430);
+		// let posTaget = Global.BinhView.cardController.listPosFirtCardFinish[0];
+		// this.timeCountDownGroup.setPosition(posTaget.x, posTaget.y + 430);
 		this.lbTimeCountDown.string = timer + "s";
+		cc.log("chay vao day set time : ", timer)
 		this.unschedule(this.funScheduleCountDown);
 		this.schedule(
 			(this.funScheduleCountDown = () => {
