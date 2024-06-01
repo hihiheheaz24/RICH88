@@ -34,6 +34,32 @@ var ReceiveResponse = cc.Class({
             case RESPONSE_CODE.MSG_SERVER_DICE_GET_TOP_WIN_LOSE_CHAIN:
                 Global.TaiXiu.responseServer(responseCode, packet);
                 return;
+            case RESPONSE_CODE.MST_SERVER_GET_VIP_CONFIG_INFO_RESPONSE:
+                Global.ConfigVipPoint = packet;
+                Global.ConfigVipPoint[3] = [{AccountId:null, VipLevel: 1, IsReceived: false, Rewards: 100000}, {AccountId:null, VipLevel: 2, IsReceived: false, Rewards: 200000},
+                    {AccountId:null, VipLevel: 3, IsReceived: false, Rewards: 300000},
+                    {AccountId:null, VipLevel: 4, IsReceived: false, Rewards: 500000},
+                    {AccountId:null, VipLevel: 5, IsReceived: false, Rewards: 1000000},
+                    {AccountId:null, VipLevel: 6, IsReceived: false, Rewards: 20000000},
+                    {AccountId:null, VipLevel: 7, IsReceived: false, Rewards: 50000000},
+                    {AccountId:null, VipLevel: 8, IsReceived: false, Rewards: 100000000},
+                    {AccountId:null, VipLevel: 9, IsReceived: false, Rewards: 200000000}]
+                return;
+            case RESPONSE_CODE.MST_SERVER_EXCHANGE_VIP_POINTS:
+                cc.log("handle change vip point o day")
+                // +) data 1: Vip level mới
+                // +) data 2: điểm vip mới
+                // +) data 3: số tiền nhận được
+                // +) data 4: số tiền của người chơi
+                return;
+            case RESPONSE_CODE.MST_SERVER_RECEIVE_VIP_REWARD:
+                cc.log("handle MST_SERVER_RECEIVE_VIP_REWARD o day")
+                // data 1: phần thưởng
+
+                // data 2: tiền sau khi thưởng
+
+                // data 3: thông tin các level có thể nhận thưởng con lại
+                return;
             case RESPONSE_CODE.MST_SERVER_SEND_LEAGUE_INFO:
                 cc.log("check data league : ", packet)
                 Global.LeagueData = packet;
@@ -498,6 +524,7 @@ var ReceiveResponse = cc.Class({
         }
 
         else if (responseCode == RESPONSE_CODE.MSG_SERVER_BETTING_RESPONSE) {
+            cc.log("chay vao dat cuoc thanh comg lo de")
             MiniGameLogicManager.getIns().MiniGameHandleResponse(operationResponse);
         }
 
@@ -666,7 +693,9 @@ var ReceiveResponse = cc.Class({
         }
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CONNECT_ERROR){
-            Global.UIManager.showCommandPopup(packet[1]);
+            Global.UIManager.showConfirmPopup(packet[1], ()=>{ Global.UIManager.showShopPopup(STATUS_SHOP.BANKING);
+
+            });
             Global.UIManager.hideMiniLoading();
         }
 

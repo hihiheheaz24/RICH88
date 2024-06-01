@@ -118,7 +118,8 @@ cc.Class({
 		// } else {
 		// 	Global.InfoPlayerTLMN.show(idPlayer);
 		// }
-        Global.UIManager.showProfilePopup(idPlayer)
+        if(idPlayer === MainPlayerInfo.accountId)
+            Global.UIManager.showProfilePopup(idPlayer)
 	},
     // update (dt) {},
 });

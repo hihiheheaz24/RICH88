@@ -24,7 +24,8 @@ cc.Class({
     },
 
     show(){
-        Global.onPopOn(this.node);
+        // Global.onPopOn(this.node);
+        this.node.active = true;
         let msg = {}
         msg[1] = "";
         require("SendRequest").getIns().MST_Client_LoDe_Get_History_Game(msg)
@@ -53,7 +54,8 @@ cc.Class({
     },
 
     hide(){
-        Global.onPopOff(this.node);
+        // Global.onPopOff(this.node);
+        this.node.active = false;
     },
 
     // update (dt) {},

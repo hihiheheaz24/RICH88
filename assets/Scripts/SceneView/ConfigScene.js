@@ -1,12 +1,3 @@
-var globalGameCustomManifest = JSON.stringify({
-	packageUrl: "http://mewin.club/bundle/android2/remote-assets/",
-	remoteManifestUrl: "http://mewin.club/bundle/android2/remote-assets/project.manifest",
-	remoteVersionUrl: "http://mewin.club/bundle/android2/remote-assets/version.manifest",
-	version: "1.0",
-	assets: {},
-	searchPaths: [],
-});
-
 cc.Class({
 	extends: cc.Component,
 
@@ -33,9 +24,6 @@ cc.Class({
 			default: null,
 			type: cc.JsonAsset,
 		},
-
-		// btnQuit: cc.Node,
-
 		nodeSupport: cc.Node,
 	},
 
@@ -55,6 +43,17 @@ cc.Class({
 		this.nodeSupport.scale = 0;
 		this.dataSupport = null;
 		this.count = 0;
+		this.globalGameStoragePath = (jsb.fileUtils ? jsb.fileUtils.getWritablePath() : "/") + "remote-asset";
+
+		this.count = 0;
+	},
+
+	onEnable() {
+		let stt_text = Global.RandomNumber(0, 5);
+		let textConfig = MyLocalization.GetText("loading_text");
+		let textEdit = textConfig.replace("%d", stt_text);
+		this.labelTip.string = "";
+
 		this.schedule(
 			(this.loading = () => {
 				this.count += 0.01;
@@ -67,34 +66,25 @@ cc.Class({
 			}),
 			0.01
 		);
-
-		if (!cc.sys.isNative) {
-			return;
-		}
-		this.globalGameStoragePath = (jsb.fileUtils ? jsb.fileUtils.getWritablePath() : "/") + "remote-asset";
-	},
-
-	onEnable() {
-		let stt_text = Global.RandomNumber(0, 5);
-		let textConfig = MyLocalization.GetText("loading_text");
-		let textEdit = textConfig.replace("%d", stt_text);
-		// this.labelTip.string = MyLocalization.GetText(textEdit);
-		this.labelTip.string = "";
-
-		// if (cc.sys.isBrowser) {
-		// 	var url = new URL(window.location.href);
-		// 	var AccessToken = url.searchParams.get("accesstoken");
-		// 	if (AccessToken) {
-		// 		this.btnQuit.active = true;
-		// 	} else {
-		// 		this.btnQuit.active = false;
-		// 	}
-		// } else {
-		// 	this.btnQuit.active = false;
-		// }
 	},
 
 	getConfigLink() {
+
+		CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv live
+		// CONFIG.CONFIG_LINK = "https://api-dev.vpl.mobi/api/config/gconfbd46a2b5fadcbc" // sv test
+		var dataSend = {
+			version: CONFIG.VERSION,
+			os: require("ReceiveResponse").getIns().GetPlatFrom(),
+			merchantid: CONFIG.MERCHANT,
+		};
+
+		cc.log("====> CONFIG.CONFIG_LINK : ", CONFIG.CONFIG_LINK, "===> data post : ", JSON.stringify(dataSend));
+
+		cc.log("bat dau send request");
+		require("BaseNetwork").request(CONFIG.CONFIG_LINK, dataSend, this.reviceConfig.bind(this));
+
+
+		return;
 		if (cc.sys.isNative)
 			linkFire = "https://raw.githubusercontent.com/hihiheheaz24/TLMN-Online/master/config.json"
 		else
@@ -119,6 +109,7 @@ cc.Class({
 					CONFIG.CONFIG_LINK = data.ConfigUrl;
 					//https://api-dev.vpl.mobi/ sv test
 					//"https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc"
+					// CONFIG.CONFIG_LINK = "https://api-dev.vpl.mobi/api/config/gconfbd46a2b5fadcbc" 
 					// CONFIG.CONFIG_LINK = "https://tele-apis.vpl.mobi/api/config/gconfbd46a2b5fadcbc" //sv test chuyen tien
                     CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv test chuyen tien
 
@@ -150,25 +141,25 @@ cc.Class({
 		};
 		http.send();
 	},
-	funGetConfigErr() {
-		cc.log("chay vao config offline");
-		let linkbundleOffline = "https://bundless.vpl.mobi/";
-		CONFIG.CONFIG_LINK = "https://apis.vpl.mobi/api/config/gconfbd46a2b5fadcbc";
-		var dataSend = {
-			version: CONFIG.VERSION,
-			os: require("ReceiveResponse").getIns().GetPlatFrom(),
-			merchantid: CONFIG.MERCHANT,
-		};
-		require("BaseNetwork").request(CONFIG.CONFIG_LINK, dataSend, this.reviceConfig.bind(this));
-		if (cc.sys.isNative && cc.sys.os != cc.sys.OS_WINDOWS) {
-			linkBundle = linkBundle.replace("%s", linkbundleOffline);
-			linkFull = linkFull.replace("%s", linkbundleOffline);
-			linkConfig = linkConfig.replace("%s", linkbundleOffline);
-			cc.log("link hotupdate full la : ", linkbundleOffline);
-			this.initUrl(linkFull);
-		}
-		this.getConfigBundle();
-	},
+	// funGetConfigErr() {
+	// 	cc.log("chay vao config offline");
+	// 	let linkbundleOffline = "https://bundless.vpl.mobi/";
+	// 	CONFIG.CONFIG_LINK = "https://apis.vpl.mobi/api/config/gconfbd46a2b5fadcbc";
+	// 	var dataSend = {
+	// 		version: CONFIG.VERSION,
+	// 		os: require("ReceiveResponse").getIns().GetPlatFrom(),
+	// 		merchantid: CONFIG.MERCHANT,
+	// 	};
+	// 	require("BaseNetwork").request(CONFIG.CONFIG_LINK, dataSend, this.reviceConfig.bind(this));
+	// 	if (cc.sys.isNative && cc.sys.os != cc.sys.OS_WINDOWS) {
+	// 		linkBundle = linkBundle.replace("%s", linkbundleOffline);
+	// 		linkFull = linkFull.replace("%s", linkbundleOffline);
+	// 		linkConfig = linkConfig.replace("%s", linkbundleOffline);
+	// 		cc.log("link hotupdate full la : ", linkbundleOffline);
+	// 		this.initUrl(linkFull);
+	// 	}
+	// 	this.getConfigBundle();
+	// },
 	getConfigBundle() {
 		if (!cc.sys.isNative) return;
 		let http = cc.loader.getXMLHttpRequest();
@@ -243,14 +234,11 @@ cc.Class({
 	},
 
 	reviceConfig(response) {
-		// cc.log("nhan duoc request" , response);
 		this.reviceConfigResponse = response;
 		if (!cc.sys.isNative || cc.sys.os == cc.sys.OS_WINDOWS) {
 			let dataJson = JSON.parse(response);
-			cc.log("reviceConfig : " + CONFIG.CONFIG_LINK);
 			cc.log(dataJson.d);
 			Global.ConfigLogin = dataJson.d;
-			cc.log("load lobby");
 			cc.director.loadScene("LobbyScene");
 			return;
 		}

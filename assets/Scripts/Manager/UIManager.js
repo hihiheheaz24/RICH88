@@ -19,7 +19,7 @@ cc.Class({
 
 	properties: {
 		parentMiniGame: cc.Node,
-		// btnMiniGame : cc.Node,
+		btnMiniGame : cc.Node,
 		mask: cc.Node,
 		parentPopup: cc.Node,
 		parentPopupLogin: cc.Node,
@@ -84,7 +84,7 @@ cc.Class({
 			console.log("về lại tab game chính");
 			console.log("Check connect server ====> Ứng dụng được mở trở lại")
 			// Global.LobbyView.sendPing();
-				Global.LobbyView.onClickCloseGameApi();
+			Global.LobbyView.onClickCloseGameApi();
 			if (this.time_enter_background < 1) return;
 
 			var _time = Date.now() / 1000;
@@ -153,7 +153,7 @@ cc.Class({
 	},
 
 	preLoadPopupInRes(funNext) {
-		// this.autoLogin();
+		this.autoLogin();
 		funNext();
 		cc.resources.loadDir(
 			"Popup",
@@ -168,7 +168,7 @@ cc.Class({
 	},
 
 	showButtonMiniGame(isActive) {
-		// this.btnMiniGame.active = isActive;
+		this.btnMiniGame.active = isActive;
 	},
 
 	autoLogin() {
@@ -176,13 +176,21 @@ cc.Class({
 		if (cc.sys.isBrowser) {
 			var url = new URL(window.location.href);
 			var teleName = url.searchParams.get("telename");
-			var telepass = url.searchParams.get("telepass");
+			var userName = url.searchParams.get("userName");
 			console.log("check tele name : ", teleName)
 			if (teleName) {
 				Global.LoginView.requestLoginTelegram(teleName);
 			}
-			else{
-				Global.LoginView.requestLogin("tuyent321", "123456h")
+			else if(userName){
+				cc.log("chay vao login voi user name : ", userName)
+				var url = new URL(window.location.href);
+				var userName = url.searchParams.get("userName");
+				var passWord = url.searchParams.get("passWord");
+				var capcha = parseInt(url.searchParams.get("capcha"));
+				if(capcha)
+					Global.LoginView.requestLogin(userName, passWord , capcha, false);
+				else
+					Global.LoginView.requestLogin(userName, passWord , "", false);
 			}
 		}
 
@@ -278,8 +286,6 @@ cc.Class({
 			});
 		}		
 		else{
-			this.parentPopupLogin.addChild(Global.CommandPopup.node);
-			Global.CommandPopup.node.active = false;
 			Global.CommandPopup.show(message, event)
 		}
 	},
@@ -350,20 +356,6 @@ cc.Class({
 			});
 		} else {
 			Global.ConfirmPopup.show(message, yesEvent, noEvent);
-		}
-	},
-
-	showConfirmPopupPO(message, yesEvent, noEvent = null) {
-		if (Global.ConfirmPopupPO == null) {
-			cc.resources.load("Popup/ConfirmPopupPO", cc.Prefab, (err, prefab) => {
-				let item = cc.instantiate(prefab).getComponent("ConfirmPopup");
-				Global.ConfirmPopupPO = item;
-				item.show(message, yesEvent, noEvent);
-				this.parentPopup.addChild(item.node);
-				item.node.zIndex = 999;
-			});
-		} else {
-			Global.ConfirmPopupPO.show(message, yesEvent, noEvent);
 		}
 	},
 
@@ -471,10 +463,12 @@ cc.Class({
 	},
 
 	showLoginTabView() {
+		Global.UIManager.showMiniLoading();
 		if (Global.LoginTabView == null) {
 			cc.resources.load("Popup/LoginTabView", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab);
 				this.parentPopup.addChild(item);
+				Global.LoginTabView.show();
 			})
 		} else {
 			Global.LoginTabView.show();
@@ -865,6 +859,7 @@ cc.Class({
 	},
 
 	showBannerPopup() {
+		cc.log("Check benenr ")
 		if (Global.BannerPopup == null) {
 			cc.resources.load("Popup/Banner", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("Banner");
@@ -887,6 +882,19 @@ cc.Class({
 			});
 		} else {
 			Global.TopView.show(typeRank);
+		}
+	},
+
+	onShowVipPoint() {
+		if (Global.VipPoint === null) {
+			cc.resources.load("Popup/VipPoint", cc.Prefab, (err, prefab) => {
+				let item = cc.instantiate(prefab).getComponent("VipPoint");
+				Global.VipPoint = item;
+				this.parentPopup.addChild(item.node);
+				item.show();
+			});
+		} else {
+			Global.VipPoint.show();
 		}
 	},
 
@@ -1314,20 +1322,32 @@ cc.Class({
 
 	onClickOpenMiniGame(gameType) {
 		let funFinish = (component) => {
-			if (!this.checkShowMiniGame(component, false)) {
+			// if (!this.checkShowMiniGame(component, false)) {
+			// 	component.node.parent = this.parentMiniGame;
+			// 	if (!component.isMinimizeGame) component.startGame();
+			// 	component.isMinimizeGame = false;
+			// 	this.hideMiniLoading();
+			// 	Global.UIManager.showMask();
+			// }
+			cc.log("check component : ", component)
+			// component.node.setSiblingIndex(length - 1);
+			if(component.node.parent === null)
 				component.node.parent = this.parentMiniGame;
-				if (!component.isMinimizeGame) component.startGame();
-				component.isMinimizeGame = false;
-				this.hideMiniLoading();
-				Global.UIManager.showMask();
-			}
+			component.node.active = true;
+			cc.log("chay vao abc 1111")
+			if (!component.isMinimizeGame) component.startGame();
+			component.isMinimizeGame = false;
+			cc.log("chay vao abc 222")
+			this.hideMiniLoading();
+			Global.UIManager.showMask();
 		};
 		
-		if (Global.XocDia == null) {
-			cc.log("chay vao day 1222", gameType)
+		if (Global[Global.getGameTypeById(gameType)] == null) {
+			cc.log("chay vao day 1222", Global.getGameTypeById(gameType))
 			this.getBundleAndInitGame(gameType, this.downloadProgress(gameType), funFinish);
 		} else {
-			funFinish(Global.XocDia);
+			cc.log("chay vao day 3333", Global[Global.getGameTypeById(gameType)])
+			funFinish(Global[Global.getGameTypeById(gameType)]);
 		}
 	},
 

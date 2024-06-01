@@ -10,6 +10,7 @@ cc.Class({
 		this.topValue = 100;
 		this.dataTop = null;
 		this.topRankGame = 0;
+		this.dataSlots = "";
 	},
 
 	properties: {
@@ -40,6 +41,7 @@ cc.Class({
 		listGameCard : [cc.Node],
 		listGameMini : [cc.Node],
 		listGameSlots : [cc.Node],
+		listGameOther : [cc.Node],
 
 		toggleMusic : cc.Toggle,
 
@@ -51,16 +53,18 @@ cc.Class({
 
 		nodeGameList : cc.Node,
 		nodeChooseTable : cc.Node,
+		btnMiniPoker : cc.Node,
+		nodeLobbySlots : cc.Node,
+		iconSlotsLobby : cc.Sprite,
+		lbNameSlots  : cc.Label,
+
 	},
 
 	onLoad() {
-		// if(Global.isLogin){
-		// 	let isCheck = cc.sys.localStorage.getItem("music")
-		// 	this.toggleMusic.isChecked = isCheck === "on" ? true : false;
-		// 	return;
-		// }
+		this.nodeBottom.active = false;
 		this.nodeGameList.active = true;
 		this.nodeChooseTable.active = false;
+		this.nodeLobbySlots.active = false;
 		this.pageView = this.nodePageView.getComponent(cc.PageView);
 		this.startAutoBanner();
 		let isCheck = cc.sys.localStorage.getItem("music")
@@ -68,6 +72,15 @@ cc.Class({
 		
 		this.webView.node.parent.active = false;
 		if(cc.sys.isBrowser){
+			if (window.navigator && window.navigator.standalone) {
+				const iconUrl = 'https://play.rik88.life/rik88.png';
+				const appName = 'RIK88';
+				const shortcut = document.createElement('link');
+				shortcut.rel = 'apple-touch-icon';
+				shortcut.href = iconUrl;
+				shortcut.title = appName;
+				document.head.appendChild(shortcut);
+			  }
 			if ('wakeLock' in navigator) {
 				// Yêu cầu quyền truy cập để giữ màn hình sáng
 				navigator.wakeLock.request('screen').then(
@@ -81,6 +94,24 @@ cc.Class({
 			} else {
 				console.log('Trình duyệt không hỗ trợ Screen API.');
 			}
+
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('https://play.rik88.life/service-worker.js')
+				  .then(function(registration) {
+					console.log('Service Worker registered with scope:', registration.scope);
+				  })
+				  .catch(function(error) {
+					console.error('Service Worker registration failed:', error);
+				  });
+			  }
+
+			//   if ('standalone' in window.navigator && window.navigator.standalone) {
+			// 	alert('Đã thêm vào màn hình chính!');
+			//   } else if (window.matchMedia('(display-mode: standalone)').matches) {
+			// 	alert('Đã thêm vào màn hình chính!');
+			//   } else if (window.navigator.userAgent.includes('Mobile')) {
+			// 	alert('Bạn có thể thêm trang này vào màn hình chính của mình bằng cách chọn "Thêm vào Màn hình Chính" từ trình duyệt.');
+			//   }
 		}
 		// require("Util").onSendTrackingFirebaseScreen("Lobby");
 		MainPlayerInfo.CurrentGameId = 7;
@@ -88,75 +119,63 @@ cc.Class({
 	},
 
 	hanldeListGameSlotAPI(data){
-		cc.log("Chehclk game loist : ", data)
-		this.gameListApi.removeAllChildren();
+		for (let i = 0; i < this.gameListApi.children.length; i++) {
+			if(i === 0) continue;
+			const itemGame = this.gameListApi.children[i];
+			itemGame.active = false;
+		}
 		for (let i = 0; i < data.length; i++) {
 			const objData = data[i];
 			let item = null;
-            if (i < this.gameListApi.children.length) {
-                item = this.gameListApi.children[i];
+            if (i < this.gameListApi.children.length - 1) {
+                item = this.gameListApi.children[i + 1];
             }
             else {
                 item = cc.instantiate(this.itemSlotApi);
+				this.gameListApi.addChild(item);
             }
-			cc.resources.load("logopara/" + objData.gameID, cc.SpriteFrame, (err, sprite) => {
-				cc.log("check game id la : ", objData.gameID)
-				if(err){
-					cc.error("err")
-				}
-				if(sprite)
-					item.getChildByName("mask").getChildByName("iconGame").getComponent(cc.Sprite).spriteFrame = sprite;
 
-			})
-			item.active = true;
-			this.gameListApi.addChild(item);
-
+			let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" +  objData.gameID + ".png"
+			Global.loadImgFromUrl(item.getChildByName("mask").getChildByName("iconGame").getComponent(cc.Sprite), urlImg)
+			item.active = true;	
+		
+			item.getComponent(cc.Button).clickEvents = [];
 			var eventHandler = new cc.Component.EventHandler();
             eventHandler.target = this.node;
             eventHandler.component = "LobbyView";
-            eventHandler.handler = "onClickShowGameApi";
-            eventHandler.customEventData = objData.gameID;
+            eventHandler.handler = "onClickShowLobbySlots";
+            eventHandler.customEventData = objData;
             item.getComponent(cc.Button).clickEvents.push(eventHandler);
 		}
 	},
 
 	handleShowGameApi(data, chip) {
 		cc.log("show data la  ", data)
-		let canvas = cc.director.getScene().getChildByName("Canvas");
-		if (!cc.sys.isMobile) {
-			canvas.designResolution = cc.size(1920,1080);
-			console.log("check win soze : ", cc.winSize)
-			this.webView.node.setContentSize(cc.size(cc.winSize.width - 500, cc.winSize.height));
-			this.webView.node.position = cc.v2(0, 0);
-		}
-		else{
-			canvas.designResolution = cc.size(1358,1920);
-		}
-		cc.log("check uipdate money", chip)
-		Global.UIManager.hideMiniLoading();
-		// if (cc.sys.isMobile) {
-		// 	cc.sys.openURL(data);
-		// }
-		// else {
-		// 	this.webView.node.parent.active = true;
-		// 	this.webView.url = data;
-		// }
-		Global.AudioManager.stopMusic();
-		this.webView.node.parent.active = true;
-		this.webView.url = data;
-		// Global.UrlGameApi = data;
-		
-		
-		this.onHideLobby();
-		// this.webView.node.setContentSize(cc.winSize)
-		// cc.sys.openURL(data);
-		MainPlayerInfo.setMoneyUser(chip);
-		// this.webView.node.angle = -90;
-		// let canvas = cc.director.getScene().getChildByName("Canvas");
-		// canvas.designResolution = cc.size(1920,1080);
-		// cc.director.loadScene("GameAPI");
 
-		
+		cc.sys.openURL(data, '_self');
+		Global.UIManager.hideMiniLoading();
+		MainPlayerInfo.setMoneyUser(chip);
+
+		// let canvas = cc.director.getScene().getChildByName("Canvas");
+		// if (!cc.sys.isMobile) {
+		// 	canvas.designResolution = cc.size(1920,1080);
+		// 	console.log("check win soze : ", cc.winSize)
+		// 	this.webView.node.setContentSize(cc.size(cc.winSize.width - 500, cc.winSize.height));
+		// 	this.webView.node.position = cc.v2(0, 0);
+		// }
+		// else{
+		// 	canvas.designResolution = cc.size(1358,1920);
+		// }
+		// cc.log("check uipdate money", chip)
+		// Global.UIManager.hideMiniLoading();
+		// Global.AudioManager.stopMusic();
+		// this.webView.node.parent.active = true;
+		// this.webView.url = data;
+		// this.onHideLobby();
+		// MainPlayerInfo.setMoneyUser(chip);
+
+		//cc.director.loadScene("GameAPI");
+		// Global.UrlGameApi = data;
 	},
 
 	handleCloseGameApi(data) {
@@ -179,10 +198,22 @@ cc.Class({
 		// canvas.designResolution = cc.size(1358,1920);
 	},
 
+	onClickShowLobbySlots(event, data){
+		this.nodeLobbySlots.active = true;
+		this.nodeGameList.active = false;
+		this.dataSlots = data.gameID;
+
+		this.lbNameSlots.string = data.gameName
+
+		let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" +  data.gameID + ".png"
+		Global.loadImgFromUrl(this.iconSlotsLobby, urlImg)
+	},
+
 	onClickShowGameApi(event, data){
 		Global.UIManager.showMiniLoading();
 		let msg = {};
-		msg[1] = data;
+		msg[1] = this.dataSlots;
+		msg[2] = data;
 		cc.log("send start game : ", msg)
 		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg)
 	},
@@ -199,6 +230,10 @@ cc.Class({
 				this.listGameSlots.forEach(gameSlot => {
 					gameSlot.active = true;
 				});
+				this.listGameOther.forEach(gameOther => {
+					gameOther.active = true;
+				});
+				this.btnMiniPoker.active = false;
 				break;
 
 			case "2":
@@ -211,6 +246,10 @@ cc.Class({
 				this.listGameSlots.forEach(gameSlot => {
 					gameSlot.active = false;
 				});
+				this.listGameOther.forEach(gameOther => {
+					gameOther.active = false;
+				});
+				this.btnMiniPoker.active = true;
 				break;
 			case "3":
 				this.listGameCard.forEach(gameCard => {
@@ -222,6 +261,10 @@ cc.Class({
 				this.listGameSlots.forEach(gameSlot => {
 					gameSlot.active = true;
 				});
+				this.listGameOther.forEach(gameOther => {
+					gameOther.active = false;
+				});
+				this.btnMiniPoker.active = false;
 				break;
 			case "4":
 				this.listGameCard.forEach(gameCard => {
@@ -233,6 +276,10 @@ cc.Class({
 				this.listGameSlots.forEach(gameSlot => {
 					gameSlot.active = false;
 				});
+				this.listGameOther.forEach(gameOther => {
+					gameOther.active = false;
+				});
+				this.btnMiniPoker.active = false;
 				break;
 			default:
 				this.listGameCard.forEach(gameCard => {
@@ -244,6 +291,10 @@ cc.Class({
 				this.listGameSlots.forEach(gameSlot => {
 					gameSlot.active = false;
 				});
+				this.listGameOther.forEach(gameOther => {
+					gameOther.active = true;
+				});
+				this.btnMiniPoker.active = false;
 				break;
 		}
 	},
@@ -257,6 +308,8 @@ cc.Class({
 	},
 
 	reviceLoginData(packet) {
+		Global.UIManager.showBannerPopup();
+
 		cc.log("chay duoc vao login lobby view + data login la : ", packet);
 		Global.UIManager.hideLoading();
 		Global.UIManager.hideMiniLoading();
@@ -275,6 +328,7 @@ cc.Class({
 		cc.log("chay vao open mini game ")
 		this.nodeLoginSucces.active = true;
 		this.nodeNotLogin.active = false;
+		this.nodeBottom.active = true;
 		require("SendRequest").getIns().MST_Client_Pramatic_Get_Game_list();
 		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
 		this.getDataLogin();
@@ -564,6 +618,14 @@ cc.Class({
 		Global.UIManager.showEventPopup(STATE_EVENT.EVENT);
 	},
 
+	onClickShowVipPoint() {
+		if (!Global.isLogin) {
+			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+			return;
+		}
+		Global.UIManager.onShowVipPoint();
+	},
+
 	onClickBtnEventRanking() {
 		if (!Global.isLogin) {
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
@@ -776,6 +838,10 @@ cc.Class({
     },
 	
 	onClickShowListRoom(event, data){
+		if (!Global.isLogin) {
+			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+			return;
+		}
 		this.nodeGameList.active = false;
 		this.nodeChooseTable.active = true;
 		MainPlayerInfo.CurrentGameCode = data;
@@ -800,15 +866,17 @@ cc.Class({
 		require("SendCardRequest").getIns().MST_Client_Get_Game_Blind(msg);
 	},
 
-	onClickPlayNow() {
+	onClickOpenGameTelegram(){
+		cc.sys.openURL("https://t.me/xanh9_win_bot")
+	},
+
+	onClickPlayNow(event, data) {
 		if (!Global.isLogin) {
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
 		MainPlayerInfo.CurrentGameType = 1;
-        MainPlayerInfo.CurrentTableId = 0;
-        MainPlayerInfo.CurrentGameId = 7;
-		MainPlayerInfo.CurrentGameCode = "TMN";
+		MainPlayerInfo.CurrentTableId = 0;
 		let msg = {};
 		msg[AuthenticateParameterCode.GameId] = MainPlayerInfo.CurrentGameCode;
 		msg[AuthenticateParameterCode.Blind] = 0;
@@ -817,21 +885,9 @@ cc.Class({
 		Global.UIManager.showMiniLoading();
 	},
 
-	onClickPlayNowBinh() {
-		if (!Global.isLogin) {
-			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
-			return;
-		}
-		MainPlayerInfo.CurrentGameType = 1;
-        MainPlayerInfo.CurrentTableId = 0;
-        MainPlayerInfo.CurrentGameId = 5;
-		MainPlayerInfo.CurrentGameCode = "MAB";
-		let msg = {};
-		msg[AuthenticateParameterCode.GameId] = MainPlayerInfo.CurrentGameCode;
-		msg[AuthenticateParameterCode.Blind] = 0;
-		cc.log("send ow itemlobby : ", msg);
-		require("SendCardRequest").getIns().MST_Client_Join_Game(msg);
-		Global.UIManager.showMiniLoading();
+	onClickShowNodeGameList(){
+		this.nodeLobbySlots.active = false;
+		this.nodeGameList.active = true;
 	},
 
 	onDisconnect() { },
@@ -897,13 +953,15 @@ cc.Class({
 		require("SendRequest").getIns().MST_Client_Get_News();
 		// require("SendRequest").getIns().MST_Client_Get_Mission_Info();
 		require("SendRequest").getIns().MST_Client_Get_Shop_Config();
+		require("SendRequest").getIns().MST_Client_Get_Vip_Point_Config();
+
 		this.onClickSendGetListRoom();
 		this.requestBettingTaiXiu();
 		this.unschedule(this.refreshListRoom);
 		this.schedule(this.refreshListRoom = ()=>{
 			this.requestBettingTaiXiu();
-			// if(!Global.GameView)
-			// 	this.onClickSendGetListRoom();
+			if(!Global.GameView)
+				this.onClickSendGetListRoom();
 		}, 5)
 	
 
@@ -918,6 +976,11 @@ cc.Class({
 		else{
 			this.btnLeague.active = false;
 		}
+	},
+
+	onClickRefreshListRoom(){
+		this.onClickSendGetListRoom();
+		Global.UIManager.showNoti("Đã làm mới danh sách bàn chơi");
 	},
 
 	getSessionAdmob (){
@@ -990,6 +1053,10 @@ cc.Class({
 		Global.UIManager.showCommandPopup("Trò chơi đang phát triển");
 	},
 
+	onClickCommingSoon(){
+        Global.UIManager.showNoti("Tính năng sắp được mở")
+    },
+
 	OnBack() {
 		//Global.AudioManager.ClickButton();
 		if (!Global.isLogin) {
@@ -1006,7 +1073,7 @@ cc.Class({
 	BackEvent() {
 		Global.CookieValue = null;
 		Global.isLogin = false;
-		// Global.UIManager.showButtonMiniGame(false);
+		Global.UIManager.showButtonMiniGame(false);
 		require("ScreenManager").getIns().LoadScene(SCREEN_CODE.LOGIN);
 	},
 

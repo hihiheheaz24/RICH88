@@ -76,7 +76,7 @@ cc.Class({
     },
 
     Hide() {
-        Global.UIManager.hideMask();
+        // Global.UIManager.hideMask();
         actionEffectClose(this.node , ()=>{
             this.node.active = false;
         })

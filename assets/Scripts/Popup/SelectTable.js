@@ -6,7 +6,10 @@ cc.Class({
         itemTable: cc.Node,
         listBlinnd : cc.ScrollView,
         itemBlind : cc.Node,
-        listSpriteFrameItemSpinGo : [cc.SpriteFrame]
+        listSpriteFrameItemSpinGo : [cc.SpriteFrame],
+
+        iconGame : cc.Sprite,
+        listIconGame : [cc.SpriteFrame]
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -77,7 +80,20 @@ cc.Class({
         cc.log("check select tb : ", data)
         // {"errCode":0,"errMsg":"","opCode":105,"vals":{"0":0,"2":0,"3":0,"4":"","5":"SBI1","15":20,"17":["{\"Id\":1,\"Name\":\"Phòng 1\",\"Blind\":50,\"LimitPlayer\":4,\"NumberPlayer\":2,\"State\":2,\"LimitCash\":1000,\"Password\":\"\",\"IsPlayerInRoom\":false}",
 
-   
+
+        switch (data[18]) {
+            case "TMN":
+                this.iconGame.spriteFrame = this.listIconGame[0]
+                break;
+
+            case "MAB":
+                this.iconGame.spriteFrame = this.listIconGame[1]
+                break;
+        }
+
+        MainPlayerInfo.CurrentGameId = Global.getGameIdByName(data[18]);
+		MainPlayerInfo.CurrentGameCode = data[18];
+
         this.roomType = data[AuthenticateParameterCode.RoomType];
 
         cc.log("check data selcet table : ", data)

@@ -42,32 +42,39 @@
 
   <link rel="stylesheet" type="text/css" href="style-mobile.css" />
   <link rel="icon" href="favicon.png" />
-  <!-- Event snippet for web.vplay.vip conversion page -->
-  <!-- Google tag (gtag.js) --> 
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11182659494"></script> 
-  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-11182659494'); 
+  <link rel="manifest" href="manifest.json">
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDtH8ZZIJj65_My8VcZqsbHwYbmwvqkauY",
+      authDomain: "rik88-7ef62.firebaseapp.com",
+      projectId: "rik88-7ef62",
+      storageBucket: "rik88-7ef62.appspot.com",
+      messagingSenderId: "393127467425",
+      appId: "1:393127467425:web:1bfcf018f5cf95363d13e0",
+      measurementId: "G-LJEDP0RDYG"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
   </script>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-    function getMobileOperatingSystem() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      // Windows Phone must come first because its UA also contains "Android"
-      if (/windows phone/i.test(userAgent)) {
-        window.location.replace("https://vplay.vip/");
-        return "Windows Phone";
-      }
-      if (/android/i.test(userAgent)) {
-        window.location.replace("https://vplay.vip/");
-        return "Android";
-      }
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.replace("https://vplay.vip/");
-        return "iOS";
-      }
-
-      return "unknown";
-    }
-    getMobileOperatingSystem();
-  </script> -->
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(function(OneSignal) {
+      OneSignal.init({
+        appId: "e3adb4e0-3229-4605-ba88-81aef3c9aff3",
+      });
+    });
+  </script>
 </head>
 
 <body>

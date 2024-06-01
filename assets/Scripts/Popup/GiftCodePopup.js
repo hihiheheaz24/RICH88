@@ -23,12 +23,12 @@ cc.Class({
         Global.onPopOn(this.node);
         this.ReloadCaptchaGift();
         this.textGift.string = "";
-        // if(!MainPlayerInfo.phoneNumber){
-        //     this.textGift.placeholder = "Xác thực số điện thoại trước";
-        // }
-        // else{
-        //     this.textGift.placeholder = "..."
-        // }
+        if(!MainPlayerInfo.phoneNumber){
+            this.textGift.placeholder = "Xác thực số điện thoại trước";
+        }
+        else{
+            this.textGift.placeholder = "NHẬP GIFTCODE"
+        }
     },
 
     ReloadCaptchaGift() {
@@ -82,10 +82,10 @@ cc.Class({
                 Global.UIManager.showCommandPopup (MyLocalization.GetText ("NAME_KHOANG_TRANG"), null);
                 return;
             }
-            // if(!MainPlayerInfo.phoneNumber){
-            //     Global.UIManager.showCommandPopup("Bấm vào Avatar của bạn để xác thực số điện thoại");
-            //     return;
-            // }
+            if(!MainPlayerInfo.phoneNumber){
+                Global.UIManager.showCommandPopup("Bấm vào Avatar của bạn để xác thực số điện thoại");
+                return;
+            }
             let msgData = {};
             msgData[1] = Global.GiftCodePopup.textGift.string;
             require("SendRequest").getIns().MST_Client_Send_Gift_Code (msgData);
@@ -97,13 +97,13 @@ cc.Class({
     },
 
     edbBegan(){
-        // if(!MainPlayerInfo.phoneNumber){
-        //     Global.UIManager.showCommandPopup("Bấm vào Avatar của bạn để xác thực số điện thoại");
-        //     this.textGift.maxLength = 0;
-        // }
-        // else{
-        //     this.textGift.maxLength = 20;
-        // }
+        if(!MainPlayerInfo.phoneNumber){
+            Global.UIManager.showCommandPopup("Bấm vào Avatar của bạn để xác thực số điện thoại");
+            this.textGift.maxLength = 0;
+        }
+        else{
+            this.textGift.maxLength = 20;
+        }
     },
 
     Hide() {

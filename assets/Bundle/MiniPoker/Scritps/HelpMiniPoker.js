@@ -16,7 +16,7 @@ cc.Class({
         Global.HuongDanChoiMiniPoker = null;
     },
     ClickClose() {
-        Global.UIManager.hideMask();
+        // Global.UIManager.hideMask();
         actionEffectClose(this.node , ()=>{
             this.node.active = false;
         })

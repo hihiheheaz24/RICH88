@@ -48,7 +48,8 @@ cc.Class({
     onLoad () {
         let msg = {};         
         cc.log("request data banking " + Global.GameConfig.UrlGameLogic.BankCodeList);
-        require("BaseNetwork").request(Global.GameConfig.UrlGameLogic.BankCodeList, msg, this.setDataBanking.bind(this));
+        let url = Global.GameConfig.UrlGameLogic.BankCodeList + "?Transtype=IN";
+        require("BaseNetwork").request(url, msg, this.setDataBanking.bind(this));
         Global.ShopTabCashInBanking = this;
         this.listTelcoIn = Global.cardTopupInfosIn;
 

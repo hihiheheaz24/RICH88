@@ -70,6 +70,7 @@ cc.Class({
   show() {
     cc.log("chay vao showw tab");
     // this.node.active = true;
+    Global.UIManager.hideMiniLoading();
     Global.onPopOn(this.node);
   },
   showCapcha() {

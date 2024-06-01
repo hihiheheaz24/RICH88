@@ -16,6 +16,8 @@ cc.Class({
         _v2OffsetChange: null,
         _vecStart: null,
         lbTimeTx: cc.Label,
+        nodeBg : cc.Node,
+        // contentTime: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -75,8 +77,8 @@ cc.Class({
         this.poolMoney = new cc.NodePool();
 
 
-        this.height = 1080/2;
-        this.width = 1920/2;
+        this.height = 1920/2;
+        this.width = 1080/2;
     },
 
     start() {
@@ -84,16 +86,82 @@ cc.Class({
         let action1 = cc.scaleTo(0.1 , 0.7);
         let action2 = cc.scaleTo(0.1 , 1);
         let action3 = cc.delayTime(2);
-       // cc.find("MiniIcon" , this.node).runAction(cc.repeatForever(cc.sequence(cc.repeat(cc.sequence(action1,action2),3) ,action3) ));
+       this.node.runAction(cc.repeatForever(cc.sequence(cc.repeat(cc.sequence(action1,action2),3) ,action3) ));
     },
 
     onClick(){
-        cc.log("click btn mini gameeee : ");
+        if(this.nodeBg.getNumberOfRunningActions() > 0) return;
+        if(!this._isOpen){
+           Global.UIManager.showMask();
+            this.nodeBg.active = true;
+            this.nodeBg.scale = 0;
+            cc.Tween.stopAllByTarget(this.nodeBg);
+          
+            cc.tween(this.nodeBg)
+            .to(0.5, { scale: 1, angle: 360 }, { easing: 'backOut' }) // Hiệu ứng mở rộng và xoay với easing 'backOut'
+            .call(() => {
+                this._isOpen = !this._isOpen;
+            })
+            .start();
+        }else{
+            cc.tween(this.nodeBg)
+            .to(0.5, { scale: 0, angle: 0 }, { easing: 'backIn' }) // Hiệu ứng mở rộng và xoay với easing 'backOut'
+            .call(() => {
+                this._isOpen = !this._isOpen;
+            })
+            .start();
+          
+            Global.UIManager.hideMask();
+        }
+    },
+
+    onClickOpenMiniGame(event, data) {
+
+        cc.tween(this.nodeBg)
+            .to(0.5, { scale: 0, angle: 0 }, { easing: 'backIn' }) // Hiệu ứng mở rộng và xoay với easing 'backOut'
+            .call(() => {
+                this._isOpen = !this._isOpen;
+            })
+            .start();
+
         if (!Global.isLogin) {
-			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
-			return;
+            Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+            Global.UIManager.hideMask();
+            return;
+        }
+        let idGame = parseInt(data);
+        cc.log("on click onpen game id : ", idGame)
+        Global.UIManager.showMiniLoading();
+		switch (idGame) {
+			case GAME_TYPE.XOCDIA:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
+				break;
+			case GAME_TYPE.TAI_XIU:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.TAI_XIU);
+				break;
+			case GAME_TYPE.MINI_POKER:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.MINI_POKER);
+				break;
+			case GAME_TYPE.MINI_SLOT:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.MINI_SLOT);
+				break;
+			case GAME_TYPE.LODE:
+				Global.UIManager.onClickOpenMiniGame(GAME_TYPE.LODE);
+				break;
+			default:
+				if (data === "TMN") {
+					let msg = {};
+					msg[AuthenticateParameterCode.RoomType] = 1;
+					msg[AuthenticateParameterCode.GameId] = "TMN";
+					msg[AuthenticateParameterCode.Blind] = 0;
+					msg[AuthenticateParameterCode.RoomId] = 25;
+					cc.log("send ow itemlobby : ", msg);
+					require("SendCardRequest").getIns().MST_Client_Join_Game(msg);
+					Global.UIManager.showMiniLoading();
+					break;
+				}
+				break
 		}
-		Global.UIManager.onClickOpenMiniGame(GAME_TYPE.TAI_XIU);
     },
 
     initTimeTaiXiu(type, time) {

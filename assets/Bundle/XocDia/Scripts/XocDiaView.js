@@ -636,6 +636,10 @@ cc.Class({
         this.valueBet = valueChip;
     },
 
+    onClickAvatar(){
+        Global.UIManager.showProfilePopup(MainPlayerInfo.accountId)
+    },
+
     onClickBetting(event, data){
         if(this.gameStatus !== XocDiaStatus.Betting){
             Global.UIManager.showNoti("Đã hết thời gian đặt cược")
@@ -890,8 +894,10 @@ cc.Class({
 
     onClickBack(){
         Global.LobbyView.OnShowLobby();
-        Global.XocDia = null;
-        this.node.destroy();
+        this.node.active = false;
+        Global.UIManager.hideMask();
+        // Global.XocDia = null;
+        // this.node.destroy();
     },
 
     // update (dt) {},

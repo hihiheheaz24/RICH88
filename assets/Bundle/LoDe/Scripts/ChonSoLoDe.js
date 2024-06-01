@@ -4,9 +4,14 @@ cc.Class({
     properties: {
         listNumberBet: cc.Node,
         itemNumberBet: cc.Node,
+        itemNumberSelect : cc.Node,
         listTabNumber: [cc.Node],
         listTop : cc.Node,
         listSelected : cc.Node,
+        listViewNumber : cc.Node,
+        puSelectNumnber : cc.Node,
+
+        lbChooseNumber : cc.Label
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -17,18 +22,109 @@ cc.Class({
         // this.maxNumberSelectRequire = 0;
         Global.ChonSoLoDe = this;
         this.currentTypeBet = 1;
+        this.listNumberSelected = [];
         cc.log("chay vao 111 onload")
+
+        this.listSelected.on("child-added", (itemPopup) => {
+            if(this.listSelected.children.length > 0){
+                this.puSelectNumnber.active = true;
+            }
+            else{
+                this.puSelectNumnber.active = false;
+            }
+        });
+
+        this.listSelected.on("child-removed", (miniGame) => {
+            if(this.listSelected.children.length > 0){
+                this.puSelectNumnber.active = true;
+            }
+            else{
+                this.puSelectNumnber.active = false;
+            }
+        });
+    },
+
+    onEnable(){
+        this.show(Global.LoDe.dataBet);
+        cc.log("check listselect : ", this.listSelected.children.length)
+        if(this.listSelected.children.length > 0){
+            this.puSelectNumnber.active = true;
+        }
+        else{
+            this.puSelectNumnber.active = false;
+        }
+        Global.LoDe.setLbChooseNumber();
+        this.checkActive();
+        this.listTabNumber[0].getComponent(cc.Toggle).isChecked = true;
+    },
+
+    checkActive(){
+        this.listSelected.destroyAllChildren();
+        this.listNumberBet.children.forEach(obj => {
+            if(obj.getComponent(cc.Toggle).isChecked){
+                let data = obj.getChildByName("lbNumber").getComponent(cc.Label).string;
+                let item = cc.instantiate(this.itemNumberSelect);
+                item.position = cc.v2(0,0);
+                item.scale = 0.8;
+                item.node = event.target;
+                item.active = true;
+                item.getChildByName("lbNumber").getComponent(cc.Label).string = data;
+                item.getComponent(cc.Toggle).isChecked = true;
+    
+                item.getComponent(cc.Toggle).clickEvents = [];
+                var eventHandler = new cc.Component.EventHandler();
+                eventHandler.target = this.node;
+                eventHandler.component = "ChonSoLoDe";
+                eventHandler.handler = "cancelNumberBet";
+                eventHandler.customEventData = data;
+                item.getComponent(cc.Toggle).clickEvents.push(eventHandler);
+    
+                this.listSelected.addChild(item);
+            }
+        });
+    },
+
+    handleBetting(){
+        let xBetValue =  Global.LoDe.configBet[Global.LoDe.typeBet];
+        if(Global.LoDe.pointBet <= 0){
+            Global.LoDe.pointBet = Global.LoDe.configBet[Global.LoDe.typeBet].xBetValue * 1000;
+        }
+        let pointBet = Global.LoDe.pointBet;
+        cc.log("check ppont bet la : ", Global.LoDe.pointBet)
+
+        Global.LoDe.edbPointBet.string = Global.formatNumber(pointBet);
+
+        let valueBet = 0;
+        let valueWin = 0;
+
+        if(Global.LoDe.typeBet === BET_TYPE.XIEN_2 || Global.LoDe.typeBet === BET_TYPE.XIEN_3 || Global.LoDe.typeBet === BET_TYPE.XIEN_4){
+            valueBet = Global.formatNumber(pointBet * xBetValue.XBetValue);
+            valueWin = Global.formatNumber(pointBet * xBetValue.XRewardValue);
+        }
+        else{
+            valueBet = Global.formatNumber(pointBet * xBetValue.XBetValue * Global.LoDe.listNumberbet.length);
+            valueWin = Global.formatNumber(pointBet * xBetValue.XRewardValue);
+        }
+
+        Global.LoDe.betOne = pointBet;
+        if(!isNaN(pointBet * xBetValue.XBetValue * Global.LoDe.listNumberbet.length) && !isNaN(pointBet * xBetValue.XRewardValue)){
+            Global.LoDe.lbTotalBet.string = valueBet;
+            Global.LoDe.lbTotalWin.string = valueWin;
+        }
+        else{
+            Global.LoDe.lbTotalBet.string = 0;
+            Global.LoDe.lbTotalWin.string = 0;
+        }
+        cc.log("chya dc den cuoi ",valueBet)
+        cc.log("chya dc den cuoi ",valueWin)
     },
 
     show(dataBet) {
-        Global.onPopOn(this.node);
+        this.node.active = true
+        // Global.onPopOn(this.node);
         cc.log("check data bet la  : ", dataBet)
         cc.log("Check type bet current : ", this.currentTypeBet  + " check nua : ", dataBet.typeBet)
-        if(this.currentTypeBet !== dataBet.typeBet){
-            cc.log("chay vao reset")
-            this.currentTypeBet = dataBet.typeBet;
-            Global.LoDe.listNumberbet = [];
-        }
+        this.currentTypeBet = dataBet.typeBet
        
         this.dataBet = dataBet;
         this.minNumberSelectRequire = dataBet.minNumberSelectRequire;
@@ -39,9 +135,16 @@ cc.Class({
         this.listTabNumber.forEach(tabNumber => {
             tabNumber.active = false;
         });
-
-        if(totalTab === 1) this.listTop.active = false;
-        else this.listTop.active = true
+        cc.log("check total tab : ", totalTab)
+        if(totalTab === 1){
+            this.listTop.active = false;
+            this.listViewNumber.setContentSize(cc.size(914, 922));
+            cc.log("check size : ", this.listViewNumber.size)
+        }else{
+            this.listTop.active = true;
+            this.listViewNumber.setContentSize(cc.size(914, 743));
+        }
+        
 
         cc.log("check toteltab : ", totalTab)
         for (let i = 0; i < totalTab; i++) {
@@ -52,14 +155,11 @@ cc.Class({
     },
 
     hide() {
-        cc.log("chay vao close : " + Global.LoDe.listNumberbet.length + " tiep " + this.minNumberSelectRequire)
-        // if(Global.LoDe.listNumberbet.length < this.minNumberSelectRequire){
-        //     Global.LoDe.effectThongBaoCuoiGame("Bạn chưa chọn đủ số, Yêu cầu chọn đủ " + this.minNumberSelectRequire + " số");
-        //     return;
-        // }
-        Global.onPopOff(this.node);
+        this.puSelectNumnber.active = false;
         Global.LoDe.resetGameView();
+        this.resetNumberBet();
     },
+
 
     onClickChooseBet(){
         Global.onPopOff(this.node);
@@ -81,7 +181,6 @@ cc.Class({
     showListNumner(dataBet, index) {
         let numberRequire = dataBet.numberRequire;
         let countItemNumberGnerate = numberRequire > 100 ? 100 : numberRequire;
-
 
         this.listNumberBet.removeAllChildren();
         for (let i = 0; i < countItemNumberGnerate; i++) {
@@ -110,7 +209,12 @@ cc.Class({
                 objNumber.active = true;
             }, 0.01 * i)
 
-            if(Global.LoDe.listNumberbet.includes(addNumber + number)){
+
+            let numberCheck = (addNumber + number).toString();
+            cc.log("check  number  : ", numberCheck)
+            cc.log("check list 22 ", Global.LoDe.listNumberbet)
+          
+            if(Global.LoDe.listNumberbet.includes(numberCheck)){
                 cc.log("check co tnon tai ", addNumber + number)
                 objNumber.getComponent(cc.Toggle).isChecked = true;
             }
@@ -159,7 +263,7 @@ cc.Class({
             }
             console.log("Số " + data + " đã được chọn.");
             Global.LoDe.listNumberbet.push(data)
-            let item = cc.instantiate(this.itemNumberBet);
+            let item = cc.instantiate(this.itemNumberSelect);
             item.position = cc.v2(0,0);
             item.scale = 0.8;
             item.node = event.target;
@@ -167,6 +271,7 @@ cc.Class({
             item.getChildByName("lbNumber").getComponent(cc.Label).string = data;
             item.getComponent(cc.Toggle).isChecked = true;
 
+            item.getComponent(cc.Toggle).clickEvents = [];
             var eventHandler = new cc.Component.EventHandler();
             eventHandler.target = this.node;
             eventHandler.component = "ChonSoLoDe";
@@ -174,11 +279,12 @@ cc.Class({
             eventHandler.customEventData = data;
             item.getComponent(cc.Toggle).clickEvents.push(eventHandler);
 
-            this.listSelected.addChild(item)
+            this.listSelected.addChild(item);
+            this.listNumberSelected.push(data)
         }
         else {
             console.log("Số " + data + " đã bị hủy");
-            let index = Global.LoDe.listNumberbet.indexOf(data);
+            let index = Global.LoDe.listNumberbet.indexOf(data.toString());
             if (index != -1) {
                 Global.LoDe.listNumberbet.splice(index, 1);
             }
@@ -190,6 +296,21 @@ cc.Class({
                     itemNumber.destroy();
                 }
             });
+
+              //
+              let number = parseInt(data);
+              let indexx = Global.LoDe.listNumberbet.indexOf(number);
+              if (indexx !== -1) {
+                  Global.LoDe.listNumberbet.splice(indexx, 1);
+              }
+              cc.log("check children by node : ", event.target)
+              this.listSelected.children.forEach(itemNumber => {
+                  if(itemNumber.getChildByName("lbNumber").getComponent(cc.Label).string === event.target.getChildByName("lbNumber").getComponent(cc.Label).string){
+                      itemNumber.destroy();
+                  }
+              });
+              Global.LoDe.lbNumberBet.string = Global.LoDe.listNumberbet.join(", ")
+              cc.log("check list bet la : ", Global.LoDe.listNumberbet.join(", "))
         }
         cc.log("check lois : ", Global.LoDe.listNumberbet)
         if(this.currentTypeBet  === BET_TYPE.XIEN_2 || this.currentTypeBet === BET_TYPE.XIEN_3 || this.currentTypeBet  === BET_TYPE.XIEN_4){
@@ -199,6 +320,16 @@ cc.Class({
             Global.LoDe.lbNumberBet.string = Global.LoDe.listNumberbet.join(", ")
         }
        
+    },
+
+    resetNumberBet(){
+        this.listNumberBet.children.forEach(itemNumber => {
+            itemNumber.getComponent(cc.Toggle).isChecked = false;
+        });
+        this.listSelected.destroyAllChildren();
+        this.listNumberSelected = [];
+        Global.LoDe.lbNumberBet.string = "";
+        Global.LoDe.listNumberbet = [];
     },
 
     cancelNumberBet(event, data){
@@ -218,6 +349,11 @@ cc.Class({
         Global.LoDe.lbNumberBet.string = Global.LoDe.listNumberbet.join(", ")
         cc.log("check list bet la : ", Global.LoDe.listNumberbet.join(", "))
     },
+
+    onClickBetting(){
+        this.handleBetting();
+        Global.LoDe.onClickShowInfoBet();
+    }
 
     // update (dt) {},
 });

@@ -48,23 +48,23 @@
         "__id__": 573
       },
       {
-        "__id__": 585
+        "__id__": 587
       },
       {
-        "__id__": 587
+        "__id__": 589
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 593
+        "__id__": 595
       },
       {
-        "__id__": 594
+        "__id__": 596
       }
     ],
     "_prefab": {
-      "__id__": 595
+      "__id__": 597
     },
     "_opacity": 255,
     "_color": {
@@ -21432,10 +21432,13 @@
     "_components": [
       {
         "__id__": 583
+      },
+      {
+        "__id__": 584
       }
     ],
     "_prefab": {
-      "__id__": 584
+      "__id__": 586
     },
     "_opacity": 255,
     "_color": {
@@ -21842,6 +21845,88 @@
     "_id": ""
   },
   {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 573
+    },
+    "_enabled": true,
+    "_normalMaterial": null,
+    "_grayMaterial": null,
+    "duration": 0.1,
+    "zoomScale": 1.2,
+    "clickEvents": [
+      {
+        "__id__": 585
+      }
+    ],
+    "_N$interactable": true,
+    "_N$enableAutoGrayEffect": false,
+    "_N$transition": 0,
+    "transition": 0,
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_N$pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "_N$hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_N$disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
+    "_N$target": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "",
+    "_componentId": "b5931vLwrVMUr15XNOg8zXa",
+    "handler": "onClickAvatar",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -21863,7 +21948,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 586
+      "__id__": 588
     },
     "_opacity": 255,
     "_color": {
@@ -21932,17 +22017,17 @@
     },
     "_children": [
       {
-        "__id__": 588
+        "__id__": 590
       }
     ],
     "_active": false,
     "_components": [
       {
-        "__id__": 591
+        "__id__": 593
       }
     ],
     "_prefab": {
-      "__id__": 592
+      "__id__": 594
     },
     "_opacity": 255,
     "_color": {
@@ -21996,17 +22081,17 @@
     "_name": "New Label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 587
+      "__id__": 589
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 589
+        "__id__": 591
       }
     ],
     "_prefab": {
-      "__id__": 590
+      "__id__": 592
     },
     "_opacity": 255,
     "_color": {
@@ -22060,7 +22145,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 588
+      "__id__": 590
     },
     "_enabled": true,
     "_materials": [
@@ -22106,7 +22191,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 587
+      "__id__": 589
     },
     "_enabled": true,
     "_materials": [
@@ -22238,7 +22323,7 @@
       "__id__": 303
     },
     "parentPopup": {
-      "__id__": 585
+      "__id__": 587
     },
     "listChipSelectBet": [
       {
@@ -22273,7 +22358,7 @@
       "__id__": 553
     },
     "lbChat": {
-      "__id__": 589
+      "__id__": 591
     },
     "listChip": [
       {

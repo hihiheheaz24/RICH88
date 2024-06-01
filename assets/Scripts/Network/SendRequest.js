@@ -396,5 +396,16 @@ var SendRequest = cc.Class({
     MST_Client_Pramatic_Close_Game(msg) {
         this.RequestMessageNoData(REQUEST_CODE.MST_CLIENT_PARAMATIC_CLOSE_GAME, msg);
     },
+
+    //Vip point 
+    MST_Client_Get_Vip_Point_Config(msg) {
+        this.RequestMessageNoData(REQUEST_CODE.MST_CLIENT_GET_VIP_CONFIG_INFO);
+    },
+    MST_Client_Exchange_Vip_Point(msg) {
+        Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_EXCHANGE_VIP_POINTS, msg);
+    },
+    MST_Client_Receive_Vip_Reward(msg) {
+        Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_RECEIVE_VIP_REWARD, msg);
+    },
 });
 module.exports = SendRequest

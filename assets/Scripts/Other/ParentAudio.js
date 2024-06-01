@@ -117,8 +117,8 @@ cc.Class({
         cc.log("chay vao stop muasic", this.isActiveMusic)
         
         if(this.ingameAudio){
-            this.ingameAudio.play();
-            this.ingameAudio.loop = true;
+            // this.ingameAudio.play();
+            // this.ingameAudio.loop = true;
         } 
        
     },

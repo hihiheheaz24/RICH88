@@ -17,6 +17,7 @@ cc.Class({
         this.listNSP = [];
         this.listSelectNSPView = [];
         this.listDataCashOut = [];
+        this.codeBank = "";
     },
 
     properties: {
@@ -30,6 +31,7 @@ cc.Class({
         inPutPin: cc.EditBox,
         inputStk: cc.EditBox,
         inputNameTk: cc.EditBox,
+        edbValueCashOut : cc.EditBox
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -38,9 +40,12 @@ cc.Class({
         Global.ShopTabCashOut = this;
         this.listDataCashOut = Global.cardTopupInfosOut;
         this.checkDataValue();
-        let msg = {};         
-        cc.log("request data banking " + Global.GameConfig.UrlGameLogic.BankCodeList);
-        require("BaseNetwork").request(Global.GameConfig.UrlGameLogic.BankCodeList, msg, this.setDataBanking);
+        let msg = {
+        };         
+      
+        let url = Global.GameConfig.UrlGameLogic.BankCodeList + "?Transtype=OUT";
+        cc.log("request data banking " + url);
+        require("BaseNetwork").request(url, msg, this.setDataBanking);
     },
 
     start () {
@@ -172,37 +177,57 @@ cc.Class({
 
     onSendCashOutBank() {
         if(this.codeBank === ""){
-            Global.UIManager.showConfirmPopup("Vui lòng chọn ngân hàng muốn rút");
+            Global.UIManager.showCommandPopup("Vui lòng chọn ngân hàng muốn rút");
             return;
         }
-        // if(this.inPutPin.string === ""){
-        //     Global.UIManager.showCommandPopup("Vui Lòng nhập mã PIN ( Mã hệ thống gửi về sau khi xác nhận số điện thoại )");
-        //     return;
-        // }
-       
-        if(this.valueCashOutCost === 0){
-            Global.UIManager.showCommandPopup("Vui lòng chọn mệnh giá");
-            return;
-        }
+
         if(this.inputStk.string === "" || this.inputNameTk.string === "" ){
             Global.UIManager.showCommandPopup("Vui Lòng nhập đủ thông tin tài khoản ngân hàng");
             return;
         }
+
+        if(this.edbValueCashOut.string === ""){
+            Global.UIManager.showCommandPopup("Vui lòng nhập mệnh giá");
+            return;
+        }
+        if(this.edbValueCashOut.string.replace(/[,.]/g, "") < 100000){
+            Global.UIManager.showCommandPopup("Mệnh giá đổi tối thiểu là 100.000");
+            return;
+        }
+      
         Global.UIManager.showConfirmPopup(Global.formatString(MyLocalization.GetText("CAST_BANK_OUT_NOTIFY"),
-            [this.valueCashOutCost, this.textValueChip.string, this.inputStk.string, this.textValueNSP.string
+            [Global.formatNumber(this.edbValueCashOut.string), Global.formatNumber(this.edbValueCashOut.string), this.inputStk.string, this.textValueNSP.string
             ]),
             () => {
                 let msgData = {};
                 msgData[1] = NSP_TYPE.BANK;
-                msgData[2] = this.valueCashOut;//this.GetCardTypeByAmount(this.valueCashOut);
+                msgData[2] = this.edbValueCashOut.string.replace(/[,.]/g, ""); //this.valueCashOut;//this.GetCardTypeByAmount(this.valueCashOut);
                 msgData[5] = this.inputNameTk.string;
-                // msgData[10] = this.inPutPin.string;
                 msgData[3] = this.codeBank;
                 msgData[4] = this.inputStk.string;
                 Global.UIManager.showMiniLoading();
                 require("SendRequest").getIns().MST_Client_Telco_CashOut(msgData);
             }
         );
+    },
+
+    editBoxTextChanged: function (sender, text) {
+        let strTemp = "";
+        for (let i = 0; i < text.string.length; i++) {
+            if (text.string.charAt(i) >= 0 && text.string.charAt(i) <= 9) {
+                strTemp += text.string.charAt(i)
+            }
+        }
+        if (strTemp == "") return;
+        this.moneyTotal = parseInt(strTemp);
+        if(this.moneyTotal < 0) this.moneyTotal = "";
+        
+        if (this.moneyTotal > MainPlayerInfo.ingameBalance) 
+            this.moneyTotal = MainPlayerInfo.ingameBalance;
+        if( MainPlayerInfo.ingameBalance === 0)
+            this.moneyTotal = "";
+        this.edbValueCashOut.string =  Global.formatNumber(this.moneyTotal) ;
+        this.edbValueCashOut.focus()
     },
 
 

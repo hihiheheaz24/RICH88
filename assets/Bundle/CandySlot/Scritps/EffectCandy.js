@@ -66,7 +66,7 @@ cc.Class({
         cpTemp.setMoney(money);
         this.isShowJP = true;
         this.funNext = funNext;
-        //this.scheduleOnce(this.onClose, 5); // vi dc jackpot la dung`
+        this.scheduleOnce(this.onClose, 5); // vi dc jackpot la dung`
     },
     showBigWin(funNext){
         this.node.active = true;

@@ -128,7 +128,7 @@ cc.Class({
 
     onClickAvata(){
         // if(this.indexInTable ==0) return ; // isMe
-        // Global.GameView.showInfoPlayerTLMN(this.id);
+        Global.GameView.showInfoPlayerTLMN(this.id);
     },
     initPlayer(data,isHistory = false){
         cc.log("data init player : ", data)

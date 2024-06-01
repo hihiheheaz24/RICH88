@@ -9,8 +9,16 @@ cc.Class({
         edbPointBet : cc.EditBox,
         parentPopup : cc.Node,
         lbRules : cc.RichText,
+        lbRulesWin : cc.Label,
         lbTime : cc.Label,
         lbDate : cc.Label,
+        lbMinbet : cc.Label,
+        toggleChooseTypeBet : cc.Toggle,
+        nodeAll : cc.Node,
+        avatar : cc.Sprite,
+        lbName : cc.Label,
+        lbGold : cc.Label,
+        toggleNoteNumber : cc.Toggle,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -27,15 +35,70 @@ cc.Class({
         this.dataBet = {};
         this.betOne = 0;
         this.gameType = GAME_TYPE.LODE;
+        this.updateInfoUser();
+    },
+
+    updateInfoUser(){
+        Global.GetAvataById(this.avatar, MainPlayerInfo.accountId);
+        this.lbName.string = MainPlayerInfo.userName;
+        this.lbGold.string = MainPlayerInfo.ingameBalance;
     },
 
     configGame(){
+        cc.log("check type bet : ", this.typeBet)
+        cc.log("check config bet : ", this.configBet)
         let configGame = this.configBet[this.typeBet];
         let tracuoc1 = configGame.XBetValue;
         let tracuoc2 = 1;
         let tracuoc3 = configGame.XRewardValue;
 
-        this.lbRules.string = `THANH TOÁN <color=#FF7C3F>${tracuoc1}</color> LÔ ĐẶT <color=#FF7C3F>${tracuoc2}</color> ĂN <color=#FF7C3F>${tracuoc3} </color>`;
+        this.lbRules.string = "Cần thanh toán X" + configGame.XBetValue + " cho mỗi số";
+        this.lbRulesWin.string = "1 ăn " + tracuoc3;
+        this.lbMinbet.string = Global.formatNumber(tracuoc1*1000);
+        // this.lbRules.string = `THANH TOÁN <color=#FF7C3F>${tracuoc1}</color> LÔ ĐẶT <color=#FF7C3F>${tracuoc2}</color> ĂN <color=#FF7C3F>${tracuoc3} </color>`;
+      
+    },
+
+    setLbChooseNumber(){
+        let configGame = this.configBet[this.typeBet];
+        if(!configGame.XBetValue) return;
+        let tracuoc1 = configGame.XBetValue;
+        let tracuoc2 = 1;
+        let tracuoc3 = configGame.XRewardValue;
+
+        let nameBet = "";
+        switch (this.typeBet) {
+            case BET_TYPE.DE:
+                nameBet = "ĐỀ ĐẶC BIỆT"
+                break;
+            case BET_TYPE.LO:
+                nameBet = "LÔ 2 SỐ"
+                break;
+            case BET_TYPE.XIEN_2:
+                nameBet = "LÔ XIÊN 2"
+                break;
+            case BET_TYPE.XIEN_3:
+                nameBet = "LÔ XIÊN 3"
+                break;
+            case BET_TYPE.XIEN_4:
+                nameBet = "LÔ XIÊN 4"
+                break;
+            case BET_TYPE.BA_CANG:
+                nameBet = "BA CÀNG"
+                break;
+            case BET_TYPE.DAU:
+                nameBet = "ĐẦU"
+                break;
+            case BET_TYPE.DIT:
+                nameBet = "ĐÍT"
+                break;
+            case BET_TYPE.LO_3_SO:
+                nameBet = "LÔ 3 SỐ"
+                break;
+        }
+
+        Global.ChonSoLoDe.lbChooseNumber.string = nameBet + " ĐẶT " + tracuoc1 + " ĂN " + Global.formatNumber(tracuoc3);
+
     },
 
     responseServer(responseCode, packet){
@@ -72,15 +135,21 @@ cc.Class({
 
                 this.lbDate.string = day + "/" + month + "/" + year;
                 this.onClickShowChonSo(null, "lo2so")
+                // this.lo2so.isChecked = true;
                 cc.log("check config bet: ", this.configBet)
-
+                this.onClickNoteNumber();
+                this.toggleNoteNumber.isChecked = true;
                 break;
 
             case RESPONSE_CODE.MSG_SERVER_BETTING_RESPONSE:
                 //Đặt cược thành công
+                cc.log("chay vao dat cuoc thanh comg lo de")
                 MainPlayerInfo.setMoneyUser(packet[1]);
                 this.effectThongBaoCuoiGame("Đặt cược thành công");
                 this.resetGameView();
+                this.updateInfoUser();
+                if(Global.ChonSoLoDe)
+                    Global.ChonSoLoDe.resetNumberBet();
                 break;
 
             case RESPONSE_CODE.MSG_SERVER_GET_HISTORY_RESPONSE:
@@ -174,6 +243,8 @@ cc.Class({
         this.dataBet.numberRequire = this.numberRequire;
         this.dataBet.minNumberSelectRequire = this.minNumberSelectRequire;
         this.dataBet.maxNumberSelectRequire = this.maxNumberSelectRequire;
+        this.toggleChooseTypeBet.isChecked = true;
+        this.nodeAll.active = false;
 
     },
 
@@ -204,25 +275,40 @@ cc.Class({
         } else {
             Global.ResultView.show();
         }
+
+        if(Global.LoDeHistory)
+            Global.LoDeHistory.node.active = false;
     },
 
-    editboxChange(editBoxString) {
+    editBoxTextBegin: function (stext){
+        this.edbPointBet.string = stext.string.replace(/\./g, "")
+    },
+
+    editboxChange: function (editBoxString) {
         //công thức tính tiền bet
         let xBetValue = this.configBet[this.typeBet]
-        let pointBet =  parseInt(editBoxString) 
+        let pointBet =  parseInt(editBoxString) ;
+        cc.log("check point bet : ", pointBet);
+        cc.log("check xBetValue bet : ", xBetValue.XBetValue);
+        if(pointBet < xBetValue.XBetValue * 1000){
+            cc.log("betn duoi muc toi thieu")
+            pointBet = xBetValue.XBetValue * 1000;
+            this.edbPointBet.string = xBetValue.XBetValue * 1000;
+            Global.UIManager.showNoti("Số tiền cược tối thiểu là là " + Global.formatNumber(xBetValue.XBetValue * 1000))
+        }
         this.pointBet = pointBet;
-        this.betOne = pointBet * xBetValue.XBetValue;
+        this.betOne = pointBet;
         cc.log("check tham so  : ",pointBet , " hcekc xx ",xBetValue.XBetValue, "check number ber : ", this.listNumberbet.length )
 
         let valueBet = 0;
         let valueWin = 0;
 
         if(this.typeBet === BET_TYPE.XIEN_2 || this.typeBet === BET_TYPE.XIEN_3 || this.typeBet === BET_TYPE.XIEN_4){
-            valueBet = Global.formatNumber(pointBet * xBetValue.XBetValue);
+            valueBet = Global.formatNumber(parseInt(pointBet)) 
             valueWin = Global.formatNumber(pointBet * xBetValue.XRewardValue);
         }
         else{
-            valueBet = Global.formatNumber(pointBet * xBetValue.XBetValue * this.listNumberbet.length);
+            valueBet = Global.formatNumber(parseInt(pointBet *  this.listNumberbet.length)) 
             valueWin = Global.formatNumber(pointBet * xBetValue.XRewardValue);
         }
 
@@ -231,13 +317,32 @@ cc.Class({
 
         if(!isNaN(pointBet * xBetValue.XBetValue * this.listNumberbet.length) && !isNaN(pointBet * xBetValue.XRewardValue)){
             this.lbTotalBet.string = valueBet;
-            this.lbTotalWin.string = valueWin;
+            this.lbTotalWin.string = Global.formatNumber( parseInt(pointBet / xBetValue.XBetValue * xBetValue.XRewardValue)) //Global.formatNumber(valueWin * 1000 / this.listNumberbet.length);
         }
         else{
             this.lbTotalBet.string = 0;
             this.lbTotalWin.string = 0;
         }
-       
+
+
+
+        // cc.log("cehck edb : ", editBoxString)
+        // let strTemp = "";
+        // for (let i = 0; i < editBoxString.length; i++) {
+        //     if (editBoxString.charAt(i) >= 0 && editBoxString.charAt(i) <= 9) {
+        //         strTemp += editBoxString.charAt(i)
+        //     }
+        // }
+        // if (strTemp == "") return;
+        // this.moneyTotal = parseInt(strTemp);
+        // if(this.moneyTotal < 0) this.moneyTotal = "";
+        
+        // if (this.moneyTotal > MainPlayerInfo.ingameBalance) 
+        //     this.moneyTotal = MainPlayerInfo.ingameBalance;
+        // if( MainPlayerInfo.ingameBalance === 0)
+        //     this.moneyTotal = "";
+        // this.edbPointBet.string =  Global.formatNumber(editBoxString.replace(/\./g, "")) ;
+        // this.edbPointBet.focus()
     },
 
     editTextEndMoney(editBoxString){
@@ -248,7 +353,69 @@ cc.Class({
         } 
         var soDaLoaiBo0DauTien = parseInt(chuoiNhap, 10).toString();
         cc.log("check number : ", soDaLoaiBo0DauTien)
-        this.edbPointBet.string = soDaLoaiBo0DauTien
+        this.edbPointBet.string = Global.formatNumber(soDaLoaiBo0DauTien)
+    },
+
+    edbTextEnd(data) {
+        // Lấy chuỗi từ EditBox
+        let inputString = data.string.replace(/[^0-9]/g, '');
+
+        cc.log("data nhap vao", data.string)
+
+        // Xử lý chuỗi để tạo các cặp số
+        let numberPairs = ""
+        if(this.typeBet === BET_TYPE.BA_CANG || this.typeBet === BET_TYPE.LO_3_SO){
+            numberPairs = this.splitStringIntoThree(inputString);
+            numberPairs.slice(0, this.maxNumberSelectRequire);
+            this.listNumberbet = numberPairs.slice(0, this.maxNumberSelectRequire);
+        }
+        else if(this.typeBet === BET_TYPE.XIEN_2 || this.typeBet === BET_TYPE.XIEN_3 || this.typeBet === BET_TYPE.XIEN_4){
+            numberPairs = this.laySoTuChuoi(this.formatStringWithHyphen(inputString), this.maxNumberSelectRequire);
+            this.listNumberbet = numberPairs.split("-");;
+        }
+        else {
+            numberPairs = this.splitStringIntoPairs(inputString);
+            numberPairs.slice(0, this.maxNumberSelectRequire);
+            this.listNumberbet = numberPairs.slice(0, this.maxNumberSelectRequire);
+        }
+
+
+        this.lbMinbet.string = Global.formatNumber(this.configBet[this.typeBet].XBetValue * 1000)
+        this.edbPointBet.string = Global.formatNumber( this.configBet[this.typeBet].XBetValue * 1000);
+        // In kết quả ra console (bạn có thể xử lý kết quả theo nhu cầu của mình)
+        cc.log("check list ban dau : ", numberPairs)
+       
+        Global.LoDe.lbNumberBet.string = numberPairs;
+        // this.listNumberbet = this.listNumberbet.map(num => parseInt(num));
+        console.log("data tra ve sau do", this.listNumberbet);
+
+
+        this.pointBet = this.edbPointBet.string.replace(/\./g, "");
+        let xBetValue = this.configBet[this.typeBet];
+        let pointBet =  this.pointBet;
+        let valueBet = 0;
+        let valueWin = 0;
+
+        this.betOne = pointBet;
+        cc.log("check value bet one : ", this.betOne);
+        if(this.typeBet === BET_TYPE.XIEN_2 || this.typeBet === BET_TYPE.XIEN_3 || this.typeBet === BET_TYPE.XIEN_4){
+            valueBet = Global.formatNumber(parseInt(pointBet)) 
+            valueWin = Global.formatNumber(pointBet * xBetValue.XRewardValue);
+        }
+        else{
+            valueBet = Global.formatNumber(parseInt(pointBet *  this.listNumberbet.length)) 
+            valueWin = Global.formatNumber(pointBet * xBetValue.XRewardValue);
+        }
+
+
+        if(!isNaN(pointBet * xBetValue.XBetValue * this.listNumberbet.length) && !isNaN(pointBet * xBetValue.XRewardValue)){
+            this.lbTotalBet.string = valueBet;
+            this.lbTotalWin.string = Global.formatNumber( parseInt(pointBet / xBetValue.XBetValue * xBetValue.XRewardValue))  //Global.formatNumber(valueWin * 1000);
+        }
+        else{
+            this.lbTotalBet.string = 0;
+            this.lbTotalWin.string = 0;
+        }
     },
 
     effectThongBaoCuoiGame(str){
@@ -268,6 +435,10 @@ cc.Class({
 
     },
 
+    onClickCommingSoon(){
+        Global.UIManager.showNoti("Tính năng sắp được mở")
+    },
+
     onClickShowHistory(){
         Global.UIManager.showMiniLoading();
         if (Global.LoDeHistoty == null) {
@@ -281,21 +452,48 @@ cc.Class({
 		} else {
 			Global.LoDeHistoty.show();
 		}
+        if(Global.ResultView)
+            Global.ResultView.node.active = false;
     },
 
     onClickShowGuide(){
         if (Global.GuideViewLoDe == null) {
+            cc.log("chay vao guide 1111")
             let bundle = cc.assetManager.getBundle(this.gameType.toString());
 			bundle.load("Prefabs/GuideView", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("GuideViewLoDe");
 				Global.GuideViewLoDe = item;
-				item.show();
-				this.parentPopup.addChild(item.node);
+				this.node.addChild(item.node);
+                item.show();
 			});
 		} else {
+            cc.log("chay vao guide 222")
 			Global.GuideViewLoDe.show();
 		}
     },
+
+    onClickShowInfoBet1(){
+        if(this.listNumberbet.length <=0 ){
+            this.effectThongBaoCuoiGame("Bạn chưa chọn số. Hãy chọn con số may mắn của bạn");
+            return;
+        }
+        if(this.listNumberbet.length < this.numberSelectRequire){
+            this.effectThongBaoCuoiGame("Bạn chưa chọn đủ số");
+            return;
+        }
+        if(this.pointBet <= 0 || isNaN(this.pointBet)){
+            this.effectThongBaoCuoiGame("Vui lòng chon số điểm cược");
+            return;
+        }
+        let msg = {};
+        msg[1] = this.typeBet;
+        msg[2] = this.lbNumberBet.string;
+        msg[3] = parseInt(parseInt(this.lbTotalBet.string.replace(/\./g, ""))  /  this.listNumberbet.length /  this.configBet[this.typeBet].XBetValue); //Global.LoDe.pointBet;
+        cc.log("check send to bet : ", msg)
+        cc.log("chcekc bet one : ", parseInt(this.lbTotalBet.string.replace(/\./g, "")))
+        require("SendRequest").getIns().MST_Client_LoDe_Betting_Game(msg);
+    },
+
 
     onClickShowInfoBet(){
         if(this.listNumberbet.length <=0 ){
@@ -306,7 +504,7 @@ cc.Class({
             this.effectThongBaoCuoiGame("Bạn chưa chọn đủ số");
             return;
         }
-        if(this.pointBet <= 0){
+        if(this.pointBet <= 0 || isNaN(this.pointBet)){
             this.effectThongBaoCuoiGame("Vui lòng chon số điểm cược");
             return;
         }
@@ -316,6 +514,8 @@ cc.Class({
         dataBet.betOne =  this.betOne;
         dataBet.totalBet =  this.lbTotalBet.string;
         dataBet.winMoney = this.lbTotalWin.string;
+        dataBet.configBet = this.configBet[this.typeBet];
+        dataBet.pointBet = this.pointBet;
 
         if (Global.InfoBetting == null) {
             let bundle = cc.assetManager.getBundle(this.gameType.toString());
@@ -348,37 +548,6 @@ cc.Class({
         this.resetGameView();
     },
 
-    edbTextEnd(data) {
-        // Lấy chuỗi từ EditBox
-        let inputString = data.string.replace(/[^0-9]/g, '');
-
-        cc.log("data nhap vao", data.string)
-
-        // Xử lý chuỗi để tạo các cặp số
-        let numberPairs = ""
-        if(this.typeBet === BET_TYPE.BA_CANG || this.typeBet === BET_TYPE.LO_3_SO){
-            numberPairs = this.splitStringIntoThree(inputString);
-            numberPairs.slice(0, this.maxNumberSelectRequire);
-            this.listNumberbet = numberPairs.slice(0, this.maxNumberSelectRequire);
-        }
-        else if(this.typeBet === BET_TYPE.XIEN_2 || this.typeBet === BET_TYPE.XIEN_3 || this.typeBet === BET_TYPE.XIEN_4){
-            numberPairs = this.laySoTuChuoi(this.formatStringWithHyphen(inputString), this.maxNumberSelectRequire);
-            this.listNumberbet = ["0"];
-        }
-        else {
-            numberPairs = this.splitStringIntoPairs(inputString);
-            numberPairs.slice(0, this.maxNumberSelectRequire);
-            this.listNumberbet = numberPairs.slice(0, this.maxNumberSelectRequire);
-        }
-
-        // In kết quả ra console (bạn có thể xử lý kết quả theo nhu cầu của mình)
-        cc.log("check list ban dau : ", numberPairs)
-       
-        Global.LoDe.lbNumberBet.string = numberPairs;
-        
-        console.log("data tra ve sau do", this.listNumberbet);
-
-    },
 
     splitStringIntoPairs(inputString) {
         // Chia chuỗi thành các cặp số, ví dụ: "12345" thành ["12", "34", "05"]
@@ -456,10 +625,37 @@ cc.Class({
        
     },
 
-    onClickClose(){
-        Global.LoDe = null;
-        this.node.destroy();
+    onClickAll(event, data){
+        this.nodeAll.active =  event.isChecked;
+        for (let i = 0; i < this.nodeAll.children.length; i++) {
+            const toggle = this.nodeAll.children[i].getComponent(cc.Toggle);
+            toggle.isChecked = false;      
+        }
     },
 
+    onClickXNumber(){
+        this.lbNumberBet.string = "";
+        this.lbNumberBet.focus();
+    },
+
+    onClickXGold(){
+        this.edbPointBet.string = "";
+        this.edbPointBet.focus();
+    },
+
+    onClickClose(){
+        Global.UIManager.hideMask();
+        this.node.active = false;
+        // Global.LoDe = null;
+        // this.node.destroy();
+    },
+
+    onClickNoteNumber(){
+        if(Global.ResultView)
+            Global.ResultView.node.active = false;
+
+        if(Global.LoDeHistory)
+            Global.LoDeHistory.node.active = false;
+    },
     // update (dt) {},
 });

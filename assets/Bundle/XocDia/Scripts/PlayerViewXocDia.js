@@ -25,5 +25,10 @@ cc.Class({
         this.lbChip.string = Global.formatMoneyChip(dataPlayer.IngameBalance);
     },
 
+    onClickAvatar(){
+        if(this.id === MainPlayerInfo.accountId)
+            Global.UIManager.showProfilePopup(idPlayer)
+    },
+
     // update (dt) {},
 });

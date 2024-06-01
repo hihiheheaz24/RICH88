@@ -728,6 +728,7 @@ cc.Class({
         cc.log("cehck id la " , id)
         cc.log("cehck id la " , this.players)
         for(let i = 0 ; i < this.players.length; i++){
+            if(!this.players[i]) continue;
             if(this.players[i].id === id) return this.players[i];
         }
     },

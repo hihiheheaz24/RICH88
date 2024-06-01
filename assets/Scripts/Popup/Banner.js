@@ -76,5 +76,12 @@ cc.Class({
 		Global.UIManager.showEventRanking(STATE_EVENT.EVENT);
     },
 
+    onClickShowShop(){
+        // require("SendRequest").getIns().MST_Client_Get_Vip_Point_Config();
+
+        Global.LobbyView.clickBtnShopCashIn(null, "1");
+        this.hide()
+    },
+
     // update (dt) {},
 });

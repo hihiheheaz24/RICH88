@@ -37,6 +37,7 @@ window.Global = {
     DataConfigShopDiamond: null,
     MissionFail: false,
     TodayMission: null,
+    ConfigVipPoint : null,
 
     RuleGamePoker: null,
     MiniGameView: null,
@@ -129,6 +130,8 @@ window.Global = {
     FirstCashIn: null,
     InfoPlayerTLMN: null,
     BannerPopup : null,
+
+    VipPoint : null,
 
     testWindow: null,
     //----- Game---
@@ -466,6 +469,16 @@ window.Global = {
                 return "PKR";
             case 25:
                 return "MAB";
+            case 14:
+                return "LoDe"
+            case 7:
+                return "TaiXiu"
+            case 19:
+                return "XocDiaView"
+            case 8:
+                return "MiniPoker"
+            case 5:
+                return "MiniSlot"
         }
     },
 
@@ -698,6 +711,7 @@ window.Global = {
         document.body.removeChild(textArea);
     },
     coppyToClipboard(text) {
+        cc.log("chay vao coppy text " , text)
         if (cc.sys.isNative) {
             Global.UIManager.showAlertMini("Đã Sao Chép");
             jsb.copyTextToClipboard(text);
@@ -822,7 +836,10 @@ window.Global = {
 
     loadImgFromUrl(nodeImg, url) {
         cc.assetManager.loadRemote(url, (err, spr) => {
-            if (err) cc.log("=====> loi tai anh : ", err);
+            if (err){
+                cc.log("=====> loi tai anh : ", err);
+                return;
+            }
             if (!nodeImg) return;
             nodeImg.spriteFrame = new cc.SpriteFrame(spr);
             cc.log("cehck img : ", spr)

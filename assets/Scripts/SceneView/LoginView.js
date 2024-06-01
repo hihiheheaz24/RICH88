@@ -75,6 +75,37 @@ cc.Class({
 		Global.UIManager.showLoginTabView();
 	},
 
+	onClickPlayNowLogin() {
+		let accPlayNow = cc.sys.localStorage.getItem("USER_PLAYNOW");
+		let passPlayNow = cc.sys.localStorage.getItem("PASS_PLAYNOW");
+		if (Global.deviceId && accPlayNow === null) {
+			accPlayNow = Global.deviceId;
+			passPlayNow = "vpl" + Global.deviceId;
+
+			cc.sys.localStorage.setItem("USER_PLAYNOW", accPlayNow);
+			cc.sys.localStorage.setItem("PASS_PLAYNOW", passPlayNow);
+		}
+		else {
+			if (accPlayNow == null) {
+				let timeSta = new Date().getTime();
+				let textRandom = "";
+				let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+				for (let i = 0; i < 10; i++) textRandom += possible.charAt(Math.floor(Math.random() * possible.length));
+
+				accPlayNow = timeSta;
+				passPlayNow = "rik" + timeSta + textRandom;
+
+				cc.sys.localStorage.setItem("USER_PLAYNOW", accPlayNow);
+				cc.sys.localStorage.setItem("PASS_PLAYNOW", passPlayNow);
+			}
+		}
+
+		console.log("check device id : ", Global.deviceId)
+		console.log("check acc play now la : ", accPlayNow);
+		console.log("check pass play now la : ", passPlayNow);
+		Global.LoginView.requestFastLogin(accPlayNow, passPlayNow);
+	},
+
 	onClickDangKy() {
 		Global.UIManager.showRegisterTabView();
 	},

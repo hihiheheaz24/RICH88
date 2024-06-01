@@ -50,7 +50,17 @@ cc.Class({
         listSprStar : [cc.SpriteFrame],
 
         lsc : cc.Node,
-        lsgd : cc.Node
+        lsgd : cc.Node,
+
+        edbInputOtpTelegram : cc.EditBox,
+        nodeActivePhone : cc.Node,
+        nodeNoneActivePhone : cc.Node,
+        lbNameUserTele : cc.Label,
+
+        nodeMain : cc.Node,
+
+        edbPhoneNumber : cc.EditBox,
+        edbInputOtpSms : cc.EditBox
     },
 
     onClickShowLsc(){
@@ -72,9 +82,7 @@ cc.Class({
 
 
     onLoad(){
-        Global.ProfilePopup = this;
         this.dataVerify = null;
-
         if(cc.sys.isBrowser) {
 			var url = new URL(window.location.href);
 			var AccessToken = url.searchParams.get("accesstoken");
@@ -93,6 +101,11 @@ cc.Class({
 		}
     },
 
+    onEnable(){
+        this.edbInputOtpSms.string = "";
+        this.edbInputOtpTelegram.string = "";
+    },
+
     start() {
         this.resignEdb(this.passOldIF);
         this.resignEdb(this.passNewIF);
@@ -108,7 +121,7 @@ cc.Class({
     show(idPlayer) {
         Global.onPopOn(this.node);
         this.ShowTabProfile();
-        // this.SetInfoProfile();
+        this.SetInfoProfile();
         let id = null
         if(idPlayer){
             id = idPlayer;
@@ -136,27 +149,28 @@ cc.Class({
        
         this.textId.string = "ID Người Chơi: "  + dataPlayer.AccountId
         this.btnLogOut.node.active = false;
-        if(Global.GameView){
-            this.node.getChildByName("background").scale = cc.v2(0.7,0.7);
-        }
-        else{
-            this.node.getChildByName("background").scale = cc.v2(1,1);
-        }
+        // if(Global.GameView){
+        //     this.node.getChildByName("background").scale = cc.v2(0.7,0.7);
+        // }
+        // else{
+        //     this.node.getChildByName("background").scale = cc.v2(1,1);
+        // }
         cc.log("check id play : ", dataPlayer.AccountId)
         cc.log("check id play : ", MainPlayerInfo.accountId)
         if (dataPlayer.AccountId !== MainPlayerInfo.accountId) {
-            this.tetxDiamond.node.parent.active = false;
-            this.textMoney.node.active = false;
+            // this.tetxDiamond.node.parent.active = false;
+            // this.textMoney.node.active = false;
+            this.nodeMain.active = false;
 
             let player = Global.GameView.getPlayerWithId(dataPlayer.AccountId);
             cc.log("check data  league : ", player)
             if (player) {
-
                 this.textMoney.node.active = true;
+                cc.log("chay vao day set gold : ", player.gold)
                 this.textMoney.string = Global.formatNumber(player.gold);
             }
+            cc.log("check player gold", player.gold)
             this.btnLogOut.node.active = false;
-            cc.log("check data  league : ", dataPlayer.LeagueInfo)
             if (dataPlayer.LeagueInfo) {
                 this.iconLeague.node.parent.active = true;
                 if (dataPlayer.LeagueInfo.rank) {
@@ -175,6 +189,7 @@ cc.Class({
             }
         }
         else{
+            this.nodeMain.active = true;
             this.tetxDiamond.node.parent.active = true;
             this.textMoney.node.active = true;
             this.tetxDiamond.string = Global.formatNumber(MainPlayerInfo.diamondBalance);
@@ -284,6 +299,15 @@ cc.Class({
     },
 
     SetInfoProfile() {
+        if(MainPlayerInfo.phoneNumber){
+            this.nodeActivePhone.active = true;
+            this.nodeNoneActivePhone.active = false;
+            this.lbNameUserTele.string = MainPlayerInfo.phoneNumber;
+        }
+        else{
+            this.nodeActivePhone.active = false;
+            this.nodeNoneActivePhone.active = true;
+        }
         return
         this.textName.string = MainPlayerInfo.nickName;
         if(MainPlayerInfo.pinCode !== "")
@@ -455,6 +479,7 @@ cc.Class({
         })
     },
     onDestroy() {
+        cc.log("chay vao destroy")
         Global.ProfilePopup = null;
     },
     onClickSendSms(){
@@ -709,6 +734,47 @@ cc.Class({
             this.passNewAgainIF.inputFlag = 5;
         else
             this.passNewAgainIF.inputFlag = 0;
+    },
+
+    onClickOpenTelegramGetOtp(){
+        cc.log("check link tele : ", Global.GameConfig.UrlGameLogic.VerifyAccountUrl)
+        cc.sys.openURL(Global.GameConfig.UrlGameLogic.VerifyAccountUrl)
+    },
+
+    onClickGetOtpSms(){
+        if(this.edbPhoneNumber.string === "" || this.edbPhoneNumber.string.length < 10){
+            Global.UIManager.showNoti("Số điện thọai chưa đúng")
+            return;
+        }
+        let msg = {};         
+        cc.log("request otp sms " + Global.GameConfig.UrlGameLogic.SmsVerifyAccountUrl);
+        cc.log("check phone la : ", this.edbPhoneNumber.string)
+        let url = Global.GameConfig.UrlGameLogic.SmsVerifyAccountUrl + "?phoneNumber=" + this.edbPhoneNumber.string;
+        require("BaseNetwork").request(url, msg, this.handleOtpSms.bind(this));
+    },
+
+    handleOtpSms(data){
+        cc.log("check data otp : ", JSON.parse(data));
+        Global.UIManager.showNoti(JSON.parse(data).m);
+    },
+
+    onClickVerifyOnTelegram(){
+        let otp = "";
+        if(this.edbInputOtpSms.string !== ""){
+            otp = this.edbInputOtpSms.string;
+        }else{
+            otp = this.edbInputOtpTelegram.string;
+        }
+        if(otp === ""){
+            Global.UIManager.showNoti("Bạn chưa nhập mã OTP. Hãy bấm vào lấy mã OTP");
+            return;
+        }
+        let msgData = {};
+        msgData[1] = "";
+        msgData[2] = otp;
+       
+        console.log("send verify phone to server accept : ", msgData)
+        require("SendRequest").getIns().MST_Client_Update_PhoneNumber(msgData);
     },
 
 });

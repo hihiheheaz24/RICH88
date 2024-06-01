@@ -6050,6 +6050,7 @@
     "itemNumberBet": {
       "__id__": 142
     },
+    "itemNumberSelect": null,
     "listTabNumber": [
       {
         "__id__": 23
@@ -6088,6 +6089,9 @@
     "listSelected": {
       "__id__": 136
     },
+    "listViewNumber": null,
+    "puSelectNumnber": null,
+    "lbChooseNumber": null,
     "_id": ""
   },
   {
