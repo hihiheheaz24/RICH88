@@ -34,31 +34,35 @@ var ReceiveResponse = cc.Class({
             case RESPONSE_CODE.MSG_SERVER_DICE_GET_TOP_WIN_LOSE_CHAIN:
                 Global.TaiXiu.responseServer(responseCode, packet);
                 return;
+            case RESPONSE_CODE.MST_SERVER_JILI_LOGIN_GAME_RESPONSE:
+                cc.sys.openURL(packet[1]);
+                return;
             case RESPONSE_CODE.MST_SERVER_GET_VIP_CONFIG_INFO_RESPONSE:
                 Global.ConfigVipPoint = packet;
-                Global.ConfigVipPoint[3] = [{AccountId:null, VipLevel: 1, IsReceived: false, Rewards: 100000}, {AccountId:null, VipLevel: 2, IsReceived: false, Rewards: 200000},
-                    {AccountId:null, VipLevel: 3, IsReceived: false, Rewards: 300000},
-                    {AccountId:null, VipLevel: 4, IsReceived: false, Rewards: 500000},
-                    {AccountId:null, VipLevel: 5, IsReceived: false, Rewards: 1000000},
-                    {AccountId:null, VipLevel: 6, IsReceived: false, Rewards: 20000000},
-                    {AccountId:null, VipLevel: 7, IsReceived: false, Rewards: 50000000},
-                    {AccountId:null, VipLevel: 8, IsReceived: false, Rewards: 100000000},
-                    {AccountId:null, VipLevel: 9, IsReceived: false, Rewards: 200000000}]
                 return;
             case RESPONSE_CODE.MST_SERVER_EXCHANGE_VIP_POINTS:
                 cc.log("handle change vip point o day")
                 // +) data 1: Vip level mới
                 // +) data 2: điểm vip mới
                 // +) data 3: số tiền nhận được
+                Global.UIManager.showConfirmPopup("Bạn nhận được " + Global.formatNumber(packet[3]) + " từ sự kiện đổi điểm VIP");
+                MainPlayerInfo.setMoneyUser(packet[4]);
+                MainPlayerInfo.SetVip(packet[1]);
+                MainPlayerInfo.SetVipPoint(packet[2]);
                 // +) data 4: số tiền của người chơi
                 return;
             case RESPONSE_CODE.MST_SERVER_RECEIVE_VIP_REWARD:
                 cc.log("handle MST_SERVER_RECEIVE_VIP_REWARD o day")
                 // data 1: phần thưởng
-
+                Global.listReward[Global.listReward.length] = JSON.parse(packet[1]);
+                Global.UIManager.showRewardPopup(STATUS_GIFT_POPUP.REWARD, MyLocalization.GetText("GET_REWARD"));
+                MainPlayerInfo.setMoneyUser(packet[2])
                 // data 2: tiền sau khi thưởng
 
                 // data 3: thông tin các level có thể nhận thưởng con lại
+                Global.ConfigVipPoint[3] = packet[3];
+                cc.log("check config vip ", Global.ConfigVipPoint[3])
+                Global.VipPoint.handleListReceive();
                 return;
             case RESPONSE_CODE.MST_SERVER_SEND_LEAGUE_INFO:
                 cc.log("check data league : ", packet)
@@ -685,6 +689,7 @@ var ReceiveResponse = cc.Class({
         }
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_START_GAME_RESPONSE){
+            cc.log("check game api : ", packet)
             Global.LobbyView.handleShowGameApi(packet[1], packet[2])
         }
 

@@ -18,6 +18,9 @@ cc.Class({
         edbInputVipPoint : cc.EditBox,
         listItemReceive : cc.ScrollView,
         itemReceive : cc.Node,
+        lbPercentExchange : cc.Label,
+        lbReceiveExchange : cc.Label,
+        edbInputVipPoint : cc.EditBox
         // Guide
 
     },
@@ -25,6 +28,9 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.listPromotion = [];
+        this.listPercent = [0, 100, 200, 300, 400, 500, 600, 700, 800, 1000];
+
         for (let i = 0; i < this.listBtnInfoVip.length; i++) {
             const btn = this.listBtnInfoVip[i];
             btn.node.on(cc.Node.EventType.MOUSE_ENTER, function(event) {
@@ -98,69 +104,108 @@ cc.Class({
     },
 
     setViewConfig(){
-        if(MainPlayerInfo.vipLevel === 0){
-            this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel];
-            this.lbTopUpPromotion.string = "0%"
-        }
-        else{
-            this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel];
-
-            let text = listPromotion[MainPlayerInfo.vipLevel - 1].Description;
-            // Sử dụng biểu thức chính quy để tìm số trước %
-            let regex = /(\d+)%/;
-            let match = text.match(regex);
-    
-            if (match) {
-                let percent = match[1];
-                console.log(percent);
-                this.lbTopUpPromotion.string = percent + "%";
-            } else {
-                console.log("Không có khuyến mãi nạp thẻ");
-                this.lbTopUpPromotion.string = "0%"
-            }
-        }
 
         let index = 0;
         index = MainPlayerInfo.vipLevel - 1;
         if(index <= 0) index = 0;
         this.vipLevelFillRange.fillRange = index / 8;
 
-        let listPromotion = [];
+        this.listPromotion = [];
         if(Global.ConfigVipPoint){
             cc.log("check config vip point : ", Global.ConfigVipPoint);      
             for (let i = 0; i < Global.ConfigVipPoint[1].length; i++) {
                 const obj = JSON.parse(Global.ConfigVipPoint[1][i]);
-                listPromotion.push(obj);
+                this.listPromotion.push(obj);
             }
-            cc.log("check list promotion : ", listPromotion[0].Description)
+            cc.log("check list promotion : ", this.listPromotion)
         }
 
         for (let i = 0; i < this.listBtnInfoVip.length; i++) {
             const btn = this.listBtnInfoVip[i];
-            if(listPromotion[i] && listPromotion[i].Description)
-                btn.node.getChildByName("noti").getChildByName("lbInfo").getComponent(cc.Label).string = listPromotion[i].Description.replace(/^-/gm, '');
+            if(this.listPromotion[i] && this.listPromotion[i].Description)
+                btn.node.getChildByName("noti").getChildByName("lbInfo").getComponent(cc.Label).string = this.listPromotion[i].Description.replace(/^-/gm, '');
         }
-       
+
+        if(MainPlayerInfo.vipLevel === 0){
+            this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel];
+            this.lbTopUpPromotion.string = "0%"
+        }
+        else{
+            this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel];
+            cc.log("check promotion la : ",  this.listPromotion[MainPlayerInfo.vipLevel - 1].RatePromotion)
+            this.lbTopUpPromotion.string =  this.listPromotion[MainPlayerInfo.vipLevel - 1].RatePromotion + "%"
+        }
+
+        
 
         this.lbPointVip.string = MainPlayerInfo.vipPoint;
         this.lbLevelVip.string = MainPlayerInfo.vipLevel;
-        this.lbRankUp.string = "0";
+        if(this.listPromotion[MainPlayerInfo.vipLevel])
+            this.lbRankUp.string = this.listPromotion[MainPlayerInfo.vipLevel].RequirePoint;
         
     },
 
     handleListReceive(){
         if(!Global.ConfigVipPoint) return;
-        let listReceive = Global.ConfigVipPoint[3];
-        cc.log("check list item la : ", listReceive);
+
+        this.lbPercentExchange.string = "VIP " + MainPlayerInfo.vipLevel + " x" + this.listPercent[MainPlayerInfo.vipLevel];
+
+        let listReceive = this.listPromotion;
+        cc.log("check list item la : ", Global.ConfigVipPoint[3]);
 
         this.listItemReceive.content.destroyAllChildren();
         for (let i = 0; i < listReceive.length; i++) {
             const obj = listReceive[i];
+            if(obj.RewardsList.length === 0) continue;
             let item = cc.instantiate(this.itemReceive).getComponent("ItemVipPointReceive");
+
+            obj.Rewards = obj.RewardsList[0].Amount;
+
+            this.listItemReceive.content.addChild(item.node);
             item.initItem(obj);
             item.node.active = true;
-            this.listItemReceive.content.addChild(item.node);
+            item.node.idVip = obj.VipId;    
         }
+
+        for (let i = 0; i < Global.ConfigVipPoint[3].length; i++) {
+            const obj = JSON.parse(Global.ConfigVipPoint[3][i]);
+            for (let j = 0; j < this.listItemReceive.content.children.length; j++) {
+                const itemVip = this.listItemReceive.content.children[j];
+                if(obj.VipLevel === itemVip.idVip){
+                    if(!obj.IsReceived){
+                        itemVip.getChildByName("btnReceive").getComponent(cc.Button).interactable = true;
+                    }
+                    else{
+                        itemVip.getChildByName("btnReceive").active = false;
+                    }
+                    continue;
+                }
+            }
+        }
+
+    },
+
+    edbChange(editBoxString, text){
+        cc.log("check text la : ", text)
+
+         cc.log("cehck edb : ", editBoxString)
+        let strTemp = "";
+        for (let i = 0; i < editBoxString.length; i++) {
+            if (editBoxString.charAt(i) >= 0 && editBoxString.charAt(i) <= 9) {
+                strTemp += editBoxString.charAt(i)
+            }
+        }
+        if (strTemp == "") return;
+        this.moneyTotal = parseInt(strTemp);
+        if(this.moneyTotal < 0) this.moneyTotal = "";
+        
+        if (this.moneyTotal > MainPlayerInfo.ingameBalance) 
+            this.moneyTotal = MainPlayerInfo.ingameBalance;
+        if( MainPlayerInfo.ingameBalance === 0)
+            this.moneyTotal = "";
+        this.edbInputVipPoint.string =  Global.formatNumber(editBoxString.replace(/\./g, "")) ;
+        this.lbReceiveExchange.string =  Global.formatNumber(editBoxString.replace(/\./g, "") * this.listPercent[MainPlayerInfo.vipLevel]);
+        this.edbInputVipPoint.focus()
     },
 
     onClickShowInfoVipLevel(){
@@ -168,9 +213,9 @@ cc.Class({
     },
 
     onClickSendExchangeVipPoint(){
-        let point = parseInt(this.edbInputVipPoint.string);
+        let point = parseInt(this.edbInputVipPoint.string.replace(/\./g, ""));
         let msg = {}
-        msg[1] = point
+        msg[1] = point;
         require("SendRequest").getIns().MST_Client_Exchange_Vip_Point(msg);
 
     },

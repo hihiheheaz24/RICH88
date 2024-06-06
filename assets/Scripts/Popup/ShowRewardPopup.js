@@ -65,7 +65,7 @@ cc.Class({
 
     show(status, content = null, func) {
         this.func = func
-        this.node.active = false;
+        // this.node.active = false;
         cc.log("check show reward id : ",status) 
         if (status == STATUS_GIFT_POPUP.ATTENDANCE){
             Global.listCacheShow.push(Global.indexDailyReward);       
@@ -86,6 +86,7 @@ cc.Class({
     },
 
     ShowProcess(status) {
+        cc.log("show log status : ", status)
         Global.isShow = false;
         Global.AgRewardAds = 0;
         if (status == STATUS_GIFT_POPUP.ATTENDANCE) {
@@ -174,6 +175,7 @@ cc.Class({
             this.listDescriptionReward.splice(0, 1);
             Global.listReward.splice(0, 1);
         } else if (status == STATUS_GIFT_POPUP.VIP) {
+            cc.log("chay vao show vip")
             this.statusRewards = STATUS_GIFT_POPUP.VIP
             this.dailyContent.active = false;
             this.onlineContent.active = false;

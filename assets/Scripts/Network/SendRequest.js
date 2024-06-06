@@ -407,5 +407,11 @@ var SendRequest = cc.Class({
     MST_Client_Receive_Vip_Reward(msg) {
         Global.NetworkManager.sendRequest(REQUEST_CODE.MST_CLIENT_RECEIVE_VIP_REWARD, msg);
     },
+
+    //ban ca JILI
+
+    MST_Client_JILI_Login_Game(msg) {
+        this.RequestMessageNoData(REQUEST_CODE.MST_CLIENT_JILI_LOGIN_GAME);
+    },
 });
 module.exports = SendRequest

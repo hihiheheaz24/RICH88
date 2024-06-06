@@ -33,11 +33,13 @@ cc.Class({
         // actionEffectClose(this.node , ()=>{
         //     this.node.active = false;
         // })
+        Global.UIManager.hideMask();
         Global.onPopOff(this.node);
     },
     show(){
         // this.node.active = true;
         // actionEffectOpen(this.node);
+        Global.UIManager.showMask();
         Global.onPopOn(this.node);
         this.checkStatusTab();
     },

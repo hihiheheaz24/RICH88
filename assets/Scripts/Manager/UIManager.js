@@ -617,10 +617,11 @@ cc.Class({
 			cc.resources.load("Popup/ShowRewardPopup", cc.Prefab, (err, prefab) => {
 				let item = cc.instantiate(prefab).getComponent("ShowRewardPopup");
 				Global.ShowRewardPopup = item;
-				this.parentPopupLogin.addChild(item.node);
-				item.show(status, content, func);
-				item.node.active = false;
-			});
+				this.parentPopup.addChild(item.node);
+				item.show(status, content);
+			})
+		} else {
+			Global.ShowRewardPopup.show(status, content);
 		}
 	},
 
@@ -631,7 +632,7 @@ cc.Class({
 				Global.ShowRewardPopup = item;
 				this.parentPopupLogin.addChild(item.node);
 				item.showRewardFirstLogin(data, func);
-				item.node.active = false;
+				// item.node.active = false;
 			});
 		}
 		// else {
@@ -648,7 +649,7 @@ cc.Class({
 				Global.ShowRewardPopup = item;
 				this.parentPopupLogin.addChild(item.node);
 				item.showRewardFinishQuest(data, func);
-				item.node.active = false;
+				// item.node.active = false;
 			});
 		}
 		// else {

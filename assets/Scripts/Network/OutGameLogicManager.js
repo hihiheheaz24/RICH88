@@ -249,6 +249,8 @@ var OutGameLogicManager = cc.Class({
         MainPlayerInfo.vipPoint = vipPoint;
         // MainPlayerInfo.setMoneyUser(accountBalance) ;
         MainPlayerInfo.ingameBalance = accountBalance;
+        cc.log("chay vao ipdate vip")
+        require("SendRequest").getIns().MST_Client_Get_Vip_Point_Config();
         if (Global.UIManager) Global.UIManager.showRewardPopup(STATUS_GIFT_POPUP.VIP);
     },
 
@@ -387,7 +389,7 @@ var OutGameLogicManager = cc.Class({
             if (Global.LobbyView) {
                 Global.LobbyView.UpdateInfoView();
             }
-            Global.UIManager.showRewardPopup(WeeklyRewardPopup.STATUS_GIFT_POPUP.REWARD, MyLocalization.GetText("GET_REWARD"));
+            Global.UIManager.showRewardPopup(STATUS_GIFT_POPUP.REWARD, MyLocalization.GetText("GET_REWARD"));
         }
     },
 

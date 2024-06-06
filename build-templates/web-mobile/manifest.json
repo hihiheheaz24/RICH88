@@ -1,0 +1,21 @@
+{
+  "name": "RIK88 CLUB",
+  "short_name": "RIK88 CLUB",
+  "description": "Rik88 Cổng game quốc tế - Uy tín xanh9 nhất hiện nay",
+  "icons": [
+    {
+      "src": "https://rik88.asia/rik88.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://rik88.asia/rik88.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}

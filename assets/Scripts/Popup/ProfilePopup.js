@@ -60,7 +60,10 @@ cc.Class({
         nodeMain : cc.Node,
 
         edbPhoneNumber : cc.EditBox,
-        edbInputOtpSms : cc.EditBox
+        edbInputOtpSms : cc.EditBox,
+
+        iconVip : cc.Sprite,
+        listIconVip : [cc.SpriteFrame]
     },
 
     onClickShowLsc(){
@@ -308,6 +311,12 @@ cc.Class({
             this.nodeActivePhone.active = false;
             this.nodeNoneActivePhone.active = true;
         }
+
+        if(MainPlayerInfo.vipLevel > 0)
+			this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel - 1];
+		else
+			this.iconVip.spriteFrame = null;
+
         return
         this.textName.string = MainPlayerInfo.nickName;
         if(MainPlayerInfo.pinCode !== "")

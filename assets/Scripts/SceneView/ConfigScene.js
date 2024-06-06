@@ -43,7 +43,10 @@ cc.Class({
 		this.nodeSupport.scale = 0;
 		this.dataSupport = null;
 		this.count = 0;
-		this.globalGameStoragePath = (jsb.fileUtils ? jsb.fileUtils.getWritablePath() : "/") + "remote-asset";
+
+		if (cc.sys.isNative) {
+			this.globalGameStoragePath = (jsb.fileUtils ? jsb.fileUtils.getWritablePath() : "/") + "remote-asset";
+        }
 
 		this.count = 0;
 	},
@@ -70,8 +73,8 @@ cc.Class({
 
 	getConfigLink() {
 
-		CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv live
-		// CONFIG.CONFIG_LINK = "https://api-dev.vpl.mobi/api/config/gconfbd46a2b5fadcbc" // sv test
+		// CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv live
+		CONFIG.CONFIG_LINK = "https://api-dev.vpl.mobi/api/config/gconfbd46a2b5fadcbc" // sv test
 		var dataSend = {
 			version: CONFIG.VERSION,
 			os: require("ReceiveResponse").getIns().GetPlatFrom(),

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "b022679a-2b18-4986-9ac5-160ab8bdcf45",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 747,
+  "height": 104,
+  "platformSettings": {},
+  "subMetas": {
+    "text-nhanthuongonline": {
+      "ver": "1.0.4",
+      "uuid": "a4cb6e8a-3705-4f56-bc0d-0e47c7c33e64",
+      "rawTextureUuid": "b022679a-2b18-4986-9ac5-160ab8bdcf45",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 747,
+      "height": 104,
+      "rawWidth": 747,
+      "rawHeight": 104,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

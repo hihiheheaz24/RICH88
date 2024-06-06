@@ -54,13 +54,32 @@ cc.Class({
 		nodeGameList : cc.Node,
 		nodeChooseTable : cc.Node,
 		btnMiniPoker : cc.Node,
+		btnDragonBall : cc.Node,
 		nodeLobbySlots : cc.Node,
 		iconSlotsLobby : cc.Sprite,
 		lbNameSlots  : cc.Label,
+		iconVip : cc.Sprite,
+		listIconVip : [cc.SpriteFrame],
+
+		btnGameDemo : cc.Node,
+		btnGameReal : cc.Node,
+		iconZeus : cc.Node
 
 	},
 
 	onLoad() {
+		this.btnGameDemo.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
+			// Mở liên kết trong tab mới
+			window.open(this.linkDemo, "_blank");
+		}, this);
+
+		this.btnGameReal.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
+			// Mở liên kết trong tab mới
+			window.open(this.linkReal, "_blank");
+		}, this);
+		
+		this.linkReal = "";
+		this.linkDemo = "";
 		this.nodeBottom.active = false;
 		this.nodeGameList.active = true;
 		this.nodeChooseTable.active = false;
@@ -72,8 +91,10 @@ cc.Class({
 		
 		this.webView.node.parent.active = false;
 		if(cc.sys.isBrowser){
+			var url = new URL(window.location.href).href;
+			cc.log("check url la : ", url)
 			if (window.navigator && window.navigator.standalone) {
-				const iconUrl = 'https://play.rik88.life/rik88.png';
+				const iconUrl = url + 'rik88.png';
 				const appName = 'RIK88';
 				const shortcut = document.createElement('link');
 				shortcut.rel = 'apple-touch-icon';
@@ -96,7 +117,7 @@ cc.Class({
 			}
 
 			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('https://play.rik88.life/service-worker.js')
+				navigator.serviceWorker.register(url + 'service-worker.js')
 				  .then(function(registration) {
 					console.log('Service Worker registered with scope:', registration.scope);
 				  })
@@ -119,21 +140,26 @@ cc.Class({
 	},
 
 	hanldeListGameSlotAPI(data){
-		for (let i = 0; i < this.gameListApi.children.length; i++) {
-			if(i === 0) continue;
+		for (let i = 2; i < this.gameListApi.children.length; i++) {
 			const itemGame = this.gameListApi.children[i];
 			itemGame.active = false;
 		}
 		for (let i = 0; i < data.length; i++) {
 			const objData = data[i];
 			let item = null;
-            if (i < this.gameListApi.children.length - 1) {
-                item = this.gameListApi.children[i + 1];
-            }
-            else {
-                item = cc.instantiate(this.itemSlotApi);
-				this.gameListApi.addChild(item);
-            }
+			if(i === 0){
+				item = this.iconZeus;
+			}
+			else{
+				if (i < this.gameListApi.children.length -3) {
+					item = this.gameListApi.children[i + 3];
+				}
+				else {
+					item = cc.instantiate(this.itemSlotApi);
+					this.gameListApi.addChild(item);
+				}
+			}
+           
 
 			let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" +  objData.gameID + ".png"
 			Global.loadImgFromUrl(item.getChildByName("mask").getChildByName("iconGame").getComponent(cc.Sprite), urlImg)
@@ -152,30 +178,16 @@ cc.Class({
 	handleShowGameApi(data, chip) {
 		cc.log("show data la  ", data)
 
-		cc.sys.openURL(data, '_self');
+		this.linkReal = data;
+		this.linkDemo = data;
+		// if (data.includes("demo")) {
+		// 	this.linkDemo = data;
+		// } else {
+		// 	this.linkReal = data;
+		// }
+
 		Global.UIManager.hideMiniLoading();
-		MainPlayerInfo.setMoneyUser(chip);
-
-		// let canvas = cc.director.getScene().getChildByName("Canvas");
-		// if (!cc.sys.isMobile) {
-		// 	canvas.designResolution = cc.size(1920,1080);
-		// 	console.log("check win soze : ", cc.winSize)
-		// 	this.webView.node.setContentSize(cc.size(cc.winSize.width - 500, cc.winSize.height));
-		// 	this.webView.node.position = cc.v2(0, 0);
-		// }
-		// else{
-		// 	canvas.designResolution = cc.size(1358,1920);
-		// }
-		// cc.log("check uipdate money", chip)
-		// Global.UIManager.hideMiniLoading();
-		// Global.AudioManager.stopMusic();
-		// this.webView.node.parent.active = true;
-		// this.webView.url = data;
-		// this.onHideLobby();
 		// MainPlayerInfo.setMoneyUser(chip);
-
-		//cc.director.loadScene("GameAPI");
-		// Global.UrlGameApi = data;
 	},
 
 	handleCloseGameApi(data) {
@@ -206,16 +218,26 @@ cc.Class({
 		this.lbNameSlots.string = data.gameName
 
 		let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" +  data.gameID + ".png"
-		Global.loadImgFromUrl(this.iconSlotsLobby, urlImg)
+		Global.loadImgFromUrl(this.iconSlotsLobby, urlImg);
+		this.getLinkGameApi("DEMO");
 	},
 
-	onClickShowGameApi(event, data){
+	getLinkGameApi(data){
 		Global.UIManager.showMiniLoading();
 		let msg = {};
 		msg[1] = this.dataSlots;
 		msg[2] = data;
 		cc.log("send start game : ", msg)
-		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg)
+		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg);
+	},
+
+	onClickShowGameApi(event, data){
+		if(data === "DEMO"){
+
+		}
+		else{
+
+		}
 	},
 
 	onClickSortGame(event, data) {
@@ -234,6 +256,7 @@ cc.Class({
 					gameOther.active = true;
 				});
 				this.btnMiniPoker.active = false;
+				this.btnDragonBall.active = false;
 				break;
 
 			case "2":
@@ -308,7 +331,6 @@ cc.Class({
 	},
 
 	reviceLoginData(packet) {
-		Global.UIManager.showBannerPopup();
 
 		cc.log("chay duoc vao login lobby view + data login la : ", packet);
 		Global.UIManager.hideLoading();
@@ -332,6 +354,11 @@ cc.Class({
 		require("SendRequest").getIns().MST_Client_Pramatic_Get_Game_list();
 		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
 		this.getDataLogin();
+		Global.UIManager.showBannerPopup();
+		if(MainPlayerInfo.vipLevel > 0)
+			this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel - 1];
+		else
+			this.iconVip.spriteFrame = null;
 	},
 
 	onClickOpenMiniGame(event, data){
@@ -945,6 +972,11 @@ cc.Class({
 		}
 	},
 
+	onClickTest(){
+		require("SendRequest").getIns().MST_Client_JILI_Login_Game();
+
+	},
+
 	getDataLogin() {
 		if (Global.NetworkManager._connect && Global.NetworkManager._connect.connectionState !== "Connected") return;
 		cc.log("=======> chay vao get data login");
@@ -954,6 +986,7 @@ cc.Class({
 		// require("SendRequest").getIns().MST_Client_Get_Mission_Info();
 		require("SendRequest").getIns().MST_Client_Get_Shop_Config();
 		require("SendRequest").getIns().MST_Client_Get_Vip_Point_Config();
+
 
 		this.onClickSendGetListRoom();
 		this.requestBettingTaiXiu();
@@ -970,12 +1003,7 @@ cc.Class({
 		require("SendRequest").getIns().MST_Client_Top_Event(msgData);
 
 		cc.log("check link request ", Global.GameConfig.UrlGameLogic.GetAdmobInfo)
-		if(Global.LeagueData){
-			this.btnLeague.active = true;
-		}
-		else{
-			this.btnLeague.active = false;
-		}
+
 	},
 
 	onClickRefreshListRoom(){

@@ -18,7 +18,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.data = null;
+        // this.data = null;
     },
 
     start () {
@@ -28,14 +28,19 @@ cc.Class({
     initItem(data){
         // IsReceived: false, Rewards: 30000
         this.data = data;
-        this.iconVip.spriteFrame = this.listItemVip[data.VipLevel];
+        this.iconVip.spriteFrame = this.listItemVip[data.VipId];
         this.lbReceive.string = Global.formatNumber(data.Rewards);
-        this.btnReceive.interactable = data.IsReceived === true ? true : false;
+        // if(!data.IsReceived) {
+        //     this.btnReceive.interactable = false;
+        // }
+        // else{
+        //     this.btnReceive.interactable = data.IsReceived === true ? true : false;
+        // } 
     },
 
     onClickReceive(){
         let msg = {};
-        msg[1] = this.data.VipLevel;
+        msg[1] = this.data.VipId;
         require("SendRequest").getIns().MST_Client_Receive_Vip_Reward(msg);
     },
 
