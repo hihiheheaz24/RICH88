@@ -3,6 +3,7 @@ window.MainPlayerInfo = {
 	userName: null,
 	nickName: null,
 	vipLevel: 0,
+	isValidate : 0,
 	ingameBalance: 0,
 	diamondBalance: 0,
 	phoneNumber: null,

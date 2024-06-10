@@ -11,6 +11,8 @@ cc.Class({
 		this.dataTop = null;
 		this.topRankGame = 0;
 		this.dataSlots = "";
+		this.url = null;
+		this.urlShootFish = null;
 	},
 
 	properties: {
@@ -63,20 +65,23 @@ cc.Class({
 
 		btnGameDemo : cc.Node,
 		btnGameReal : cc.Node,
-		iconZeus : cc.Node
+		iconZeus : cc.Node,
+		iconTele : cc.Node
 
 	},
 
 	onLoad() {
-		this.btnGameDemo.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
-			// Mở liên kết trong tab mới
-			window.open(this.linkDemo, "_blank");
-		}, this);
+		// this.btnGameDemo.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
+		// 	// Mở liên kết trong tab mới
+		// 	// window.open(this.linkDemo, "_blank");
+		// 	this.onClickShowGameApi(null, "DEMO");
+		// }, this);
 
-		this.btnGameReal.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
-			// Mở liên kết trong tab mới
-			window.open(this.linkReal, "_blank");
-		}, this);
+		// this.btnGameReal.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
+		// 	// Mở liên kết trong tab mới
+		// 	// window.open(this.linkReal, "_blank");
+		// 	this.onClickShowGameApi(null, "REAL");
+		// }, this);
 		
 		this.linkReal = "";
 		this.linkDemo = "";
@@ -140,7 +145,7 @@ cc.Class({
 	},
 
 	hanldeListGameSlotAPI(data){
-		for (let i = 2; i < this.gameListApi.children.length; i++) {
+		for (let i = 1; i < this.gameListApi.children.length; i++) {
 			const itemGame = this.gameListApi.children[i];
 			itemGame.active = false;
 		}
@@ -151,8 +156,8 @@ cc.Class({
 				item = this.iconZeus;
 			}
 			else{
-				if (i < this.gameListApi.children.length -3) {
-					item = this.gameListApi.children[i + 3];
+				if (i < this.gameListApi.children.length) {
+					item = this.gameListApi.children[i];
 				}
 				else {
 					item = cc.instantiate(this.itemSlotApi);
@@ -186,8 +191,36 @@ cc.Class({
 		// 	this.linkReal = data;
 		// }
 
-		Global.UIManager.hideMiniLoading();
+		// window.location = data;
+		// cc.sys.openURL(data);
+		// this.url = window.open("https://www.google.com", "_blank")
+		console.log("chheck url : ", this.url.window.location)
+		this.url.window.location = data;
+
+		Global.UIManager.hideMiniLoading()
+		MainPlayerInfo.setMoneyUser(chip);
+
+
+		// let canvas = cc.director.getScene().getChildByName("Canvas");
+		// if (!cc.sys.isMobile) {
+		// 	canvas.designResolution = cc.size(1920,1080);
+		// 	console.log("check win soze : ", cc.winSize)
+		// 	this.webView.node.setContentSize(cc.size(cc.winSize.width - 500, cc.winSize.height));
+		// 	this.webView.node.position = cc.v2(0, 0);
+		// }
+		// else{
+		// 	canvas.designResolution = cc.size(1358,1920);
+		// }
+		// cc.log("check uipdate money", chip)
+		// Global.UIManager.hideMiniLoading();
+		// Global.AudioManager.stopMusic();
+		// this.webView.node.parent.active = true;
+		// this.webView.url = data;
+		// this.onHideLobby();
 		// MainPlayerInfo.setMoneyUser(chip);
+
+		//cc.director.loadScene("GameAPI");
+		// Global.UrlGameApi = data;
 	},
 
 	handleCloseGameApi(data) {
@@ -219,7 +252,7 @@ cc.Class({
 
 		let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" +  data.gameID + ".png"
 		Global.loadImgFromUrl(this.iconSlotsLobby, urlImg);
-		this.getLinkGameApi("DEMO");
+		// this.getLinkGameApi("DEMO");
 	},
 
 	getLinkGameApi(data){
@@ -232,12 +265,17 @@ cc.Class({
 	},
 
 	onClickShowGameApi(event, data){
-		if(data === "DEMO"){
-
+		if (!Global.isLogin) {
+			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+			return;
 		}
-		else{
-
-		}
+		Global.UIManager.showMiniLoading();
+		let msg = {};
+		msg[1] = this.dataSlots;
+		msg[2] = data;
+		cc.log("send start game : ", msg)
+		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg);
+		this.url = window.open("about:blank", "_blank");
 	},
 
 	onClickSortGame(event, data) {
@@ -257,6 +295,7 @@ cc.Class({
 				});
 				this.btnMiniPoker.active = false;
 				this.btnDragonBall.active = false;
+				this.iconTele.active = true;
 				break;
 
 			case "2":
@@ -273,6 +312,7 @@ cc.Class({
 					gameOther.active = false;
 				});
 				this.btnMiniPoker.active = true;
+				this.iconTele.active = false;
 				break;
 			case "3":
 				this.listGameCard.forEach(gameCard => {
@@ -288,6 +328,7 @@ cc.Class({
 					gameOther.active = false;
 				});
 				this.btnMiniPoker.active = false;
+				this.iconTele.active = false;
 				break;
 			case "4":
 				this.listGameCard.forEach(gameCard => {
@@ -303,6 +344,7 @@ cc.Class({
 					gameOther.active = false;
 				});
 				this.btnMiniPoker.active = false;
+				this.iconTele.active = false;
 				break;
 			default:
 				this.listGameCard.forEach(gameCard => {
@@ -318,6 +360,7 @@ cc.Class({
 					gameOther.active = true;
 				});
 				this.btnMiniPoker.active = false;
+				this.iconTele.active = false;
 				break;
 		}
 	},
@@ -351,7 +394,6 @@ cc.Class({
 		this.nodeLoginSucces.active = true;
 		this.nodeNotLogin.active = false;
 		this.nodeBottom.active = true;
-		require("SendRequest").getIns().MST_Client_Pramatic_Get_Game_list();
 		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
 		this.getDataLogin();
 		Global.UIManager.showBannerPopup();
@@ -972,9 +1014,15 @@ cc.Class({
 		}
 	},
 
-	onClickTest(){
-		require("SendRequest").getIns().MST_Client_JILI_Login_Game();
-
+	onClickTest(event, data){
+		if (!Global.isLogin) {
+			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
+			return;
+		}
+		let msg = {};
+		msg[1] = parseInt(data);
+		require("SendRequest").getIns().MST_Client_JILI_Login_Game(msg);
+		this.itemShootFishAPI = window.open("about:blank", "_blank");;
 	},
 
 	getDataLogin() {
@@ -986,6 +1034,8 @@ cc.Class({
 		// require("SendRequest").getIns().MST_Client_Get_Mission_Info();
 		require("SendRequest").getIns().MST_Client_Get_Shop_Config();
 		require("SendRequest").getIns().MST_Client_Get_Vip_Point_Config();
+		require("SendRequest").getIns().MST_Client_Pramatic_Get_Game_list();
+		require("SendRequest").getIns().MST_Client_Get_Game_List_Jili();
 
 
 		this.onClickSendGetListRoom();

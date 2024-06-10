@@ -35,7 +35,10 @@ var ReceiveResponse = cc.Class({
                 Global.TaiXiu.responseServer(responseCode, packet);
                 return;
             case RESPONSE_CODE.MST_SERVER_JILI_LOGIN_GAME_RESPONSE:
-                cc.sys.openURL(packet[1]);
+                Global.LobbyView.itemShootFishAPI.window.location = packet[1];
+                return;
+            case RESPONSE_CODE.MST_SERVER_JILI_GET_GAME_LIST:
+                cc.log("handle list game o day")
                 return;
             case RESPONSE_CODE.MST_SERVER_GET_VIP_CONFIG_INFO_RESPONSE:
                 Global.ConfigVipPoint = packet;
@@ -698,6 +701,7 @@ var ReceiveResponse = cc.Class({
         }
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CONNECT_ERROR){
+            Global.LobbyView.url.close();
             Global.UIManager.showConfirmPopup(packet[1], ()=>{ Global.UIManager.showShopPopup(STATUS_SHOP.BANKING);
 
             });

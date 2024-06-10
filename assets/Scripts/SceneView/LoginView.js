@@ -141,6 +141,7 @@ cc.Class({
 			Global.AcessToken = rs.d.AccessToken;
 			cc.log("check login : ", rs.d);
 			Global.IsNewUser = rs.d.IsNewUser;
+			MainPlayerInfo.isValidate = rs.d.IsValidate;
 			this.LoginSuccess(rs.d);
 			if (rs.d.UserName === cc.sys.localStorage.getItem(CONFIG.KEY_USERNAME)) {
 				cc.sys.localStorage.setItem("FAST_LOGIN_USERNAME", cc.sys.localStorage.getItem(CONFIG.KEY_USERNAME));

@@ -73,7 +73,7 @@ cc.Class({
 
 	getConfigLink() {
 
-		// CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv live
+		CONFIG.CONFIG_LINK = "https://aapi.nqrik88.online/api/config/gconfbd46a2b5fadcbc" //sv live
 		CONFIG.CONFIG_LINK = "https://api-dev.vpl.mobi/api/config/gconfbd46a2b5fadcbc" // sv test
 		var dataSend = {
 			version: CONFIG.VERSION,

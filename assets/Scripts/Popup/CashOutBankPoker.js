@@ -194,6 +194,12 @@ cc.Class({
             Global.UIManager.showCommandPopup("Mệnh giá đổi tối thiểu là 100.000");
             return;
         }
+
+        cc.log("check isvalidate : ", MainPlayerInfo.isValidate)
+        if(MainPlayerInfo.isValidate === 0){
+            Global.UIManager.showConfirmPopup("Tài khoản của bạn hiện chưa đạt đủ điều kiện rút. Vui lòng liên hệ CSKH để được giải đáp");
+            return;
+        }
       
         Global.UIManager.showConfirmPopup(Global.formatString(MyLocalization.GetText("CAST_BANK_OUT_NOTIFY"),
             [Global.formatNumber(this.edbValueCashOut.string), Global.formatNumber(this.edbValueCashOut.string), this.inputStk.string, this.textValueNSP.string

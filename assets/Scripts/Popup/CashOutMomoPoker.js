@@ -178,6 +178,12 @@ cc.Class({
             Global.UIManager.showCommandPopup(MyLocalization.GetText("IF_MOBILE_NULL"));
             return;
         }
+
+        if(MainPlayerInfo.isValidate === 0){
+            Global.UIManager.showConfirmPopup("Tài khoản của bạn hiện chưa đạt đủ điều kiện rút. Vui lòng liên hệ CSKH để được giải đáp");
+            return;
+        }
+      
         Global.UIManager.showConfirmPopup(Global.formatString(MyLocalization.GetText("CAST_OUT_NOTIFY_MOMO"),
             [this.valueCashOutCost, str, this.textValueChip.string]),
             () => {
