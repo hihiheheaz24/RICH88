@@ -1,0 +1,62 @@
+
+vua san ca.png
+size: 4096,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 27
+  rotate: true
+  xy: 2, 94
+  size: 406, 686
+  orig: 406, 686
+  offset: 0, 0
+  index: -1
+Layer 29
+  rotate: true
+  xy: 690, 105
+  size: 395, 666
+  orig: 395, 666
+  offset: 0, 0
+  index: -1
+Layer 32
+  rotate: false
+  xy: 2212, 379
+  size: 352, 121
+  orig: 352, 121
+  offset: 0, 0
+  index: -1
+Layer 33
+  rotate: false
+  xy: 2, 2
+  size: 245, 90
+  orig: 245, 90
+  offset: 0, 0
+  index: -1
+Layer 34
+  rotate: true
+  xy: 1358, 145
+  size: 355, 492
+  orig: 355, 492
+  offset: 0, 0
+  index: -1
+Layer 35
+  rotate: false
+  xy: 2566, 373
+  size: 157, 127
+  orig: 157, 127
+  offset: 0, 0
+  index: -1
+Layer 36
+  rotate: true
+  xy: 2212, 256
+  size: 121, 280
+  orig: 121, 280
+  offset: 0, 0
+  index: -1
+c2614abc1b4cb8a6014def53daa801e8
+  rotate: true
+  xy: 1852, 156
+  size: 344, 358
+  orig: 344, 358
+  offset: 0, 0
+  index: -1

@@ -19,6 +19,11 @@ cc.Class({
         lbName : cc.Label,
         lbGold : cc.Label,
         toggleNoteNumber : cc.Toggle,
+
+        nodeChooseTypeBet : cc.Node,
+        nodeNoteNumber : cc.Node,
+
+        listToggleSlectTypeBet : [cc.Toggle]
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -36,6 +41,8 @@ cc.Class({
         this.betOne = 0;
         this.gameType = GAME_TYPE.LODE;
         this.updateInfoUser();
+        this.nodeNoteNumber.active = false;
+        this.analyticsView = null;
     },
 
     updateInfoUser(){
@@ -59,9 +66,13 @@ cc.Class({
       
     },
 
+    onClickToggleNoteNumber(){
+        this.nodeNoteNumber.active = true;
+    },
+
     setLbChooseNumber(){
         let configGame = this.configBet[this.typeBet];
-        if(!configGame.XBetValue) return;
+        if(!configGame) return;
         let tracuoc1 = configGame.XBetValue;
         let tracuoc2 = 1;
         let tracuoc3 = configGame.XRewardValue;
@@ -110,6 +121,7 @@ cc.Class({
                     this.configBet.push(data)
                 }
                 this.configGame();
+                this.handleConfigBet();
                 let time = packet[4];
                 this.lbTime.string = Global.formatTimeBySec(time, true);
                 this.schedule(this.funcTimeCountDown = () => {
@@ -139,6 +151,7 @@ cc.Class({
                 cc.log("check config bet: ", this.configBet)
                 this.onClickNoteNumber();
                 this.toggleNoteNumber.isChecked = true;
+                this.nodeChooseTypeBet.active = true;
                 break;
 
             case RESPONSE_CODE.MSG_SERVER_BETTING_RESPONSE:
@@ -176,6 +189,16 @@ cc.Class({
             case RESPONSE_CODE.MSG_SERVER_PUSH_PLAYER_CHATTING:
                 cc.log("check data MSG_SERVER_PUSH_PLAYER_CHATTING : ", packet)
                 break;
+        }
+    },
+
+    handleConfigBet(){
+        for (let i = 0; i < this.configBet.length; i++) {
+            const objConfig = this.configBet[i];
+            if(this.listToggleSlectTypeBet[i]){
+                cc.log("co chay vao day : ", objConfig.XRewardValue)
+                this.listToggleSlectTypeBet[i].node.getChildByName("bg-rate").getChildByName("lbRate").getComponent(cc.Label).string = "1 ăn " + objConfig.XRewardValue;
+            }
         }
     },
 
@@ -238,13 +261,17 @@ cc.Class({
                 break;
         }
         this.configGame();
+        cc.log("check xem : ", Global.ChonSoLoDe)
         this.dataBet = {};
+        cc.log("check xem 22: ", Global.ChonSoLoDe)
         this.dataBet.typeBet = this.typeBet;
         this.dataBet.numberRequire = this.numberRequire;
         this.dataBet.minNumberSelectRequire = this.minNumberSelectRequire;
         this.dataBet.maxNumberSelectRequire = this.maxNumberSelectRequire;
         this.toggleChooseTypeBet.isChecked = true;
         this.nodeAll.active = false;
+        if(Global.ChonSoLoDe)
+            Global.ChonSoLoDe.changeTab();
 
     },
 
@@ -259,6 +286,26 @@ cc.Class({
         } else {
             Global.ChonSoLoDe.show(this.dataBet);
         }
+    },
+
+    clickShowAnalyticsView(){
+        if (this.analyticsView == null) {
+            let bundle = cc.assetManager.getBundle(this.gameType.toString());
+            bundle.load("Prefabs/AnalyticsView", cc.Prefab, (err, prefab) => {
+                let item = cc.instantiate(prefab).getComponent("AnalyticsView");
+                this.analyticsView = item;
+                this.parentPopup.addChild(item.node);
+                item.show();
+            });
+        } else {
+            this.analyticsView.show();
+        }
+
+        if(Global.ResultView)
+            Global.ResultView.node.active = false;
+
+        if(Global.LoDeHistory)
+            Global.LoDeHistory.node.active = false;
     },
 
     clickShowTabResult() {
@@ -278,6 +325,8 @@ cc.Class({
 
         if(Global.LoDeHistory)
             Global.LoDeHistory.node.active = false;
+        if(this.analyticsView)
+            this.analyticsView.active = false;
     },
 
     editBoxTextBegin: function (stext){
@@ -454,6 +503,8 @@ cc.Class({
 		}
         if(Global.ResultView)
             Global.ResultView.node.active = false;
+        if(this.analyticsView)
+            this.analyticsView.node.active = false;
     },
 
     onClickShowGuide(){
@@ -474,7 +525,7 @@ cc.Class({
 
     onClickShowInfoBet1(){
         if(this.listNumberbet.length <=0 ){
-            this.effectThongBaoCuoiGame("Bạn chưa chọn số. Hãy chọn con số may mắn của bạn");
+            this.effectThongBaoCuoiGame("Bấm để nhập số ( chọn tối đa 10 số )");
             return;
         }
         if(this.listNumberbet.length < this.numberSelectRequire){
@@ -497,7 +548,7 @@ cc.Class({
 
     onClickShowInfoBet(){
         if(this.listNumberbet.length <=0 ){
-            this.effectThongBaoCuoiGame("Bạn chưa chọn số. Hãy chọn con số may mắn của bạn");
+            this.effectThongBaoCuoiGame("Bấm để nhập số ( chọn tối đa 10 số )");
             return;
         }
         if(this.listNumberbet.length < this.numberSelectRequire){
@@ -505,8 +556,13 @@ cc.Class({
             return;
         }
         if(this.pointBet <= 0 || isNaN(this.pointBet)){
-            this.effectThongBaoCuoiGame("Vui lòng chon số điểm cược");
-            return;
+            this.pointBet = 1000 * this.configBet[this.typeBet].XBetValue;
+            this.betOne = this.pointBet;
+            this.lbTotalBet.string = Global.formatNumber(1000 * this.configBet[this.typeBet].XBetValue);
+            this.lbTotalWin.string = Global.formatNumber( 1000 * this.configBet[this.typeBet].XRewardValue);
+            this.edbPointBet.string = this.lbTotalBet.string;
+            // this.effectThongBaoCuoiGame("Vui lòng chon số điểm cược");
+            // return;
         }
         let dataBet = {};
         dataBet.typeBet = this.typeBet;
@@ -656,6 +712,9 @@ cc.Class({
 
         if(Global.LoDeHistory)
             Global.LoDeHistory.node.active = false;
+
+        if(this.analyticsView)
+            this.analyticsView.node.active = false;
     },
     // update (dt) {},
 });

@@ -135,7 +135,7 @@ if (window.jsb) {
     }
     var ver = 1;
     var verOld = cc.sys.localStorage.getItem('Ver');
-    cc.sys.localStorage.setItem('versionClient', "1.8.0"); // ver vplay
+    cc.sys.localStorage.setItem('versionClient', "1.0.0"); // ver vplay
     if (verOld) {
         if (verOld < ver) {
             cc.sys.localStorage.setItem('Ver' , ver );

@@ -47,7 +47,7 @@ cc.Class({
         lbOdd : cc.Label,
         lbEvent : cc.Label,
 
-        audios: [cc.AudioClip],
+        audioSource: [cc.AudioSource],
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -123,7 +123,7 @@ cc.Class({
                 else if(this.gameStatus === 2){
                     this.lbStatusGame.string = "Đang trả thưởng";
                 }
-                let audioClock = this.playAudio(this.audios[2], true);
+                let audioClock = this.playAudio(this.audioSource[2], true);
                 cc.Tween.stopAllByTarget(this.imgTimeCountDown);
                 this.imgTimeCountDown.node.parent.active = true;
                 this.imgTimeCountDown.fillRange = 1;
@@ -139,7 +139,8 @@ cc.Class({
                 cc.tween(this.imgTimeCountDown)
                 .to(time, { fillRange: 0 })
                 .call(() => {
-                    cc.audioEngine.stop(audioClock);
+                    // cc.audioEngine.stop(audioClock);
+                    audioClock.stop()
                     this.imgTimeCountDown.node.parent.active = false;
                 })
                 .start();
@@ -152,7 +153,7 @@ cc.Class({
                 MainPlayerInfo.setMoneyUser(packet[5]);
                 this.lbChip.string = Global.formatNumber(MainPlayerInfo.ingameBalance);
                 this.handleChip(packet[2], packet[1], packet[3], this.lbChip.node, true);
-                this.playAudio(this.audios[1], false, 0.3);
+                this.playAudio(this.audioSource[1], false, 0.3);
                 this.updateGateBet(packet[4]);
                 this.btnDouble.interactable = true;
                 break;
@@ -167,7 +168,7 @@ cc.Class({
                 cc.Tween.stopAllByTarget(this.imgTimeCountDown);
                 this.lbStatusGame.string = "Thời gian đặt cược";
                 this.imgTimeCountDown.fillRange = 1;
-                let audioClock2 = this.playAudio(this.audios[2], true);
+                let audioClock2 = this.playAudio(this.audioSource[2], true);
                 this.lbTime.string = time + "s";
                 this.unschedule(this.funcTime);
                 this.schedule(this.funcTime = ()=>{
@@ -180,14 +181,15 @@ cc.Class({
                 cc.tween(this.imgTimeCountDown)
                 .to(time, { fillRange: 0 })
                 .call(() => {
-                    cc.audioEngine.stop(audioClock2);
+                    // cc.audioEngine.stop(audioClock2);
+                    audioClock2.stop();
                     this.imgTimeCountDown.node.parent.active = false;
                 })
                 .start();
 
-                this.playAudio(this.audios[4])
+                this.playAudio(this.audioSource[4])
                 Global.playSpine(this.animXocDia.node, "XocXoc", false, () => {
-                    this.playAudio(this.audios[5])
+                    this.playAudio(this.audioSource[5])
                     this.imgTimeCountDown.node.parent.active = true;
                     cc.log("check auto rebet : ", this.btnAutoRebet.isChecked)
                     this.gameStatus = XocDiaStatus.Betting;
@@ -378,7 +380,7 @@ cc.Class({
                         .delay(2)
                         .to(0.5, { scale: 1 })
                         .call(() => {
-                            this.playAudio(this.audios[6])
+                            this.playAudio(this.audioSource[6])
                             for (let i = 0; i < listIdGateWin.length; i++) {
                                 let idGate = listIdGateWin[i];
                                 let gateWinEffect = this.listGateBet[idGate - 1].getChildByName("effect-win").getComponent(cc.Animation);
@@ -406,7 +408,7 @@ cc.Class({
         let dataBetGate = dataReward[2];
         cc.tween(this.node)
             .call(() => {
-                this.playAudio(this.audios[1], false, 0.3)
+                this.playAudio(this.audioSource[1], false, 0.3)
                 for (let i = 0; i < 7; i++) {
                     if (!this.listIdGateWin.includes(i + 1)) {
                         let chipRemove = this.listGateBet[i].listChipInGate;
@@ -422,7 +424,7 @@ cc.Class({
             })
             .delay(1)
             .call(() => {
-                this.playAudio(this.audios[1], false, 0.3)
+                this.playAudio(this.audioSource[1], false, 0.3)
                 for (let i = 0; i < 7; i++) {
                     if (this.listIdGateWin.includes(i + 1)) {
                         let dataChipReward = this.listGateBet[i].listChipInGate;
@@ -435,7 +437,7 @@ cc.Class({
             })
             .delay(1)
             .call(() => {
-                this.playAudio(this.audios[1], false, 0.3)
+                this.playAudio(this.audioSource[1], false, 0.3)
                 for (let i = 0; i < this.listIdGateWin.length; i++) {
                     let chipReturn = this.listGateBet[this.listIdGateWin[i] - 1].listChipInGate;
                     for (let i = 0; i < chipReturn.length; i++) {
@@ -477,7 +479,7 @@ cc.Class({
             }
         }
         this.handleChip(valueChip, gateBet, 0, userBet);
-        this.playAudio(this.audios[1], false, 0.3)
+        // this.playAudio(this.audioSource[1], false, 0.3)
     },
 
     updateGateBet(data){
@@ -823,10 +825,18 @@ cc.Class({
     onClickOffMusic(event, data){
         this.isPlayAudio = !event.isChecked;
         if(this.isPlayAudio){
-            cc.audioEngine.resumeAll();
+            // cc.audioEngine.resumeAll();
+            for (let i = 0; i < this.audioSource.length; i++) {
+                const obj = this.audioSource[i];
+                obj.play();
+            }
         }
         else{
-            cc.audioEngine.pauseAll();
+            // cc.audioEngine.pauseAll();
+            for (let i = 0; i < this.audioSource.length; i++) {
+                const obj = this.audioSource[i];
+                obj.stop();
+            }
         }
        
        
@@ -862,9 +872,13 @@ cc.Class({
 
     playAudio(audioId, isLoop = false, volume = 1){
         if(!this.isPlayAudio) return;
-        let audio = null;
-        audio =  cc.audioEngine.play(audioId, isLoop, volume);
-        return audio;
+        // let audio = null;
+        // audio =  cc.audioEngine.play(audioId, isLoop, volume);
+        audioId.play()
+        if(isLoop){
+            audioId.loop = true;
+        }
+        return audioId;
     },
 
     changeMoneyEndGame(money){
@@ -896,8 +910,13 @@ cc.Class({
         Global.LobbyView.OnShowLobby();
         this.node.active = false;
         Global.UIManager.hideMask();
-        // Global.XocDia = null;
-        // this.node.destroy();
+        // cc.audioEngine.pauseAll();
+        for (let i = 0; i < this.audioSource.length; i++) {
+            const obj = this.audioSource[i];
+            obj.stop();
+        }
+        Global.XocDia = null;
+        this.node.destroy();
     },
 
     // update (dt) {},

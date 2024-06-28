@@ -36,17 +36,17 @@
         "__id__": 37
       },
       {
-        "__id__": 86
+        "__id__": 87
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 91
+        "__id__": 92
       }
     ],
     "_prefab": {
-      "__id__": 92
+      "__id__": 93
     },
     "_opacity": 255,
     "_color": {
@@ -828,7 +828,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 293.04,
+      "width": 232.74,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -880,8 +880,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "Tiền đánh / 1 con   [K]",
-    "_N$string": "Tiền đánh / 1 con   [K]",
+    "_string": "Tiền đánh / 1 con",
+    "_N$string": "Tiền đánh / 1 con",
     "_fontSize": 33,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1398,7 +1398,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 85
+      "__id__": 86
     },
     "_opacity": 255,
     "_color": {
@@ -2454,11 +2454,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 83
+        "__id__": 84
       }
     ],
     "_prefab": {
-      "__id__": 84
+      "__id__": 85
     },
     "_opacity": 255,
     "_color": {
@@ -2532,7 +2532,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 82
+      "__id__": 83
     },
     "_opacity": 255,
     "_color": {
@@ -3008,15 +3008,19 @@
     "returnType": 0,
     "maxLength": 8,
     "_tabIndex": 0,
-    "editingDidBegan": [],
-    "textChanged": [
+    "editingDidBegan": [
       {
         "__id__": 80
       }
     ],
-    "editingDidEnded": [
+    "textChanged": [
       {
         "__id__": 81
+      }
+    ],
+    "editingDidEnded": [
+      {
+        "__id__": 82
       }
     ],
     "editingReturn": [],
@@ -3033,6 +3037,16 @@
     "_N$inputMode": 6,
     "_N$stayOnTop": false,
     "_id": ""
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "",
+    "_componentId": "8fe51WOcSJO9KDGWj3P85j/",
+    "handler": "editBoxTextBegin",
+    "customEventData": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -3130,14 +3144,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 87
+        "__id__": 88
       },
       {
-        "__id__": 89
+        "__id__": 90
       }
     ],
     "_prefab": {
-      "__id__": 90
+      "__id__": 91
     },
     "_opacity": 255,
     "_color": {
@@ -3191,7 +3205,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 86
+      "__id__": 87
     },
     "_enabled": true,
     "_normalMaterial": null,
@@ -3200,7 +3214,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 88
+        "__id__": 89
       }
     ],
     "_N$interactable": true,
@@ -3285,7 +3299,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 86
+      "__id__": 87
     },
     "_enabled": true,
     "_materials": [

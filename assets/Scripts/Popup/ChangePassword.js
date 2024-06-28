@@ -9,21 +9,9 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        passOldIF: cc.EditBox,
+        passNewIF: cc.EditBox,
+        passNewAgainIF: cc.EditBox,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -32,6 +20,53 @@ cc.Class({
 
     start () {
 
+    },
+
+    ClickConfirmChangePass() {
+        if (this.CheckPassword(this.passOldIF.string) && this.SoSanhPassword(this.passNewIF.string, this.passNewAgainIF.string)) {
+            this.SendRequestChangePass(this.passOldIF.string, this.passNewIF.string, this.passNewAgainIF.string);
+        }
+    },
+
+    SendRequestChangePass(oldPass, newPass, newPassAgain) {
+        if (this.CheckPassword(newPass) && this.SoSanhPassword(newPass, newPassAgain)) {
+            let msgData = {};
+            msgData[1] = oldPass;
+            msgData[2] = newPass;
+            require("SendRequest").getIns().MST_Client_Change_Password(msgData);
+            this.ClearIF();
+        }
+    },
+
+    CheckPassword(pass) {
+        if (pass.length < 6) {
+            Global.UIManager.showCommandPopup(MyLocalization.GetText("PASS_WORD_MIN_6"), null);
+            return;
+        }
+        if (/^[a-zA-Z0-9]*$/.test(pass) == false) {
+            Global.UIManager.showCommandPopup(MyLocalization.GetText("PASS_WORD_SPECIAL"), null);
+            return;
+        }
+        if (/\s/g.test(pass) == true) {
+            Global.UIManager.showCommandPopup(MyLocalization.GetText("PASS_WORD_SPACE"), null);
+            return;
+        }
+        return true;
+    },
+
+    SoSanhPassword(pass1, pass2) {
+        if (pass1 != pass2) {
+            Global.UIManager.showCommandPopup(MyLocalization.GetText("PASS_WORD_NOT_SAME"));
+            return false;
+        }
+        else
+            return true;
+    },
+
+    ClearIF() {
+        this.passOldIF.string = "";
+        this.passNewIF.string = "";
+        this.passNewAgainIF.string = "";
     },
 
     show(){

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "ed899ed5-8bd0-4292-ba92-e701111efcfa",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 4096,
+  "height": 512,
+  "platformSettings": {},
+  "subMetas": {
+    "vua san ca": {
+      "ver": "1.0.4",
+      "uuid": "847d4cc3-9cfa-4d51-9aae-f178ca19335e",
+      "rawTextureUuid": "ed899ed5-8bd0-4292-ba92-e701111efcfa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -685.5,
+      "offsetY": 4.5,
+      "trimX": 3,
+      "trimY": 3,
+      "width": 2719,
+      "height": 497,
+      "rawWidth": 4096,
+      "rawHeight": 512,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,6 +1,3 @@
-const { log } = require("console");
-const { checkPrime } = require("crypto");
-
 var TypeAnTrang = {
 	BA_SANH: 0,
 	BA_THUNG: 1,
@@ -139,9 +136,9 @@ cc.Class({
 			if (node) node.active = true;
 		}
 		let fixingStatus = cc.sys.localStorage.getItem("Fixing_Status");
-		if (fixingStatus == 0) {
-			Global.UIManager.showFixingScreen();
-		}
+		// if (fixingStatus == 0) {
+		// 	Global.UIManager.showFixingScreen();
+		// }
 	},
 	start() {
 		this.onEvent();

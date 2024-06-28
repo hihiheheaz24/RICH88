@@ -35,10 +35,18 @@ var ReceiveResponse = cc.Class({
                 Global.TaiXiu.responseServer(responseCode, packet);
                 return;
             case RESPONSE_CODE.MST_SERVER_JILI_LOGIN_GAME_RESPONSE:
-                Global.LobbyView.itemShootFishAPI.window.location = packet[1];
+                cc.log("Cehck data", packet)
+                if(cc.sys.isBrowser)
+                    Global.LobbyView.itemShootFishAPI.window.location = packet[1];
+                else{
+                    Global.LobbyView.handleShowGameApi(packet[1])
+                }
                 return;
             case RESPONSE_CODE.MST_SERVER_JILI_GET_GAME_LIST:
                 cc.log("handle list game o day")
+                return;
+            case RESPONSE_CODE.MSG_SERVER_GET_CAU_XSMB_RESPONSE:
+                Global.LoDe.analyticsView.handleDataAnalytics(JSON.parse(packet[1]))
                 return;
             case RESPONSE_CODE.MST_SERVER_GET_VIP_CONFIG_INFO_RESPONSE:
                 Global.ConfigVipPoint = packet;
@@ -701,9 +709,14 @@ var ReceiveResponse = cc.Class({
         }
 
         else if(responseCode == RESPONSE_CODE.MST_SERVER_PARAMATIC_CONNECT_ERROR){
-            Global.LobbyView.url.close();
+            if(cc.sys.isBrowser){
+                Global.LobbyView.url.close()
+            }
+            else{
+                Global.LobbyView.webView.node.parent.active = false;
+                Global.LobbyView.webView.url = "";
+            }
             Global.UIManager.showConfirmPopup(packet[1], ()=>{ Global.UIManager.showShopPopup(STATUS_SHOP.BANKING);
-
             });
             Global.UIManager.hideMiniLoading();
         }

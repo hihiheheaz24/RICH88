@@ -152,19 +152,14 @@ cc.Class({
 		for (let i = 0; i < data.length; i++) {
 			const objData = data[i];
 			let item = null;
-			if(i === 0){
-				item = this.iconZeus;
+
+			if (i < this.gameListApi.children.length - 1) {
+				item = this.gameListApi.children[i + 1];
 			}
-			else{
-				if (i < this.gameListApi.children.length) {
-					item = this.gameListApi.children[i];
-				}
-				else {
-					item = cc.instantiate(this.itemSlotApi);
-					this.gameListApi.addChild(item);
-				}
+			else {
+				item = cc.instantiate(this.itemSlotApi);
+				this.gameListApi.addChild(item);
 			}
-           
 
 			let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" +  objData.gameID + ".png"
 			Global.loadImgFromUrl(item.getChildByName("mask").getChildByName("iconGame").getComponent(cc.Sprite), urlImg)
@@ -177,6 +172,17 @@ cc.Class({
             eventHandler.handler = "onClickShowLobbySlots";
             eventHandler.customEventData = objData;
             item.getComponent(cc.Button).clickEvents.push(eventHandler);
+
+			if (i === 0) {
+				let urlImg = "https://49762968e7.puajflzrfe.net/game_pic/rec/325/" + objData.gameID + ".png"
+				Global.loadImgFromUrl(this.iconZeus.getChildByName("mask").getChildByName("iconGame").getComponent(cc.Sprite), urlImg)
+				this.iconZeus.active = true;
+				this.iconZeus.getComponent(cc.Button).clickEvents = [];
+				this.iconZeus.getComponent(cc.Button).clickEvents.push(eventHandler);
+
+				item.active = false;
+			}
+
 		}
 	},
 
@@ -194,31 +200,29 @@ cc.Class({
 		// window.location = data;
 		// cc.sys.openURL(data);
 		// this.url = window.open("https://www.google.com", "_blank")
-		console.log("chheck url : ", this.url.window.location)
-		this.url.window.location = data;
-
-		Global.UIManager.hideMiniLoading()
-		MainPlayerInfo.setMoneyUser(chip);
+		
 
 
-		// let canvas = cc.director.getScene().getChildByName("Canvas");
-		// if (!cc.sys.isMobile) {
-		// 	canvas.designResolution = cc.size(1920,1080);
-		// 	console.log("check win soze : ", cc.winSize)
-		// 	this.webView.node.setContentSize(cc.size(cc.winSize.width - 500, cc.winSize.height));
-		// 	this.webView.node.position = cc.v2(0, 0);
-		// }
-		// else{
-		// 	canvas.designResolution = cc.size(1358,1920);
-		// }
-		// cc.log("check uipdate money", chip)
-		// Global.UIManager.hideMiniLoading();
-		// Global.AudioManager.stopMusic();
-		// this.webView.node.parent.active = true;
-		// this.webView.url = data;
-		// this.onHideLobby();
-		// MainPlayerInfo.setMoneyUser(chip);
+		let canvas = cc.director.getScene().getChildByName("Canvas");
+		if (cc.sys.isNative) {
+			// canvas.designResolution = cc.size(1920, 1080);
+			console.log("check win soze : ", cc.winSize)
+			// this.webView.node.setContentSize(cc.size(cc.winSize.width, cc.winSize.height - 500));
+			// this.webView.node.position = cc.v2(0, 0);
+			this.webView.node.parent.active = true;
+			this.webView.url = data;
+			this.onHideLobby();
+		}
+		else {
+			console.log("chheck url : ", this.url.window.location)
+			this.url.window.location = data;
+		}
+		Global.UIManager.hideMiniLoading();
+		Global.AudioManager.stopMusic();
+		if(chip)
+			MainPlayerInfo.setMoneyUser(chip);
 
+		Global.UIManager.showButtonMiniGame(false);
 		//cc.director.loadScene("GameAPI");
 		// Global.UrlGameApi = data;
 	},
@@ -239,6 +243,7 @@ cc.Class({
 		this.OnShowLobby();
 		let isCheck = cc.sys.localStorage.getItem("music")
 		Global.AudioManager.isActiveMusic = isCheck === "on" ? true : false;
+		Global.UIManager.showButtonMiniGame(true);
 		//
 		// canvas.designResolution = cc.size(1358,1920);
 	},
@@ -275,7 +280,8 @@ cc.Class({
 		msg[2] = data;
 		cc.log("send start game : ", msg)
 		require("SendRequest").getIns().MST_Client_Pramatic_Start_Game(msg);
-		this.url = window.open("about:blank", "_blank");
+		if(cc.sys.isBrowser)
+			this.url = window.open("about:blank", "_blank");
 	},
 
 	onClickSortGame(event, data) {
@@ -296,6 +302,8 @@ cc.Class({
 				this.btnMiniPoker.active = false;
 				this.btnDragonBall.active = false;
 				this.iconTele.active = true;
+				this.iconZeus.active = true;
+				this.listGameSlots[1].active = false;
 				break;
 
 			case "2":
@@ -327,6 +335,7 @@ cc.Class({
 				this.listGameOther.forEach(gameOther => {
 					gameOther.active = false;
 				});
+				this.iconZeus.active = false;
 				this.btnMiniPoker.active = false;
 				this.iconTele.active = false;
 				break;
@@ -385,7 +394,8 @@ cc.Class({
 		CONFIG.TX_BET_PERIOD = 60;
 		CONFIG.TX_AWARD_PERIOD = 20;
 		if (Global.GameConfig.TextNotifiAlterLogin) {
-			Global.UIManager.showCommandPopup(Global.GameConfig.TextNotifiAlterLogin, null);
+			Global.UIManager.showBannerPopup();
+			// Global.UIManager.showCommandPopup(Global.GameConfig.TextNotifiAlterLogin, null);
 		}
 		Global.isLogin = true;
 		Global.UIManager.hideMask();
@@ -396,7 +406,7 @@ cc.Class({
 		this.nodeBottom.active = true;
 		// Global.UIManager.onClickOpenMiniGame(GAME_TYPE.XOCDIA);
 		this.getDataLogin();
-		Global.UIManager.showBannerPopup();
+		
 		if(MainPlayerInfo.vipLevel > 0)
 			this.iconVip.spriteFrame = this.listIconVip[MainPlayerInfo.vipLevel - 1];
 		else
@@ -911,12 +921,15 @@ cc.Class({
 			Global.UIManager.showCommandPopup(MyLocalization.GetText("NEED_LOGIN"));
 			return;
 		}
+		let returnGame = Global.UIManager.onClickOpenBigGame(Global.getGameTypeByName(data), true);
+		if (returnGame) return;
+
 		this.nodeGameList.active = false;
 		this.nodeChooseTable.active = true;
 		MainPlayerInfo.CurrentGameCode = data;
 		MainPlayerInfo.CurrentGameId  = Global.getGameIdByName(data);
 
-
+		Global.UIManager.hideMiniLoading();
 		this.onClickSendGetListRoom();
 	},
 
@@ -1022,7 +1035,8 @@ cc.Class({
 		let msg = {};
 		msg[1] = parseInt(data);
 		require("SendRequest").getIns().MST_Client_JILI_Login_Game(msg);
-		this.itemShootFishAPI = window.open("about:blank", "_blank");;
+		if(cc.sys.isBrowser)
+			this.itemShootFishAPI = window.open("about:blank", "_blank");
 	},
 
 	getDataLogin() {

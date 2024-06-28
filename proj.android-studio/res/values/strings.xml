@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
-    <string name="app_name" translatable="false">VSOP Poker</string>
-    <string name="facebook_app_id">449435769318933</string>
-    <string name="fb_login_protocol_scheme">fb449435769318933</string>
-</resources>

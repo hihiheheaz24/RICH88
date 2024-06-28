@@ -1,5 +1,3 @@
-const { toUSVString } = require("util");
-
 cc.Class({
   extends: cc.Component,
 

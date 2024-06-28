@@ -1,0 +1,83 @@
+
+vua ban ca.png
+size: 4096,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+7d519accacabe80ffea295d634c930ae9d0fff8a946c-VPx0CM
+  rotate: false
+  xy: 3410, 263
+  size: 210, 206
+  orig: 210, 206
+  offset: 0, 0
+  index: -1
+Layer 1
+  rotate: false
+  xy: 1822, 164
+  size: 453, 305
+  orig: 453, 305
+  offset: 0, 0
+  index: -1
+Layer 2
+  rotate: false
+  xy: 2, 2
+  size: 43, 59
+  orig: 43, 59
+  offset: 0, 0
+  index: -1
+Layer 27
+  rotate: true
+  xy: 2, 63
+  size: 406, 686
+  orig: 406, 686
+  offset: 0, 0
+  index: -1
+Layer 29
+  rotate: true
+  xy: 690, 72
+  size: 397, 668
+  orig: 397, 668
+  offset: 0, 0
+  index: -1
+Layer 3
+  rotate: false
+  xy: 1360, 87
+  size: 46, 19
+  orig: 46, 19
+  offset: 0, 0
+  index: -1
+Layer 4
+  rotate: false
+  xy: 1360, 108
+  size: 460, 361
+  orig: 460, 361
+  offset: 0, 0
+  index: -1
+Layer 5
+  rotate: false
+  xy: 2719, 207
+  size: 334, 262
+  orig: 334, 262
+  offset: 0, 0
+  index: -1
+bắn cá
+  rotate: false
+  xy: 3055, 341
+  size: 353, 128
+  orig: 353, 128
+  offset: 0, 0
+  index: -1
+c35263436b2f3163818f789adece71cb
+  rotate: false
+  xy: 2277, 269
+  size: 440, 200
+  orig: 440, 200
+  offset: 0, 0
+  index: -1
+vua
+  rotate: false
+  xy: 3055, 227
+  size: 243, 112
+  orig: 243, 112
+  offset: 0, 0
+  index: -1

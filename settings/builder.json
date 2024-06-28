@@ -2,12 +2,14 @@
   "title": "RIK88",
   "packageName": "org.cocos2d.demo",
   "startScene": "28be5ba7-b801-41aa-8630-8758c14a1650",
-  "excludeScenes": [],
+  "excludeScenes": [
+    "6f9093a0-fcd8-4667-a975-5b29de926494"
+  ],
   "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": true
   },
   "webOrientation": "portrait",
   "inlineSpriteFrames": false,
@@ -17,13 +19,13 @@
   "optimizeHotUpdate": false,
   "md5Cache": true,
   "nativeMd5Cache": false,
-  "encryptJs": true,
+  "encryptJs": false,
   "xxteaKey": "52baila-poker",
   "zipCompressJs": true,
   "fb-instant-games": {},
   "android": {
     "REMOTE_SERVER_ROOT": "",
-    "packageName": "com.tienlen.choibai.vplay"
+    "packageName": "com.rik88.asia"
   },
   "ios": {
     "REMOTE_SERVER_ROOT": "",

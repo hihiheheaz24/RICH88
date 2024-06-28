@@ -39,11 +39,11 @@ cc.Class({
     // },
 
     onEnable(){//MyLocalization.GetText("HUY_DANGKY_THOAT_BAN")
-        let stt_text = Global.RandomNumber(0,5);
+        let stt_text = Global.RandomNumber(0,10);
         let textConfig = MyLocalization.GetText("loading_text");
         let textEdit = textConfig.replace('%d', stt_text);
-        // this.lbTip.string = MyLocalization.GetText(textEdit);
-        this.lbTip.string = ""
+        this.lbTip.string = MyLocalization.GetText(textEdit);
+        // this.lbTip.string = ""
     },
 
     // start () {

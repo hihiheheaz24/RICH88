@@ -45,6 +45,10 @@ cc.Class({
     },
 
     onEnable(){
+       this.changeTab();
+    },
+
+    changeTab(){
         this.show(Global.LoDe.dataBet);
         cc.log("check listselect : ", this.listSelected.children.length)
         if(this.listSelected.children.length > 0){
@@ -214,10 +218,17 @@ cc.Class({
             cc.log("check  number  : ", numberCheck)
             cc.log("check list 22 ", Global.LoDe.listNumberbet)
           
-            if(Global.LoDe.listNumberbet.includes(numberCheck)){
-                cc.log("check co tnon tai ", addNumber + number)
-                objNumber.getComponent(cc.Toggle).isChecked = true;
+
+            for (let i = 0; i < Global.LoDe.listNumberbet.length; i++) {
+                const number = Global.LoDe.listNumberbet[i];
+                if(number == numberCheck){
+                    objNumber.getComponent(cc.Toggle).isChecked = true;
+                }
             }
+            // if(Global.LoDe.listNumberbet.includes(numberCheck)){
+            //     cc.log("check co tnon tai ", addNumber + number)
+            //     objNumber.getComponent(cc.Toggle).isChecked = true;
+            // }
 
             var eventHandler = new cc.Component.EventHandler();
             eventHandler.target = this.node;

@@ -216,6 +216,10 @@ var SendRequest = cc.Class({
         Global.NetworkManager.sendRequest(REQUEST_CODE.MSG_CLIENT_GET_DAILY_RESULT, msg);
     },
 
+    MST_Client_LoDe_Get_Cau_XSMB(msg) {
+        Global.NetworkManager.sendRequest(REQUEST_CODE.MSG_CLIENT_GET_CAU_XSMB, msg);
+    },
+
     MST_Client_LoDe_Get_Chat_List() {
         this.RequestMessageNoData(REQUEST_CODE.MSG_CLIENT_GET_CHAT_LIST);
     },

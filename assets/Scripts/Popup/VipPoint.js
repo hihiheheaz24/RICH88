@@ -205,7 +205,8 @@ cc.Class({
             this.moneyTotal = "";
         this.edbInputVipPoint.string =  Global.formatNumber(editBoxString.replace(/\./g, "")) ;
         this.lbReceiveExchange.string =  Global.formatNumber(editBoxString.replace(/\./g, "") * this.listPercent[MainPlayerInfo.vipLevel]);
-        this.edbInputVipPoint.focus()
+        if(cc.sys.isBrowser)
+            this.edbInputVipPoint.focus()
     },
 
     onClickShowInfoVipLevel(){

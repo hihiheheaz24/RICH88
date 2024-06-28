@@ -28,16 +28,12 @@ cc.Class({
             var connect = new signalR.HubConnectionBuilder()
                 .withUrl(urlConnect)
                 .withAutomaticReconnect([0, 3000, 6000, 10000, 10000, 10000, 10000, 10000])
-                // .withUrl("https://devserver.vpl.asia/network")  // sv test
                 .build();
-            // connect.serverTimeoutInMilliseconds = 120000;
-            // connect.keepAliveIntervalInMilliseconds = 60000;
         } catch (error) {
-            cc.log("loi connect")
+            cc.log("connect error")
         }
 
         connect.on("sendToClient", function (opCode, message) {
-            // cc.log("check op code : ", opCode , " va messgae ", message )
             switch (opCode) {
                 case RESPONSE_CODE.CTP_OPERATION_CODE:
                     require("ReceiveResponse").getIns().reviceData(message);

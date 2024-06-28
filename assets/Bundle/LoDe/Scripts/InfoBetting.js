@@ -39,6 +39,7 @@ cc.Class({
         Global.onPopOn(this.node);
         this.dataBet = data;
         this.handleInfoBet(data);
+        this.edbInputBetOnce.focus();
     },
 
     handleInfoBet(data){
@@ -174,10 +175,10 @@ cc.Class({
         this.moneyTotal = parseInt(strTemp);
         if(this.moneyTotal < 0) this.moneyTotal = "";
         
-        if (this.moneyTotal > MainPlayerInfo.ingameBalance) 
-            this.moneyTotal = MainPlayerInfo.ingameBalance;
-        if( MainPlayerInfo.ingameBalance === 0)
-            this.moneyTotal = "";
+        // if (this.moneyTotal > MainPlayerInfo.ingameBalance) 
+        //     this.moneyTotal = MainPlayerInfo.ingameBalance;
+        // if( MainPlayerInfo.ingameBalance === 0)
+        //     this.moneyTotal = "";
 
         let xBetValue =  Global.LoDe.configBet[Global.LoDe.typeBet]
         let pointBet =  this.moneyTotal;
@@ -214,6 +215,10 @@ cc.Class({
         // }
         cc.log("chya dc den cuoi ",valueBet)
         cc.log("chya dc den cuoi ",valueWin)
+    },
+
+    editBoxTextBegin: function (stext){
+        this.edbInputBetOnce.string = stext.string.replace(/\./g, "")
     },
 
     edbTextEnd(text){

@@ -196,11 +196,27 @@ cc.Class({
         }
 
         cc.log("check isvalidate : ", MainPlayerInfo.isValidate)
-        if(MainPlayerInfo.isValidate === 0){
-            Global.UIManager.showConfirmPopup("Tài khoản của bạn hiện chưa đạt đủ điều kiện rút. Vui lòng liên hệ CSKH để được giải đáp");
+        if (MainPlayerInfo.isValidate === 0) {
+            let message = "Tài khoản của bạn hiện chưa đạt đủ điều kiện rút. Vui lòng liên hệ CSKH để được giải đáp";
+            if (Global.CommandPopup === null) {
+                cc.resources.load("Popup/CommandPopup", cc.Prefab, (err, prefab) => {
+                    let item = cc.instantiate(prefab).getComponent("CommandPopup");
+                    item.node.name = "Dialog";
+                    Global.CommandPopup = item;
+                    item.show(message, null);
+                    // if(this.parentPopupLogin)
+                    Global.UIManager.parentPopup.addChild(item.node);
+                    // item.node.active = false;
+                    item.node.zIndex = 999;
+                    console.log(" chay vao command popup ");
+                });
+            }
+            else {
+                Global.CommandPopup.show(message, null)
+            } 
             return;
         }
-      
+
         Global.UIManager.showConfirmPopup(Global.formatString(MyLocalization.GetText("CAST_BANK_OUT_NOTIFY"),
             [Global.formatNumber(this.edbValueCashOut.string), Global.formatNumber(this.edbValueCashOut.string), this.inputStk.string, this.textValueNSP.string
             ]),
@@ -233,7 +249,8 @@ cc.Class({
         if( MainPlayerInfo.ingameBalance === 0)
             this.moneyTotal = "";
         this.edbValueCashOut.string =  Global.formatNumber(this.moneyTotal) ;
-        this.edbValueCashOut.focus()
+        if(cc.sys.isBrowser)
+            this.edbValueCashOut.focus()
     },
 
 

@@ -79,9 +79,9 @@ var verChildGame = {
     25: "1.0.1",
     31: "1.0.1",
 }
-var linkBundle = "%sBundleVPlay/%n/";
-var linkFull = "%sFull/VPlay/";
-var linkConfig = '%sConfigBundleVPlay.txt';
+var linkBundle = "%s/%n/";
+var linkFull = "%sFull/";
+var linkConfig = '%sConfigBundle.txt';
 
 
 var linkFire = "";

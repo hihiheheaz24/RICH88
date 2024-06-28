@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name" translatable="false">VPLAY</string>
-    <string name="facebook_app_id" translatable="false">6009743259148038</string>
-    <string name="facebook_client_token" translatable="false">e34daec14964ed9c3abf9ce7383e4c54</string>
-    <string name="fb_login_protocol_scheme" translatable="false">6009743259148038</string>
-</resources>

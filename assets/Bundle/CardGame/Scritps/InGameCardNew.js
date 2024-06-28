@@ -87,6 +87,27 @@ cc.Class({
         }
 
         Global.UIManager.showLoading();
+        cc.assetManager.loadBundle(gameType, (err, bundle) => {
+            cc.log("bat dau load bundle " + gameType)
+            if (err) return;
+            cc.log("load dc bundle roi nay " + gameType)
+            bundle.load(url, cc.Prefab,(count , total)=>{
+                Global.UIManager.progressLoading(count/total);
+            }, (err2, prefab) => {
+                cc.log("bat dau load prefabs " + gameType)
+                if (err2) return;
+                cc.log("load xong prefabs " + gameType)
+                Global.UIManager.hideLoading();
+                let gameView =  cc.instantiate(prefab).getComponent(componentGlobal);
+                this.parentGame.addChild(gameView.node);
+                cc.log("==> component global la : " , componentGlobal);
+                Global[MainPlayerInfo.CurrentGameCode + roomId] = gameView;
+                if (Global[MainPlayerInfo.CurrentGameCode + roomId]["initGame"]) Global[MainPlayerInfo.CurrentGameCode + roomId].initGame(data);                
+                Global.AudioManager.playInGame();
+            });
+        });
+
+        Global.UIManager.showLoading();
 
         // let funFinish = (component) => {
         //     cc.log("load xong prefabs " + gameType)
@@ -102,25 +123,25 @@ cc.Class({
         // Global.UIManager.getBundleAndInitGame(gameType,  Global.UIManager.downloadProgress(gameType),funFinish )
 
         // return;
-        cc.resources.load(url, cc.Prefab, (count, total) => {
-            Global.UIManager.progressLoading(count / total);
-        }, (err2, prefab) => {
-            console.log("bat dau load prefabs " + url)
-            if (err2) {
-                console.log("co loi  khi load prefab : ", err2)
-                return;
-            }
-            cc.log("load xong prefabs " + gameType)
-            Global.UIManager.hideLoading();
-            cc.log("==> MainPlayerInfo.CurrentGameCode la : ", MainPlayerInfo.CurrentGameCode);
-            cc.log("==> roomId la : ", roomId);
-            let gameView = cc.instantiate(prefab).getComponent(componentGlobal);
-            this.parentGame.addChild(gameView.node);
-            Global.AudioManager.playInGame();
-            Global.GameView = gameView;
-            Global[MainPlayerInfo.CurrentGameCode + roomId] = gameView;
-            if (Global[MainPlayerInfo.CurrentGameCode + roomId]["initGame"]) Global[MainPlayerInfo.CurrentGameCode + roomId].initGame(data);
-        });
+        // cc.resources.load(url, cc.Prefab, (count, total) => {
+        //     Global.UIManager.progressLoading(count / total);
+        // }, (err2, prefab) => {
+        //     console.log("bat dau load prefabs " + url)
+        //     if (err2) {
+        //         console.log("co loi  khi load prefab : ", err2)
+        //         return;
+        //     }
+        //     cc.log("load xong prefabs " + gameType)
+        //     Global.UIManager.hideLoading();
+        //     cc.log("==> MainPlayerInfo.CurrentGameCode la : ", MainPlayerInfo.CurrentGameCode);
+        //     cc.log("==> roomId la : ", roomId);
+        //     let gameView = cc.instantiate(prefab).getComponent(componentGlobal);
+        //     this.parentGame.addChild(gameView.node);
+        //     Global.AudioManager.playInGame();
+        //     Global.GameView = gameView;
+        //     Global[MainPlayerInfo.CurrentGameCode + roomId] = gameView;
+        //     if (Global[MainPlayerInfo.CurrentGameCode + roomId]["initGame"]) Global[MainPlayerInfo.CurrentGameCode + roomId].initGame(data);
+        // });
 
     },
     

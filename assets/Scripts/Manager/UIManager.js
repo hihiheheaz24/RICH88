@@ -84,9 +84,13 @@ cc.Class({
 			console.log("về lại tab game chính");
 			console.log("Check connect server ====> Ứng dụng được mở trở lại")
 			// Global.LobbyView.sendPing();
-			Global.LobbyView.onClickCloseGameApi();
+			if(cc.sys.isBrowser){
+				Global.LobbyView.onClickCloseGameApi();
+				Global.LobbyView.url.close();
+			}
+			
 			if (this.time_enter_background < 1) return;
-
+			
 			var _time = Date.now() / 1000;
 			let time_out_bg = _time - this.time_enter_background;
 			if (cc.sys.isNative && time_out_bg > 1800) cc.game.restart();
@@ -153,12 +157,24 @@ cc.Class({
 	},
 
 	preLoadPopupInRes(funNext) {
+		this.count = 0;
+		this.showLoading();
+		this.schedule(
+			(this.loadingFunc = () => {
+				this.count += 0.01;
+				this.progressLoading(this.count);
+				if (this.count >= 0.99) {
+					this.unschedule(this.loadingFunc);
+				}
+			}),
+			0.01
+		);
 		this.autoLogin();
 		funNext();
 		cc.resources.loadDir(
 			"Popup",
 			(count, total) => {
-				this.progressLoading(count / total);
+				// this.progressLoading(count / total);
 			},
 			(err, listAset) => {
 				this.hideLoading();
@@ -168,6 +184,7 @@ cc.Class({
 	},
 
 	showButtonMiniGame(isActive) {
+		cc.log("chay offf btn mini game : ", isActive);
 		this.btnMiniGame.active = isActive;
 	},
 
@@ -1108,24 +1125,24 @@ cc.Class({
 	},
 
 	checkShowMiniGame(cp, isResetPosition) {
-		let length = this.parentMiniGame.childrenCount;
-		let isReturn = false;
-		for (let i = 0; i < length; i++) {
-			if (this.parentMiniGame.children[i] == cp.node) {
-				isReturn = true;
-			} else {
-				try {
-					this.parentMiniGame.children[i].getComponent("DragMiniGame").miniSize()
-				} catch (error) {
-					cc.log(" ==============> loi checkShowMiniGame")
-				}
-			}
-		}
-		if (cp.node.parent != null) {
-			cp.node.setSiblingIndex(length - 1);
-		}
-		if (isResetPosition) cp.node.position = cc.v2(0, 0);
-		return isReturn;
+		// let length = this.parentMiniGame.childrenCount;
+		// let isReturn = false;
+		// for (let i = 0; i < length; i++) {
+		// 	if (this.parentMiniGame.children[i] == cp.node) {
+		// 		isReturn = true;
+		// 	} else {
+		// 		try {
+		// 			this.parentMiniGame.children[i].getComponent("DragMiniGame").miniSize()
+		// 		} catch (error) {
+		// 			cc.log(" ==============> loi checkShowMiniGame")
+		// 		}
+		// 	}
+		// }
+		// if (cp.node.parent != null) {
+		// 	cp.node.setSiblingIndex(length - 1);
+		// }
+		// if (isResetPosition) cp.node.position = cc.v2(0, 0);
+		return false;
 	},
 
 	initConfigBundle() {
@@ -1173,49 +1190,43 @@ cc.Class({
 	},
 
 	checkAssets(gameType, isForcePlay = false) {
-		return false; // fix cung
+		// return false; // fix cung
 		if (!cc.sys.isNative || cc.sys.os == cc.sys.OS_WINDOWS) return false;
 		let updateAssetManager = new UpdateAssetManager();
 		if (updateAssetManager.updateAsset(gameType)) {
 			this.removeDownload(gameType);
 			let funFinish = () => {
+				console.log("chay vafo fun finish dow xong")
 				this.removeDownload(gameType);
 				this.objGameWating[gameType] = false;
 				updateAssetManager.onDestroyClass();
-
+				Global.UIManager.hideMiniLoading();
 				MainPlayerInfo.CurrentGameCode = Global.getGameTypeById(gameType);
 				MainPlayerInfo.CurrentGameId = Global.getGameIdByName(MainPlayerInfo.CurrentGameCode);
-				Global.nodeInOutToRight(Global.LobbyView.nodePlayNow, null);
-				Global.nodeInOutToLeft(null, Global.LobbyView.nodeMiddle);
-				Global.LobbyView.nodeSuggestGame.active = false;
 
-				if (Global.IsNewUser) {
-					cc.log("check today mission : ", Global.TodayMission);
-					if (Global.TodayMission && MainPlayerInfo.CurrentGameCode === "TMN") {
-						Global.UIManager.showConfirmPopup(Global.TodayMission.MissionDescription, () => {
-							let msg = {};
-							msg[AuthenticateParameterCode.GameId] = MainPlayerInfo.CurrentGameCode;
-							msg[AuthenticateParameterCode.Blind] = 0;
-							cc.log("send ow itemlobby : ", msg);
-							require("SendCardRequest").getIns().MST_Client_Join_Game(msg);
-							Global.UIManager.showMiniLoading();
-						});
-					} else {
-						Global.UIManager.showConfirmPopup("Chưa có nhiệm vụ hiện tại");
-					}
+				if(isForcePlay){ // reconnect game bai khi chua download bundle
+					
+					// if(Global.InGameCard){
+					// 	Global.InGameCard.start();
+					// }
+					console.log("chay show lobby game bai")
+					Global.LobbyView.nodeGameList.active = false;
+					Global.LobbyView.nodeChooseTable.active = true;
+					return;
 				}
 
-				Global.LobbyView.setIconGame();
+				this.onClickOpenMiniGame(gameType)
+			
 			};
 			if (isForcePlay) {
 				let funProgress = null;
-				funProgress = (per) => {
-					Global.UIManager.progressLoading(per / 100);
-				};
+				// funProgress = (per) => {
+				// 	Global.UIManager.progressLoading(per / 100);
+				// };
 				updateAssetManager.initProgress(funProgress, funFinish);
 			} else {
-				updateAssetManager.initProgress(this.downloadProgress(gameType), funFinish);
-			}
+				updateAssetManager.initProgress(null, funFinish);
+			}	
 			updateAssetManager.checkUpdate();
 			return true;
 		} else {
@@ -1223,9 +1234,10 @@ cc.Class({
 		}
 	},
 	getBundleAndInitGame(gameType, funProgress, funFinish) {
-		cc.log("checjj assts : ")
-		cc.log("checjj assts : ", this.checkAssets(gameType))
+		console.log("checjj assts 1111: ")
+		// console.log("checjj assts : ", this.checkAssets(gameType))
 		if (this.checkAssets(gameType)) return;
+		console.log("checjj assts 2222: ")
 		let str = "";
 		let strGame = "";
 		let component = "";
@@ -1292,12 +1304,12 @@ cc.Class({
 				}
 			);
 		} else {
-			cc.log("chay vao load bundle : ", gameType.toString())
+			console.log("chay vao load bundle : ", gameType.toString())
 			cc.assetManager.loadBundle(gameType.toString(), (err, bundle) => {
 				if (err) {
 					return cc.log("loi roi nay " + err);
 				}
-				cc.log("Check bundle la : ", bundle)
+				console.log("Check bundle la : ", bundle)
 				bundle.load(
 					str,
 					cc.Prefab,
@@ -1309,7 +1321,7 @@ cc.Class({
 					},
 					(err, prefab) => {
 						if (err){
-							cc.log("co loi khi load : ", err)
+							console.log("co loi khi load : ", err)
 							return;
 						} 
 						Global[strGame] = cc.instantiate(prefab).getComponent(component);
@@ -1323,37 +1335,40 @@ cc.Class({
 
 	onClickOpenMiniGame(gameType) {
 		let funFinish = (component) => {
-			// if (!this.checkShowMiniGame(component, false)) {
-			// 	component.node.parent = this.parentMiniGame;
-			// 	if (!component.isMinimizeGame) component.startGame();
-			// 	component.isMinimizeGame = false;
-			// 	this.hideMiniLoading();
-			// 	Global.UIManager.showMask();
-			// }
-			cc.log("check component : ", component)
+			if (!this.checkShowMiniGame(component, false)) {
+				if(component.node.parent === null)
+					component.node.parent = this.parentMiniGame;
+				if (!component.isMinimizeGame) component.startGame();
+				component.isMinimizeGame = false;
+				component.node.active = true;
+				this.hideMiniLoading();
+				Global.UIManager.showMask();
+			}
+			console.log("check component : ", component)
 			// component.node.setSiblingIndex(length - 1);
-			if(component.node.parent === null)
-				component.node.parent = this.parentMiniGame;
-			component.node.active = true;
-			cc.log("chay vao abc 1111")
-			if (!component.isMinimizeGame) component.startGame();
-			component.isMinimizeGame = false;
-			cc.log("chay vao abc 222")
-			this.hideMiniLoading();
-			Global.UIManager.showMask();
+			// if(component.node.parent === null)
+			// 	component.node.parent = this.parentMiniGame;
+			// component.node.active = true;
+			// console.log("chay vao abc 1111")
+			// if (!component.isMinimizeGame) component.startGame();
+			// component.isMinimizeGame = false;
+			// console.log("chay vao abc 222")
+			// this.hideMiniLoading();
+			// Global.UIManager.showMask();
 		};
 		
 		if (Global[Global.getGameTypeById(gameType)] == null) {
-			cc.log("chay vao day 1222", Global.getGameTypeById(gameType))
+			console.log("chay vao day 1222", Global.getGameTypeById(gameType))
 			this.getBundleAndInitGame(gameType, this.downloadProgress(gameType), funFinish);
 		} else {
-			cc.log("chay vao day 3333", Global[Global.getGameTypeById(gameType)])
+			console.log("chay vao day 3333", Global[Global.getGameTypeById(gameType)])
 			funFinish(Global[Global.getGameTypeById(gameType)]);
 		}
 	},
 
 	onClickOpenBigGame(gameType, isForcePlay = false) {
 		console.log("check click game type : ", gameType);
+		Global.UIManager.showMiniLoading();
 		console.log("check list game type : ", this.objGameWating[gameType]);
 		if (this.objGameWating[gameType]) return true;
 		this.objGameWating[gameType] = true;

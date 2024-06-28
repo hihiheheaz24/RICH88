@@ -1,1 +1,1 @@
-{"urlFull":"https://bundless.vpl.mobi/Full/Vplay/","urlZip":"https://bundless.vpl.mobi/Zip/Vplay/","urlBundle":"https://bundless.vpl.mobi/Vplay","verProejct":"1.9.9","verChildGame":{"20":"1.0.4","21":"1.0.4","25":"1.0.4"}}
+{"urlFull":"https://up.nqrik88.online/Full/","urlZip":"https://up.nqrik88.online/Zip/","urlBundle":"https://up.nqrik88.online","verProejct":"1.0.0","verChildGame":{"5":"1.0.2","7":"1.0.2","8":"1.0.2","14":"1.0.2","19":"1.0.2","21":"1.0.2","25":"1.0.2"}}
