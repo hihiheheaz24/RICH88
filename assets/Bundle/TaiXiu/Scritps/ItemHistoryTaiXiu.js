@@ -46,7 +46,7 @@ cc.Class({
        
 
         this.lbTime.string = timeReturn;
-       this.lbPhien.string = info.TurnId;
+       this.lbPhien.string = "#" + info.TurnId;
        this.cuadat.string = info.BetLocation == 1 ? "Xỉu" : "Tài";
        this.ketQua.string = info.Result
        this.saoDat.string = Global.formatNumber(info.TotalBet) ;

@@ -86,7 +86,8 @@ cc.Class({
 			// Global.LobbyView.sendPing();
 			if(cc.sys.isBrowser){
 				Global.LobbyView.onClickCloseGameApi();
-				Global.LobbyView.url.close();
+				if(Global.LobbyView.url)
+					Global.LobbyView.url.close();
 			}
 			
 			if (this.time_enter_background < 1) return;

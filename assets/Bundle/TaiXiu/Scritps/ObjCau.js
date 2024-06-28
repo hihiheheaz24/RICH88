@@ -84,7 +84,8 @@ cc.Class({
             Global.ChiTietPhienTaiXiu.setInfo(this.info);
             Global.ChiTietPhienTaiXiu.show();
         }else{
-            cc.loader.loadRes("TaiXiu/ChiTietPhien" , (err , prefab)=>{
+            let bundle = cc.assetManager.getBundle(Global.TaiXiu.gameType.toString());
+            bundle.load("Prefabs/ChiTietPhien" , (err , prefab)=>{
                 if(err) return;
                 let node = cc.instantiate(prefab);
                 node.getComponent("ChiTietPhienTaiXiu").setInfo(this.info);

@@ -35,10 +35,10 @@ cc.Class({
         if (seconds < 10) {
             seconds = "0" + seconds;
         }
-        this.labelSess.string = info.TurnId;
+        this.labelSess.string = "#" + info.TurnId;
         this.labelTime.string = day + "/" + month + " " + hours + ":" + minutes + ":" + seconds;
-        this.labelSub.string = this.formatGold(info.TotalBet);
-        this.labelAdd.string = this.formatGold(info.Prize);
+        this.labelSub.string = "-" + this.formatGold(info.TotalBet);
+        this.labelAdd.string = "+" + this.formatGold(info.Prize);
         this.labelGold.string = this.formatGold(info.AccountBalance);
     },
 

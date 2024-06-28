@@ -12,7 +12,7 @@ cc.Class({
         scrView: cc.ScrollView,
         itemXepHang: cc.Node,
         nodeToggle : cc.Node,
-        lbTitleChain : cc.Label,
+        // lbTitleChain : cc.Label,
         lbTime : cc.Label
         // toggle : cc.Toggle
     },
@@ -26,7 +26,7 @@ cc.Class({
         this.dataLose = [];
         this.isWin = true;
         this.dataRank = null;
-        this.lbTitleChain.string = "DÂY THẮNG";
+        // this.lbTitleChain.string = "DÂY THẮNG";
 
         // Lấy thời điểm hiện tại
         this.ngayHienTai = new Date();       
@@ -78,11 +78,11 @@ cc.Class({
 
         if(this.isWin){
             this.dataRank = this.dataWin;
-            this.lbTitleChain.string = "DÂY THẮNG";
+            // this.lbTitleChain.string = "DÂY THẮNG";
         }
         else{
             this.dataRank = this.dataLose;
-            this.lbTitleChain.string = "DÂY THUA";
+            // this.lbTitleChain.string = "DÂY THUA";
         }
         this.scrView.content.removeAllChildren();
         for (let i = 0; i < this.dataRank.length; i++) {

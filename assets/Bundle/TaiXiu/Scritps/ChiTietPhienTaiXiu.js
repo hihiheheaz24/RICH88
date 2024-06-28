@@ -42,12 +42,12 @@ cc.Class({
         cc.find("Scale/lbPhien",this.node).getComponent(cc.RichText).string = "Phiên <color =#EAA705 >#%n </c>".replace("%n", obj.GameSessionID);
         cc.find("Scale/result",this.node).getComponent(cc.Label).string = obj.DiceSum;
 
-        let nodeTai = cc.find("Scale/txt_Tai",this.node);
-        let nodeXiu = cc.find("Scale/txt_Xiu",this.node);
-        nodeXiu.stopAllActions();
-        nodeXiu.scale = 1;
-        nodeTai.stopAllActions();
-        nodeTai.scale = 1;
+        // let nodeTai = cc.find("Scale/txt_Tai",this.node);
+        // let nodeXiu = cc.find("Scale/txt_Xiu",this.node);
+        // nodeXiu.stopAllActions();
+        // nodeXiu.scale = 1;
+        // nodeTai.stopAllActions();
+        // nodeTai.scale = 1;
     },
 
     responseServer(packet) {

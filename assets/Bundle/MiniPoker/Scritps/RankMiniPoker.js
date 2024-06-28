@@ -2,7 +2,7 @@ cc.Class({
     extends: cc.Component,
     ctor() {
         this.numberPage = 10;
-        this.numberRow = 9;
+        this.numberRow = 8;
         
     },
 
